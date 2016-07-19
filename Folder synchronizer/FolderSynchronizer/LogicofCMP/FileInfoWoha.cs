@@ -24,12 +24,26 @@ namespace LogicofCMP
             DateMoficication = DateTime.MinValue;
         }
     }
+    public class LinksInfo
+    {
+        public int Left;
+        public int Right;
+        public int Relations;
+        public LinksInfo()
+            {
+            Left=0;
+            Right=0;
+            Relations=0;
+            }
+    }
 
     public class ListsofFiles
     {
         public List<FileInfoWoha> LeftListofFiles;
         public List<FileInfoWoha> RightListofFiles;
+        public List<LinksInfo> linksInfo;
         public List<int> WhatToDo;
+        public string FileMask;
         //1 - Right
         //2 - Left
         //3 - Equal
@@ -39,16 +53,19 @@ namespace LogicofCMP
         const int LeftIcon = 2;
         const int EqualIcon = 3;
         const int NotEqualIcon = 4;
-        const int DNEIcon = 5;
+        const int DNEIcon = 5; //does not exist
         public ListsofFiles()
         {
-            LeftListofFiles = new List<FileInfoWoha>();
-            RightListofFiles = new List<FileInfoWoha>();
-            WhatToDo = new List<int>();
+            LeftListofFiles = new List<FileInfoWoha>(); //лівий
+            RightListofFiles = new List<FileInfoWoha>(); //правий
+            //WhatToDo = new List<int>();
+            linksInfo = new List<LinksInfo>(); // відносини між лівим та правим
         }
 
         public void FillListsFromPath(string SourcePath, string TargetPath)
         {
+            LeftListofFiles.Clear();
+            RightListofFiles.Clear();
             FillSourcePathList(SourcePath);
             FillTargetPathList(TargetPath);
         }
@@ -76,13 +93,14 @@ namespace LogicofCMP
         private void FillSourcePathList(string SourcePath)
         {
             // Process the list of files found in the directory.
-            
 
-            string[] fileEntries = Directory.GetFiles(SourcePath);
+            //LeftListofFiles.Clear();
+            var fileEntries = Directory.EnumerateFiles(SourcePath, FileMask);
             foreach (string fileName in fileEntries)
             {
                 FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fileName;
+                fileData.Name = fileName.Substring(SourcePath.Length+1);
+                fileData.Path = fileName.Remove(SourcePath.Length + 1, fileName.Length- SourcePath.Length-1);
                 LeftListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.
@@ -94,13 +112,14 @@ namespace LogicofCMP
         private void FillTargetPathList(string TargetPath)
         {
             // Process the list of files found in the directory.
-            
 
-            string[] fileEntries = Directory.GetFiles(TargetPath);
+            //RightListofFiles.Clear();
+            var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
             foreach (string fileName in fileEntries)
             {
                 FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fileName;
+                fileData.Name = fileName.Substring(TargetPath.Length + 1);
+                fileData.Path = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
                 RightListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.

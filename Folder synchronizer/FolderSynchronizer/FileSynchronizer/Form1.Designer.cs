@@ -43,13 +43,14 @@
             this.buttonCompare = new System.Windows.Forms.Button();
             this.buttonSyncronize = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonLeft = new System.Windows.Forms.Button();
-            this.buttonRight = new System.Windows.Forms.Button();
-            this.buttonEqual = new System.Windows.Forms.Button();
-            this.buttonNotEqual = new System.Windows.Forms.Button();
             this.buttonDuplicates = new System.Windows.Forms.Button();
             this.buttonSingles = new System.Windows.Forms.Button();
             this.textBoxFileMask = new System.Windows.Forms.TextBox();
+            this.checkBoxRight = new System.Windows.Forms.CheckBox();
+            this.checkBoxLeft = new System.Windows.Forms.CheckBox();
+            this.checkBoxNotEqual = new System.Windows.Forms.CheckBox();
+            this.checkBoxEqual = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxFolderPathLeft
@@ -124,6 +125,7 @@
             this.checkBoxAsymmetric.TabIndex = 7;
             this.checkBoxAsymmetric.Text = "Asymmetric";
             this.checkBoxAsymmetric.UseVisualStyleBackColor = true;
+            this.checkBoxAsymmetric.CheckedChanged += new System.EventHandler(this.checkBoxAsymmetric_CheckedChanged);
             // 
             // checkBoxWithsubdirs
             // 
@@ -144,6 +146,7 @@
             this.checkBoxByContent.TabIndex = 9;
             this.checkBoxByContent.Text = "By Content";
             this.checkBoxByContent.UseVisualStyleBackColor = true;
+            this.checkBoxByContent.CheckedChanged += new System.EventHandler(this.checkBoxByContent_CheckedChanged);
             // 
             // checkBoxIgnoreDate
             // 
@@ -172,6 +175,7 @@
             this.buttonSyncronize.TabIndex = 12;
             this.buttonSyncronize.Text = "Syncronize";
             this.buttonSyncronize.UseVisualStyleBackColor = true;
+            this.buttonSyncronize.Click += new System.EventHandler(this.buttonSyncronize_Click);
             // 
             // buttonClose
             // 
@@ -181,46 +185,11 @@
             this.buttonClose.TabIndex = 13;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
-            // 
-            // buttonLeft
-            // 
-            this.buttonLeft.Location = new System.Drawing.Point(735, 100);
-            this.buttonLeft.Name = "buttonLeft";
-            this.buttonLeft.Size = new System.Drawing.Size(40, 40);
-            this.buttonLeft.TabIndex = 14;
-            this.buttonLeft.Text = "<";
-            this.buttonLeft.UseVisualStyleBackColor = true;
-            // 
-            // buttonRight
-            // 
-            this.buttonRight.Location = new System.Drawing.Point(659, 100);
-            this.buttonRight.Name = "buttonRight";
-            this.buttonRight.Size = new System.Drawing.Size(41, 40);
-            this.buttonRight.TabIndex = 15;
-            this.buttonRight.Text = ">";
-            this.buttonRight.UseVisualStyleBackColor = true;
-            // 
-            // buttonEqual
-            // 
-            this.buttonEqual.Location = new System.Drawing.Point(698, 64);
-            this.buttonEqual.Name = "buttonEqual";
-            this.buttonEqual.Size = new System.Drawing.Size(40, 40);
-            this.buttonEqual.TabIndex = 16;
-            this.buttonEqual.Text = "==";
-            this.buttonEqual.UseVisualStyleBackColor = true;
-            // 
-            // buttonNotEqual
-            // 
-            this.buttonNotEqual.Location = new System.Drawing.Point(698, 138);
-            this.buttonNotEqual.Name = "buttonNotEqual";
-            this.buttonNotEqual.Size = new System.Drawing.Size(40, 40);
-            this.buttonNotEqual.TabIndex = 17;
-            this.buttonNotEqual.Text = "!=";
-            this.buttonNotEqual.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonDuplicates
             // 
-            this.buttonDuplicates.Location = new System.Drawing.Point(828, 100);
+            this.buttonDuplicates.Location = new System.Drawing.Point(824, 71);
             this.buttonDuplicates.Name = "buttonDuplicates";
             this.buttonDuplicates.Size = new System.Drawing.Size(73, 23);
             this.buttonDuplicates.TabIndex = 18;
@@ -229,7 +198,7 @@
             // 
             // buttonSingles
             // 
-            this.buttonSingles.Location = new System.Drawing.Point(828, 138);
+            this.buttonSingles.Location = new System.Drawing.Point(824, 109);
             this.buttonSingles.Name = "buttonSingles";
             this.buttonSingles.Size = new System.Drawing.Size(73, 23);
             this.buttonSingles.TabIndex = 19;
@@ -244,18 +213,85 @@
             this.textBoxFileMask.TabIndex = 20;
             this.textBoxFileMask.Text = "*.*";
             // 
+            // checkBoxRight
+            // 
+            this.checkBoxRight.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxRight.AutoSize = true;
+            this.checkBoxRight.Location = new System.Drawing.Point(667, 74);
+            this.checkBoxRight.MaximumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxRight.MinimumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxRight.Name = "checkBoxRight";
+            this.checkBoxRight.Size = new System.Drawing.Size(40, 40);
+            this.checkBoxRight.TabIndex = 21;
+            this.checkBoxRight.Text = ">";
+            this.checkBoxRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxRight.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxLeft
+            // 
+            this.checkBoxLeft.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxLeft.AutoSize = true;
+            this.checkBoxLeft.Location = new System.Drawing.Point(745, 74);
+            this.checkBoxLeft.MaximumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxLeft.MinimumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxLeft.Name = "checkBoxLeft";
+            this.checkBoxLeft.Size = new System.Drawing.Size(40, 40);
+            this.checkBoxLeft.TabIndex = 22;
+            this.checkBoxLeft.Text = "<";
+            this.checkBoxLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxLeft.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxNotEqual
+            // 
+            this.checkBoxNotEqual.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxNotEqual.AutoSize = true;
+            this.checkBoxNotEqual.Location = new System.Drawing.Point(706, 112);
+            this.checkBoxNotEqual.MaximumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxNotEqual.MinimumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxNotEqual.Name = "checkBoxNotEqual";
+            this.checkBoxNotEqual.Size = new System.Drawing.Size(40, 40);
+            this.checkBoxNotEqual.TabIndex = 23;
+            this.checkBoxNotEqual.Text = "!=";
+            this.checkBoxNotEqual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxNotEqual.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEqual
+            // 
+            this.checkBoxEqual.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxEqual.AutoSize = true;
+            this.checkBoxEqual.Location = new System.Drawing.Point(706, 36);
+            this.checkBoxEqual.MaximumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxEqual.MinimumSize = new System.Drawing.Size(40, 40);
+            this.checkBoxEqual.Name = "checkBoxEqual";
+            this.checkBoxEqual.Size = new System.Drawing.Size(40, 40);
+            this.checkBoxEqual.TabIndex = 24;
+            this.checkBoxEqual.Text = "==";
+            this.checkBoxEqual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxEqual.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(421, 199);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FolderSynchronizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(947, 559);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.checkBoxEqual);
+            this.Controls.Add(this.checkBoxNotEqual);
+            this.Controls.Add(this.checkBoxLeft);
+            this.Controls.Add(this.checkBoxRight);
             this.Controls.Add(this.textBoxFileMask);
             this.Controls.Add(this.buttonSingles);
             this.Controls.Add(this.buttonDuplicates);
-            this.Controls.Add(this.buttonNotEqual);
-            this.Controls.Add(this.buttonEqual);
-            this.Controls.Add(this.buttonRight);
-            this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSyncronize);
             this.Controls.Add(this.buttonCompare);
@@ -294,13 +330,14 @@
         private System.Windows.Forms.Button buttonCompare;
         private System.Windows.Forms.Button buttonSyncronize;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Button buttonLeft;
-        private System.Windows.Forms.Button buttonRight;
-        private System.Windows.Forms.Button buttonEqual;
-        private System.Windows.Forms.Button buttonNotEqual;
         private System.Windows.Forms.Button buttonDuplicates;
         private System.Windows.Forms.Button buttonSingles;
         private System.Windows.Forms.TextBox textBoxFileMask;
+        private System.Windows.Forms.CheckBox checkBoxRight;
+        private System.Windows.Forms.CheckBox checkBoxLeft;
+        private System.Windows.Forms.CheckBox checkBoxNotEqual;
+        private System.Windows.Forms.CheckBox checkBoxEqual;
+        private System.Windows.Forms.Button button1;
     }
 }
 

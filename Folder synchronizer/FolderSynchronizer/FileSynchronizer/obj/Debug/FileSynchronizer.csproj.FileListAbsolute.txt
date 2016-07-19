@@ -1,0 +1,9 @@
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\bin\Debug\FileSynchronizer.exe.config
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\bin\Debug\FileSynchronizer.exe
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\bin\Debug\FileSynchronizer.pdb
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.csprojResolveAssemblyReference.cache
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.Form1.resources
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.Properties.Resources.resources
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.csproj.GenerateResource.Cache
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.exe
+D:\Arch_Slavik\OneDrive\C# cource\File synchronizer\FileSynchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.pdb

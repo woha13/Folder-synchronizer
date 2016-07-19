@@ -1,0 +1,5 @@
+C:\Users\vladimiri\Google Drive\Projects\Folder synchronizer\FolderSynchronizer\LogicofCMP\bin\Debug\LogicofCMP.dll
+C:\Users\vladimiri\Google Drive\Projects\Folder synchronizer\FolderSynchronizer\LogicofCMP\bin\Debug\LogicofCMP.pdb
+C:\Users\vladimiri\Google Drive\Projects\Folder synchronizer\FolderSynchronizer\LogicofCMP\obj\Debug\LogicofCMP.csprojResolveAssemblyReference.cache
+C:\Users\vladimiri\Google Drive\Projects\Folder synchronizer\FolderSynchronizer\LogicofCMP\obj\Debug\LogicofCMP.dll
+C:\Users\vladimiri\Google Drive\Projects\Folder synchronizer\FolderSynchronizer\LogicofCMP\obj\Debug\LogicofCMP.pdb

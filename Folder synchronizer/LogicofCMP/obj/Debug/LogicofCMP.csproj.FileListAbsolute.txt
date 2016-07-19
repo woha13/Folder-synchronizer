@@ -18,3 +18,8 @@ C:\Users\vladimiri\Google Drive\Projects\111\Folder synchronizer\FolderSynchroni
 \\Vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\FolderSynchronizer\LogicofCMP\obj\Debug\LogicofCMP.csprojResolveAssemblyReference.cache
 \\Vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\FolderSynchronizer\LogicofCMP\obj\Debug\LogicofCMP.dll
 \\Vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\FolderSynchronizer\LogicofCMP\obj\Debug\LogicofCMP.pdb
+D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.dll
+D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.pdb
+D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.csprojResolveAssemblyReference.cache
+D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.dll
+D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.pdb

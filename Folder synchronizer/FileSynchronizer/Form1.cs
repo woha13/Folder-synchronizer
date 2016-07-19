@@ -122,7 +122,7 @@ namespace FolderSynchronizer
             Synchronization syncFiles = new Synchronization();
             syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
 
-
+            FolderSynchronizerForm_Load(this, e);
         }
 
         private void button1_Click(object sender, EventArgs e)

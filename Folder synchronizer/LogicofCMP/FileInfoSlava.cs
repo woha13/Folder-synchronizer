@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 /// <summary>
 /// SAMALET
@@ -19,25 +20,51 @@ namespace LogicofCMP
             {
                 FileInfoWoha TargetListFile = ListsOfFiles.RightListofFiles.First();
 
+                //deleting all files from right list
+                
+                foreach (FileInfoWoha FIW in ListsOfFiles.RightListofFiles)
+                {
+                    string fileForDeletion = Path.Combine(FIW.Path, FIW.Name);
+                    try
+                    {
+                        File.Delete(fileForDeletion);
+                    }
+                    catch (IOException e)
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        DialogResult result;
+                        string message = e.ToString();
+                        string caption = "Error deleting file";
+                        result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);                        
+                    }
+                    
+                }
+
+                //copying files from left list to right list
                 foreach (FileInfoWoha FIW in ListsOfFiles.LeftListofFiles)
                 {
-                    
-                    //!!!Path field returns not only path but also filename
-
-                    //string sourceFile = System.IO.Path.Combine(FIW.Path, FIW.Name);
-                    //string destFile = System.IO.Path.Combine(TargetListFile.Path, FIW.Name);
+                    string sourceFile = Path.Combine(FIW.Path, FIW.Name);
+                    string destFile = Path.Combine(TargetListFile.Path, FIW.Name);
 
                     try
                     {
-                       // System.IO.File.Copy(sourceFile, destFile, true);
+                       File.Copy(sourceFile, destFile, true);
                     }
-                    catch (IOException copyError)
+                    catch (IOException e)
                     {
-
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        DialogResult result;
+                        string message = e.ToString();
+                        string caption = "Error copying file";
+                        result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
                     }
 
                 }
 
+
+            }
+            else
+            {
 
             }
         }

@@ -23,8 +23,15 @@ namespace FolderSynchronizer
             textBoxFolderPathLeft.Text = @"d:\Slava\1";
             textBoxFolderPathRight.Text = @"d:\Slava\2";
             textBoxFileMask.Text = @"*.*";
+
+            checkBoxAsymmetric.Checked = false; //Asymmetric checkbox default state
+            checkBoxByContent.Checked = false; //ByContent checkbox default state
         }
-        
+
+        public bool isAsymmetricChecked = false; //variable to send Asymmetric checkbox state for Syncronize method
+        public bool isByContentChecked = false; //variable to send ByContent checkbox state for Syncronize method
+
+
         FolderBrowserDialog FolderPathLeftDialog = new FolderBrowserDialog(); //creating dialog window instance for left file path
         FolderBrowserDialog FolderPathRightDialog = new FolderBrowserDialog(); //creating dialog window instance for right file path
         ListsofFiles listsofFiles = new ListsofFiles();
@@ -66,17 +73,61 @@ namespace FolderSynchronizer
 
         private void FolderSynchronizerForm_Load(object sender, EventArgs e)
         {
+            //наповнюються логічні класи LeftListofFiles і RightListofFiles
+            listsofFiles.FileMask = textBoxFileMask.Text;
             listsofFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text);
+            
+            //наповнюються listView 
+            listViewLeftListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.LeftListofFiles)
             {
-                listViewLeftListofFiles.Items.Add(FIW.Name);
+                listViewLeftListofFiles.Items.Add(FIW.Path + FIW.Name);
             }
+            listViewRightListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.RightListofFiles)
             {
-                listViewRightListofFiles.Items.Add(FIW.Name);
+                listViewRightListofFiles.Items.Add(FIW.Path + FIW.Name);
             }
         }
 
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        
+        private void checkBoxAsymmetric_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxAsymmetric.Checked)
+            {
+                isAsymmetricChecked = true;
+            } else
+            {
+                isAsymmetricChecked = false;
+            }
+        }
 
+        private void checkBoxByContent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxByContent.Checked)
+            {
+                isByContentChecked = true;
+            } else
+            {
+                isByContentChecked = false;
+            }
+        }
+
+        private void buttonSyncronize_Click(object sender, EventArgs e)
+        {
+            Synchronization syncFiles = new Synchronization();
+            syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FolderSynchronizerForm_Load(this, e);
+        }
     }
 }

@@ -29,11 +29,11 @@ namespace LogicofCMP
         public int Right;
         public int Relations;
         public LinksInfo()
-            {
-            Left=0;
-            Right=0;
-            Relations=0;
-            }
+        {
+            Left = 0;
+            Right = 0;
+            Relations = 0;
+        }
     }
 
     public class ListsofFiles
@@ -73,7 +73,7 @@ namespace LogicofCMP
         //{
         //    // Process the list of files found in the directory.
         //    FileInfoWoha fileData = new FileInfoWoha();
-            
+
         //    string[] fileEntries = Directory.GetFiles(SourcePath);
         //    foreach (string fileName in fileEntries)
         //    {
@@ -81,7 +81,7 @@ namespace LogicofCMP
         //        fileData.Name = fileName;
         //        LeftListofFiles.Add(fileData);
         //    }
-                
+
 
         //    // Recurse into subdirectories of this directory.
         //    string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
@@ -98,8 +98,8 @@ namespace LogicofCMP
             foreach (string fileName in fileEntries)
             {
                 FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fileName.Substring(SourcePath.Length+1);
-                fileData.Path = fileName.Remove(SourcePath.Length + 1, fileName.Length- SourcePath.Length-1);
+                fileData.Name = fileName.Substring(SourcePath.Length + 1);
+                fileData.Path = fileName.Remove(SourcePath.Length + 1, fileName.Length - SourcePath.Length - 1);
                 LeftListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.
@@ -127,5 +127,11 @@ namespace LogicofCMP
                 FillTargetPathList(subdirectory);
         }
     }
-
+    public partial class Synchronization
+    {
+        public void WithSubdirs()
+        {
+            int i = 0;
+        }
+    }
 }

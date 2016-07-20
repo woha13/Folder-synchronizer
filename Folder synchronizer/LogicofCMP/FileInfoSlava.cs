@@ -16,7 +16,8 @@ using System.Windows.Forms;
 
 namespace LogicofCMP
 {
-    public class Synchronization
+    //20.07.16 12.37 Woha - add partial to class definition
+    public partial class Synchronization
     {
 
         public void Synchronize (ListsofFiles ListsOfFiles, bool isAsymmetricChecked, bool isByContentChecked)

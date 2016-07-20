@@ -134,21 +134,33 @@ namespace LogicofCMP
         public void SymetricSynchronize(ListsofFiles listsOfFiles)
         {
             //FileInfoWoha FIW = new FileInfoWoha();
+            int leftListIndex = 0;
 
-            //foreach(FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
-            //{
+            foreach (FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
+            {
+                if (listsOfFiles.RightListofFiles.Exists(x=>x.Name==FIW.Name))
+                {
+                    LinksInfo LI = new LinksInfo();
+                    LI.Left = 1;
+                    listsOfFiles.linksInfo.Add(LI);
+                }
+                leftListIndex++;
+            }
+
+            //Console.WriteLine("\nContains: Part with Id=1734: {0}",
+              //      parts.Contains(new Part { PartId = 1734, PartName = "" }));
 
             //}
-            FileInfoWoha FIW1=new FileInfoWoha(); 
-            FileInfoWoha FIW2 = new FileInfoWoha();
-            FIW1.Name = "1";
-            FIW2.Name = "1";
-            //FIW2.Size = 100;
-            FIW2.DateMoficication = DateTime.Now;
-            if (CompareBy(FIW1, FIW2, true, true))
-            {
-                Console.Beep();
-            }
+            //FileInfoWoha FIW1=new FileInfoWoha(); 
+            //FileInfoWoha FIW2 = new FileInfoWoha();
+            //FIW1.Name = "1";
+            //FIW2.Name = "1";
+            ////FIW2.Size = 100;
+            //FIW2.DateMoficication = DateTime.Now;
+            //if (CompareBy(FIW1, FIW2, true, true))
+            //{
+            //    Console.Beep();
+            //}
 
         }
         public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 

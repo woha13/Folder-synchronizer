@@ -23,53 +23,54 @@ namespace LogicofCMP
           {
             if (isAsymmetricChecked)
             {
-                FileInfoWoha TargetListFile = ListsOfFiles.RightListofFiles.First();
+                //20.07.16 12.26 calling assymetryc synchronize method
+                AssymetricSynchronize(ListsOfFiles);
+            }
+        }
 
-                //deleting all files from right list
-                
-                foreach (FileInfoWoha FIW in ListsOfFiles.RightListofFiles)
+        //20.07.16 12.26 creating assymetricSynchronize method
+        private void AssymetricSynchronize (ListsofFiles ListsOfFiles)
+        {
+            FileInfoWoha TargetListFile = ListsOfFiles.RightListofFiles.First();
+
+            //deleting all files from right list
+
+            foreach (FileInfoWoha FIW in ListsOfFiles.RightListofFiles)
+            {
+                string fileForDeletion = Path.Combine(FIW.Path, FIW.Name);
+                try
                 {
-                    string fileForDeletion = Path.Combine(FIW.Path, FIW.Name);
-                    try
-                    {
-                        File.Delete(fileForDeletion);
-                    }
-                    catch (IOException e)
-                    {
-                        MessageBoxButtons buttons = MessageBoxButtons.OK;
-                        DialogResult result;
-                        string message = e.ToString();
-                        string caption = "Error deleting file";
-                        result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);                        
-                    }
-                    
+                    File.Delete(fileForDeletion);
                 }
-
-                //copying files from left list to right list
-                foreach (FileInfoWoha FIW in ListsOfFiles.LeftListofFiles)
+                catch (IOException e)
                 {
-                    string sourceFile = Path.Combine(FIW.Path, FIW.Name);
-                    string destFile = Path.Combine(TargetListFile.Path, FIW.Name);
-
-                    try
-                    {
-                       File.Copy(sourceFile, destFile, true);
-                    }
-                    catch (IOException e)
-                    {
-                        MessageBoxButtons buttons = MessageBoxButtons.OK;
-                        DialogResult result;
-                        string message = e.ToString();
-                        string caption = "Error copying file";
-                        result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
-                    }
-
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+                    string message = e.ToString();
+                    string caption = "Error deleting file";
+                    result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
                 }
-
 
             }
-            else
+
+            //copying files from left list to right list
+            foreach (FileInfoWoha FIW in ListsOfFiles.LeftListofFiles)
             {
+                string sourceFile = Path.Combine(FIW.Path, FIW.Name);
+                string destFile = Path.Combine(TargetListFile.Path, FIW.Name);
+
+                try
+                {
+                    File.Copy(sourceFile, destFile, true);
+                }
+                catch (IOException e)
+                {
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+                    string message = e.ToString();
+                    string caption = "Error copying file";
+                    result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
+                }
 
             }
         }

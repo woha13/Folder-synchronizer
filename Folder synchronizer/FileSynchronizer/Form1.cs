@@ -135,9 +135,20 @@ namespace FolderSynchronizer
             FolderSynchronizerForm_Load(this, e);
         }
 
+
+        // 20.07.16 23.27 slava - temprory using for checking equalByContent method 
         private void button1_Click(object sender, EventArgs e)
         {
-            FolderSynchronizerForm_Load(this, e);
+
+            Synchronization sync = new Synchronization();
+            
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result;
+            string message = (sync.EqualByContent(listsofFiles.LeftListofFiles.First(), listsofFiles.RightListofFiles.First())).ToString();
+            string caption = "Files equal:";
+            result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Information);
+
+            //FolderSynchronizerForm_Load(this, e);
         }
     }
 }

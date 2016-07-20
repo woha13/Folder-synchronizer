@@ -51,6 +51,10 @@
             this.checkBoxNotEqual = new System.Windows.Forms.CheckBox();
             this.checkBoxEqual = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxFolderPathLeft
@@ -91,7 +95,7 @@
             // 
             this.listViewLeftListofFiles.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.listViewLeftListofFiles.GridLines = true;
-            this.listViewLeftListofFiles.Location = new System.Drawing.Point(12, 281);
+            this.listViewLeftListofFiles.Location = new System.Drawing.Point(12, 202);
             this.listViewLeftListofFiles.Name = "listViewLeftListofFiles";
             this.listViewLeftListofFiles.Size = new System.Drawing.Size(381, 266);
             this.listViewLeftListofFiles.TabIndex = 4;
@@ -101,7 +105,7 @@
             // listViewRightListofFiles
             // 
             this.listViewRightListofFiles.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.listViewRightListofFiles.Location = new System.Drawing.Point(554, 282);
+            this.listViewRightListofFiles.Location = new System.Drawing.Point(554, 203);
             this.listViewRightListofFiles.Name = "listViewRightListofFiles";
             this.listViewRightListofFiles.Size = new System.Drawing.Size(381, 266);
             this.listViewRightListofFiles.TabIndex = 5;
@@ -111,7 +115,7 @@
             // listViewIcons
             // 
             this.listViewIcons.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.listViewIcons.Location = new System.Drawing.Point(436, 281);
+            this.listViewIcons.Location = new System.Drawing.Point(436, 202);
             this.listViewIcons.Name = "listViewIcons";
             this.listViewIcons.Size = new System.Drawing.Size(73, 266);
             this.listViewIcons.TabIndex = 6;
@@ -121,7 +125,7 @@
             // checkBoxAsymmetric
             // 
             this.checkBoxAsymmetric.AutoSize = true;
-            this.checkBoxAsymmetric.Location = new System.Drawing.Point(12, 54);
+            this.checkBoxAsymmetric.Location = new System.Drawing.Point(6, 19);
             this.checkBoxAsymmetric.Name = "checkBoxAsymmetric";
             this.checkBoxAsymmetric.Size = new System.Drawing.Size(79, 17);
             this.checkBoxAsymmetric.TabIndex = 7;
@@ -132,7 +136,7 @@
             // checkBoxWithsubdirs
             // 
             this.checkBoxWithsubdirs.AutoSize = true;
-            this.checkBoxWithsubdirs.Location = new System.Drawing.Point(12, 77);
+            this.checkBoxWithsubdirs.Location = new System.Drawing.Point(6, 42);
             this.checkBoxWithsubdirs.Name = "checkBoxWithsubdirs";
             this.checkBoxWithsubdirs.Size = new System.Drawing.Size(84, 17);
             this.checkBoxWithsubdirs.TabIndex = 8;
@@ -142,7 +146,7 @@
             // checkBoxByContent
             // 
             this.checkBoxByContent.AutoSize = true;
-            this.checkBoxByContent.Location = new System.Drawing.Point(12, 100);
+            this.checkBoxByContent.Location = new System.Drawing.Point(6, 65);
             this.checkBoxByContent.Name = "checkBoxByContent";
             this.checkBoxByContent.Size = new System.Drawing.Size(78, 17);
             this.checkBoxByContent.TabIndex = 9;
@@ -153,7 +157,7 @@
             // checkBoxIgnoreDate
             // 
             this.checkBoxIgnoreDate.AutoSize = true;
-            this.checkBoxIgnoreDate.Location = new System.Drawing.Point(12, 123);
+            this.checkBoxIgnoreDate.Location = new System.Drawing.Point(6, 88);
             this.checkBoxIgnoreDate.Name = "checkBoxIgnoreDate";
             this.checkBoxIgnoreDate.Size = new System.Drawing.Size(80, 17);
             this.checkBoxIgnoreDate.TabIndex = 10;
@@ -191,7 +195,7 @@
             // 
             // buttonDuplicates
             // 
-            this.buttonDuplicates.Location = new System.Drawing.Point(824, 71);
+            this.buttonDuplicates.Location = new System.Drawing.Point(141, 46);
             this.buttonDuplicates.Name = "buttonDuplicates";
             this.buttonDuplicates.Size = new System.Drawing.Size(73, 23);
             this.buttonDuplicates.TabIndex = 18;
@@ -200,7 +204,7 @@
             // 
             // buttonSingles
             // 
-            this.buttonSingles.Location = new System.Drawing.Point(824, 109);
+            this.buttonSingles.Location = new System.Drawing.Point(141, 84);
             this.buttonSingles.Name = "buttonSingles";
             this.buttonSingles.Size = new System.Drawing.Size(73, 23);
             this.buttonSingles.TabIndex = 19;
@@ -219,7 +223,7 @@
             // 
             this.checkBoxRight.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxRight.AutoSize = true;
-            this.checkBoxRight.Location = new System.Drawing.Point(667, 74);
+            this.checkBoxRight.Location = new System.Drawing.Point(6, 56);
             this.checkBoxRight.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxRight.MinimumSize = new System.Drawing.Size(40, 40);
             this.checkBoxRight.Name = "checkBoxRight";
@@ -233,7 +237,7 @@
             // 
             this.checkBoxLeft.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxLeft.AutoSize = true;
-            this.checkBoxLeft.Location = new System.Drawing.Point(745, 74);
+            this.checkBoxLeft.Location = new System.Drawing.Point(84, 56);
             this.checkBoxLeft.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxLeft.MinimumSize = new System.Drawing.Size(40, 40);
             this.checkBoxLeft.Name = "checkBoxLeft";
@@ -247,7 +251,7 @@
             // 
             this.checkBoxNotEqual.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxNotEqual.AutoSize = true;
-            this.checkBoxNotEqual.Location = new System.Drawing.Point(706, 112);
+            this.checkBoxNotEqual.Location = new System.Drawing.Point(45, 94);
             this.checkBoxNotEqual.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxNotEqual.MinimumSize = new System.Drawing.Size(40, 40);
             this.checkBoxNotEqual.Name = "checkBoxNotEqual";
@@ -261,7 +265,7 @@
             // 
             this.checkBoxEqual.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxEqual.AutoSize = true;
-            this.checkBoxEqual.Location = new System.Drawing.Point(706, 36);
+            this.checkBoxEqual.Location = new System.Drawing.Point(45, 18);
             this.checkBoxEqual.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxEqual.MinimumSize = new System.Drawing.Size(40, 40);
             this.checkBoxEqual.Name = "checkBoxEqual";
@@ -273,34 +277,54 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(421, 199);
+            this.button1.Location = new System.Drawing.Point(225, 81);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 25;
-            this.button1.Text = "button1";
+            this.button1.Text = "Test";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxRight);
+            this.groupBox1.Controls.Add(this.checkBoxLeft);
+            this.groupBox1.Controls.Add(this.checkBoxEqual);
+            this.groupBox1.Controls.Add(this.buttonSingles);
+            this.groupBox1.Controls.Add(this.checkBoxNotEqual);
+            this.groupBox1.Controls.Add(this.buttonDuplicates);
+            this.groupBox1.Location = new System.Drawing.Point(638, 46);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(221, 143);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Files display options";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBoxAsymmetric);
+            this.groupBox2.Controls.Add(this.checkBoxWithsubdirs);
+            this.groupBox2.Controls.Add(this.checkBoxByContent);
+            this.groupBox2.Controls.Add(this.checkBoxIgnoreDate);
+            this.groupBox2.Location = new System.Drawing.Point(17, 54);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(118, 112);
+            this.groupBox2.TabIndex = 27;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Synchronize options";
             // 
             // FolderSynchronizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(947, 559);
+            this.ClientSize = new System.Drawing.Size(947, 477);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBoxEqual);
-            this.Controls.Add(this.checkBoxNotEqual);
-            this.Controls.Add(this.checkBoxLeft);
-            this.Controls.Add(this.checkBoxRight);
             this.Controls.Add(this.textBoxFileMask);
-            this.Controls.Add(this.buttonSingles);
-            this.Controls.Add(this.buttonDuplicates);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSyncronize);
             this.Controls.Add(this.buttonCompare);
-            this.Controls.Add(this.checkBoxIgnoreDate);
-            this.Controls.Add(this.checkBoxByContent);
-            this.Controls.Add(this.checkBoxWithsubdirs);
-            this.Controls.Add(this.checkBoxAsymmetric);
             this.Controls.Add(this.listViewIcons);
             this.Controls.Add(this.listViewRightListofFiles);
             this.Controls.Add(this.listViewLeftListofFiles);
@@ -312,6 +336,10 @@
             this.Name = "FolderSynchronizerForm";
             this.Text = "Folder Synchronizer";
             this.Shown += new System.EventHandler(this.FolderSynchronizerForm_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,6 +368,8 @@
         private System.Windows.Forms.CheckBox checkBoxNotEqual;
         private System.Windows.Forms.CheckBox checkBoxEqual;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

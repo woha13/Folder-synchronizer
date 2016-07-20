@@ -110,11 +110,13 @@
             // 
             // listViewIcons
             // 
+            this.listViewIcons.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.listViewIcons.Location = new System.Drawing.Point(436, 281);
             this.listViewIcons.Name = "listViewIcons";
             this.listViewIcons.Size = new System.Drawing.Size(73, 266);
             this.listViewIcons.TabIndex = 6;
             this.listViewIcons.UseCompatibleStateImageBehavior = false;
+            this.listViewIcons.View = System.Windows.Forms.View.List;
             // 
             // checkBoxAsymmetric
             // 

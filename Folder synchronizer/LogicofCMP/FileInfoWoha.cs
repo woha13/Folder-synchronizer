@@ -36,6 +36,16 @@ namespace LogicofCMP
             Right = 0;
             Relations = 0;
         }
+        //1 - Right
+        //2 - Left
+        //3 - Equal
+        //4 - NotEqual
+        //5 - DoesNotExist
+        public const int RightIcon = 1;
+        public const int LeftIcon = 2;
+        public const int EqualIcon = 3;
+        public const int NotEqualIcon = 4;
+        public const int DNEIcon = 5; //does not exist
     }
 
     public class ListsofFiles
@@ -45,16 +55,6 @@ namespace LogicofCMP
         public List<LinksInfo> linksInfo;
         public List<int> WhatToDo;
         public string FileMask;
-        //1 - Right
-        //2 - Left
-        //3 - Equal
-        //4 - NotEqual
-        //5 - DoesNotExist
-        const int RightIcon = 1;
-        const int LeftIcon = 2;
-        const int EqualIcon = 3;
-        const int NotEqualIcon = 4;
-        const int DNEIcon = 5; //does not exist
         public ListsofFiles()
         {
             LeftListofFiles = new List<FileInfoWoha>(); //лівий
@@ -138,17 +138,21 @@ namespace LogicofCMP
 
             foreach (FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
             {
-                if (listsOfFiles.RightListofFiles.Exists(x=>x.Name==FIW.Name))
+                LinksInfo LI = new LinksInfo();
+                LI.Relations = LinksInfo.RightIcon;
+                if (listsOfFiles.RightListofFiles.Exists(x => x.Name == FIW.Name))
                 {
-                    LinksInfo LI = new LinksInfo();
-                    LI.Left = 1;
-                    listsOfFiles.linksInfo.Add(LI);
+                    LI.Right = listsOfFiles.RightListofFiles.FindIndex(x => x.Name == FIW.Name);
+                    LI.Relations =LinksInfo.EqualIcon;
                 }
+                //LI.Right = listsOfFiles.RightListofFiles.IndexOf(FIW.Name);
+                LI.Left = leftListIndex;
+                listsOfFiles.linksInfo.Add(LI);
                 leftListIndex++;
             }
 
             //Console.WriteLine("\nContains: Part with Id=1734: {0}",
-              //      parts.Contains(new Part { PartId = 1734, PartName = "" }));
+            //      parts.Contains(new Part { PartId = 1734, PartName = "" }));
 
             //}
             //FileInfoWoha FIW1=new FileInfoWoha(); 
@@ -161,6 +165,7 @@ namespace LogicofCMP
             //{
             //    Console.Beep();
             //}
+            Console.Beep();
 
         }
         public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 

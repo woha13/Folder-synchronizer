@@ -125,6 +125,13 @@ namespace FolderSynchronizer
             Synchronization syncFiles = new Synchronization();
             syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
             syncFiles.SymetricSynchronize(listsofFiles);
+
+            listViewIcons.Items.Clear();
+            //
+            foreach (LinksInfo LI in listsofFiles.linksInfo)
+            {
+                listViewIcons.Items.Add(LI.Left.ToString()+LI.Relations.ToString()+LI.Right.ToString());
+            }
             FolderSynchronizerForm_Load(this, e);
         }
 

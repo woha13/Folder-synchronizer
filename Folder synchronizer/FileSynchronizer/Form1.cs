@@ -26,11 +26,14 @@ namespace FolderSynchronizer
 
             checkBoxAsymmetric.Checked = false; //Asymmetric checkbox default state
             checkBoxByContent.Checked = false; //ByContent checkbox default state
+            checkBoxIgnoreDate.Checked = false;
+            checkBoxWithsubdirs.Checked = false;
         }
 
         public bool isAsymmetricChecked = false; //variable to send Asymmetric checkbox state for Syncronize method
         public bool isByContentChecked = false; //variable to send ByContent checkbox state for Syncronize method
-
+        public bool isIgnoreDateChecked = false;
+        public bool isWithSubdirsChecked = false;
 
         FolderBrowserDialog FolderPathLeftDialog = new FolderBrowserDialog(); //creating dialog window instance for left file path
         FolderBrowserDialog FolderPathRightDialog = new FolderBrowserDialog(); //creating dialog window instance for right file path
@@ -121,7 +124,7 @@ namespace FolderSynchronizer
         {
             Synchronization syncFiles = new Synchronization();
             syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
-
+            syncFiles.SymetricSynchronize(listsofFiles);
             FolderSynchronizerForm_Load(this, e);
         }
 

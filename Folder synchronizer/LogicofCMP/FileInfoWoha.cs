@@ -14,6 +14,7 @@ namespace LogicofCMP
         public Int64 Size;
         public DateTime DateCreation;
         public DateTime DateMoficication;
+        public bool IsInSubDir;
         public FileInfoWoha()
         {
             Path = "";
@@ -21,6 +22,7 @@ namespace LogicofCMP
             Size = 0;
             DateCreation = DateTime.MinValue;
             DateMoficication = DateTime.MinValue;
+            IsInSubDir = false;
         }
     }
     public class LinksInfo
@@ -129,9 +131,56 @@ namespace LogicofCMP
     }
     public partial class Synchronization
     {
-        public void WithSubdirs()
+        public void SymetricSynchronize(ListsofFiles listsOfFiles)
         {
-            int i = 0;
+            //FileInfoWoha FIW = new FileInfoWoha();
+
+            //foreach(FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
+            //{
+
+            //}
+            FileInfoWoha FIW1=new FileInfoWoha(); 
+            FileInfoWoha FIW2 = new FileInfoWoha();
+            FIW1.Name = "1";
+            FIW2.Name = "1";
+            //FIW2.Size = 100;
+            FIW2.DateMoficication = DateTime.Now;
+            if (CompareBy(FIW1, FIW2, true, true))
+            {
+                Console.Beep();
+            }
+
+        }
+        public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 
+                                bool isIgnoreDateChecked)
+        {
+            bool State=false;
+            if ((FIW1.Name == FIW2.Name) && (FIW1.Path == FIW2.Path)&&(FIW1.DateMoficication == FIW2.DateMoficication))
+            {
+                State = true;
+            }
+
+            if (isIgnoreDateChecked)
+            {
+                if((FIW1.Name == FIW2.Name) && (FIW1.Path == FIW2.Path))
+                {
+                    State = true;
+                }
+            }
+
+            if ((isByContentChecked) && (State))
+            {
+                if (FIW1.Size == FIW2.Size)
+                {
+                    State = true;
+                }
+                else
+                {
+                    State = false;
+                }
+            }
+
+            return State;
         }
     }
 }

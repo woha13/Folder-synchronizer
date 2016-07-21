@@ -115,6 +115,7 @@ namespace LogicofCMP
             foreach (string subdirectory in subdirectoryEntries)
                 FillSourcePathList(subdirectory);
         }
+
         private void RemoveStartFolder(string Path, List<FileInfoWoha> listFIW)
         {            
             foreach (FileInfoWoha FIW in listFIW)
@@ -165,20 +166,7 @@ namespace LogicofCMP
                 leftListIndex++;
             }
 
-            //Console.WriteLine("\nContains: Part with Id=1734: {0}",
-            //      parts.Contains(new Part { PartId = 1734, PartName = "" }));
 
-            //}
-            //FileInfoWoha FIW1=new FileInfoWoha(); 
-            //FileInfoWoha FIW2 = new FileInfoWoha();
-            //FIW1.Name = "1";
-            //FIW2.Name = "1";
-            ////FIW2.Size = 100;
-            //FIW2.DateMoficication = DateTime.Now;
-            //if (CompareBy(FIW1, FIW2, true, true))
-            //{
-            //    Console.Beep();
-            //}
             Console.Beep();
 
         }

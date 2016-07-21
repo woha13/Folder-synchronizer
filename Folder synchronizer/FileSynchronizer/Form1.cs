@@ -77,6 +77,7 @@ namespace FolderSynchronizer
         private void FolderSynchronizerForm_Load(object sender, EventArgs e)
         {
             //наповнюються логічні класи LeftListofFiles і RightListofFiles
+
             listsofFiles.FileMask = textBoxFileMask.Text;
             listsofFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text);
             
@@ -84,12 +85,12 @@ namespace FolderSynchronizer
             listViewLeftListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.LeftListofFiles)
             {
-                listViewLeftListofFiles.Items.Add(FIW.PathInFolder + FIW.Name);
+                listViewLeftListofFiles.Items.Add(FIW.Path+'~'+FIW.PathInFolder+'~' + FIW.Name);
             }
             listViewRightListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.RightListofFiles)
             {
-                listViewRightListofFiles.Items.Add(FIW.PathInFolder + FIW.Name);
+                listViewRightListofFiles.Items.Add(FIW.Path + '~' + FIW.PathInFolder + '~' + FIW.Name);
             }
         }
 

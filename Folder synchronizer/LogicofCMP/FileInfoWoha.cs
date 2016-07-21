@@ -10,6 +10,7 @@ namespace LogicofCMP
     public class FileInfoWoha
     {
         public string Path;
+        public string PathInFolder;
         public string Name;
         public Int64 Size;
         public DateTime DateCreation;
@@ -17,7 +18,8 @@ namespace LogicofCMP
         public bool IsInSubDir;
         public FileInfoWoha()
         {
-            Path = "";
+            Path = ""; //Шлях до папки
+            PathInFolder = ""; //Шлях у папці
             Name = "";
             Size = 0;
             DateCreation = DateTime.MinValue;
@@ -32,8 +34,8 @@ namespace LogicofCMP
         public int Relations;
         public LinksInfo()
         {
-            Left = 0;
-            Right = 0;
+            Left = -1;
+            Right = -1;
             Relations = 0;
         }
         //1 - Right
@@ -45,6 +47,8 @@ namespace LogicofCMP
         public const int LeftIcon = 2;
         public const int EqualIcon = 3;
         public const int NotEqualIcon = 4;
+        public const int NotEqualToLeft = 6;   // Лівий новіший
+        public const int NotEqualToRight = 7;  // Правий новіший
         public const int DNEIcon = 5; //does not exist
     }
 

@@ -74,14 +74,14 @@ namespace LogicofCMP
             LeftListofFiles.Clear();
             RightListofFiles.Clear();
             //FillSourcePathList(SourcePath, //FolderSynchronizerForm.isWithSubdirsChecked);
-            FillPathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs);
-            FillPathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs);
+            FillSourcePathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs);
+            FillSourcePathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs);
             RemoveStartFolder(SourcePath, LeftListofFiles);
             RemoveStartFolder(TargetPath, RightListofFiles);
         }
 
 
-        private void FillPathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
+        private void FillSourcePathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
         {
             // Process the list of files found in the directory.
 
@@ -99,7 +99,7 @@ namespace LogicofCMP
             {
                 string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
                 foreach (string subdirectory in subdirectoryEntries)
-                    FillPathList(subdirectory, ListofFiles, withSubDirs);
+                    FillSourcePathList(subdirectory, ListofFiles, withSubDirs);
             }
         }
 
@@ -113,24 +113,24 @@ namespace LogicofCMP
         }
 
 
-        //private void FillTargetPathList(string TargetPath)
-        //{
-        //    // Process the list of files found in the directory.
+        private void FillTargetPathList(string TargetPath)
+        {
+            // Process the list of files found in the directory.
 
-        //    var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
-        //    foreach (string fileName in fileEntries)
-        //    {
-        //        FileInfoWoha fileData = new FileInfoWoha();
-        //        fileData.Name = fileName.Substring(TargetPath.Length + 1);
-        //        fileData.PathInFolder = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
-        //        fileData.Path = TargetPath;
-        //        RightListofFiles.Add(fileData);
-        //    }
-        //    // Recurse into subdirectories of this directory.
-        //    string[] subdirectoryEntries = Directory.GetDirectories(TargetPath);
-        //    foreach (string subdirectory in subdirectoryEntries)
-        //        FillTargetPathList(subdirectory);
-        //}
+            var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
+            foreach (string fileName in fileEntries)
+            {
+                FileInfoWoha fileData = new FileInfoWoha();
+                fileData.Name = fileName.Substring(TargetPath.Length + 1);
+                fileData.PathInFolder = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
+                fileData.Path = TargetPath;
+                RightListofFiles.Add(fileData);
+            }
+            // Recurse into subdirectories of this directory.
+            string[] subdirectoryEntries = Directory.GetDirectories(TargetPath);
+            foreach (string subdirectory in subdirectoryEntries)
+                FillTargetPathList(subdirectory);
+        }
         
     }
     public partial class Synchronization

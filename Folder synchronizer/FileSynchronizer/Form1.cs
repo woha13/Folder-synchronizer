@@ -89,10 +89,17 @@ namespace FolderSynchronizer
             {
                 listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+" - "+ FIW.Path+'~'+FIW.PathInFolder+'~' + FIW.Name);
             }
+
             listViewRightListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.RightListofFiles)
             {
                 listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + " - "+FIW.Path + '~' + FIW.PathInFolder + '~' + FIW.Name);
+            }
+
+            listViewIcons.Items.Clear();
+            foreach (LinksInfo LI in listsofFiles.linksInfo)
+            {
+                listViewIcons.Items.Add(LI.Left.ToString() + '-' + LI.Relations.ToString() + ' ' + LI.Right.ToString());
             }
         }
 
@@ -126,14 +133,14 @@ namespace FolderSynchronizer
         private void buttonSyncronize_Click(object sender, EventArgs e)
         {
             Synchronization syncFiles = new Synchronization();
-            //syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
+            syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
 
             syncFiles.WohaAsymetricSynchronize(listsofFiles);
             //if (isAsymmetricChecked
             syncFiles.WohaSymetricSynchronize(listsofFiles, isAsymmetricChecked);
 
             listViewIcons.Items.Clear();
-            //
+            
             foreach (LinksInfo LI in listsofFiles.linksInfo)
             {
                 listViewIcons.Items.Add(LI.Left.ToString()+LI.Relations.ToString()+LI.Right.ToString());
@@ -155,6 +162,18 @@ namespace FolderSynchronizer
             result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Information);
 
             //FolderSynchronizerForm_Load(this, e);
+        }
+
+        private void checkBoxWithsubdirs_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxWithsubdirs.Checked)
+            {
+                isWithSubdirsChecked = true;
+            }
+            else
+            {
+                isWithSubdirsChecked = false;
+            }
         }
     }
 }

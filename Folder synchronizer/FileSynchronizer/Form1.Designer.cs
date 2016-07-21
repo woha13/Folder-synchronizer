@@ -143,6 +143,7 @@
             this.checkBoxWithsubdirs.TabIndex = 8;
             this.checkBoxWithsubdirs.Text = "With subdirs";
             this.checkBoxWithsubdirs.UseVisualStyleBackColor = true;
+            this.checkBoxWithsubdirs.CheckedChanged += new System.EventHandler(this.checkBoxWithsubdirs_CheckedChanged);
             // 
             // checkBoxByContent
             // 

@@ -153,13 +153,22 @@ namespace FolderSynchronizer
         private void button1_Click(object sender, EventArgs e)
         {
 
+
             Synchronization sync = new Synchronization();
-            
-            MessageBoxButtons buttons = MessageBoxButtons.OK;
-            DialogResult result;
-            string message = (sync.EqualByContent(listsofFiles.LeftListofFiles.First(), listsofFiles.RightListofFiles.First())).ToString();
-            string caption = "Files equal:";
-            result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Information);
+
+            sync.FileHandler(listsofFiles);
+
+
+            FolderSynchronizerForm_Load(this, e);
+
+
+            //Synchronization sync = new Synchronization();
+
+            //MessageBoxButtons buttons = MessageBoxButtons.OK;
+            //DialogResult result;
+            //string message = (sync.EqualByContent(listsofFiles.LeftListofFiles.First(), listsofFiles.RightListofFiles.First())).ToString();
+            //string caption = "Files equal:";
+            //result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Information);
 
             //FolderSynchronizerForm_Load(this, e);
         }

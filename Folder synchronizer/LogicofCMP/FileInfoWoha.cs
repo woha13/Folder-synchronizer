@@ -14,7 +14,7 @@ namespace LogicofCMP
         public string Name;
         public Int64 Size;
         public DateTime DateCreation;
-        public DateTime DateMoficication;
+        public DateTime DateModification;
         public bool IsInSubDir;
         public FileInfoWoha()
         {
@@ -23,7 +23,7 @@ namespace LogicofCMP
             Name = "";
             Size = 0;
             DateCreation = DateTime.MinValue;
-            DateMoficication = DateTime.MinValue;
+            DateModification = DateTime.MinValue;
             IsInSubDir = false;
         }
     }
@@ -187,7 +187,7 @@ namespace LogicofCMP
                                 bool isIgnoreDateChecked)
         {
             bool State=false;
-            if ((FIW1.Name == FIW2.Name) && (FIW1.Path == FIW2.Path)&&(FIW1.DateMoficication == FIW2.DateMoficication))
+            if ((FIW1.Name == FIW2.Name) && (FIW1.Path == FIW2.Path)&&(FIW1.DateModification == FIW2.DateModification))
             {
                 State = true;
             }

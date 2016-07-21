@@ -124,5 +124,105 @@ namespace LogicofCMP
             result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
         }
 
+        public void FileHandler(ListsofFiles Lists)
+        {
+            
+            FileInfoWoha FIWLeft;
+            FileInfoWoha FIWRight;
+
+            foreach (LinksInfo LI in Lists.linksInfo)
+            {
+                
+                
+                //if file from left folder doesn't exist in right folder
+                if (LI.Right == -1)
+                {
+
+                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
+                    FIWRight = Lists.RightListofFiles.ElementAt(0); //getting right file info
+
+                    string sourceFile = Path.Combine(FIWLeft.Path+ FIWLeft.PathInFolder, FIWLeft.Name);
+                    string destFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWLeft.Name);
+
+                    // copying left file to right folder
+                    try
+                    {
+                        File.Copy(sourceFile, destFile, false);
+                    }
+                    catch (IOException e)
+                    {
+                        
+                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                    }
+                }
+
+
+
+                // if file from right folder doesn't exist in left folder
+                if (LI.Left == -1)
+                {
+                    FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
+                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+
+                    string sourceFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
+                    string destFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWRight.Name);
+
+                    // copying right file to left folder
+                    try
+                    {
+                        File.Copy(sourceFile, destFile, false);
+                    }
+                    catch (IOException e)
+                    {
+
+                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                    }
+                }
+
+                //if files equal but left is newer
+                if (LI.Relations == 6)
+                {
+
+                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
+                    FIWRight = Lists.RightListofFiles.ElementAt(0); //getting right file info
+
+                    string sourceFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWLeft.Name);
+                    string destFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWLeft.Name);
+
+                    // copying left file to right folder
+                    try
+                    {
+                        File.Copy(sourceFile, destFile, false);
+                    }
+                    catch (IOException e)
+                    {
+
+                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                    }
+                }
+
+                // if files are equal but right file is newer
+                if (LI.Relations == 7)
+                {
+                    FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
+                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+
+                    string sourceFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
+                    string destFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWRight.Name);
+
+                    // copying right file to left folder
+                    try
+                    {
+                        File.Copy(sourceFile, destFile, false);
+                    }
+                    catch (IOException e)
+                    {
+
+                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                    }
+                }
+            }
+        }
+        
     }
 }

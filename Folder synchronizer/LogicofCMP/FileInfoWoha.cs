@@ -77,25 +77,6 @@ namespace LogicofCMP
             RemoveStartFolder(SourcePath, RightListofFiles);
         }
 
-        //private void FillSourcePathList(string SourcePath)
-        //{
-        //    // Process the list of files found in the directory.
-        //    FileInfoWoha fileData = new FileInfoWoha();
-
-        //    string[] fileEntries = Directory.GetFiles(SourcePath);
-        //    foreach (string fileName in fileEntries)
-        //    {
-        //        //ProcessFile(fileName);
-        //        fileData.Name = fileName;
-        //        LeftListofFiles.Add(fileData);
-        //    }
-
-
-        //    // Recurse into subdirectories of this directory.
-        //    string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
-        //    foreach (string subdirectory in subdirectoryEntries)
-        //        FillSourcePathList(subdirectory);
-        //}
 
         private void FillSourcePathList(string SourcePath)
         {
@@ -166,29 +147,32 @@ namespace LogicofCMP
             }
             Console.Beep();
         }
-        public void WohaSymetricSynchronize(ListsofFiles listsOfFiles)
+        public void WohaSymetricSynchronize(ListsofFiles listsOfFiles, bool isAsymmetricChecked)
         {
-            //FileInfoWoha FIW = new FileInfoWoha();
-            int leftListIndex = 0;
-            //listsOfFiles.linksInfo.Clear();
-            foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
+            if (!(isAsymmetricChecked))
             {
-                LinksInfo LI = new LinksInfo();
-                LI.Relations = LinksInfo.RightIcon;
-                if (listsOfFiles.LeftListofFiles.Exists(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder)))
+                //FileInfoWoha FIW = new FileInfoWoha();
+                int leftListIndex = 0;
+                //listsOfFiles.linksInfo.Clear();
+                foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
                 {
-                    LI.Left = listsOfFiles.LeftListofFiles.FindIndex(x => x.Name == FIW.Name);
-                    LI.Relations = LinksInfo.EqualIcon;
+                    LinksInfo LI = new LinksInfo();
+                    LI.Relations = LinksInfo.RightIcon;
+                    if (listsOfFiles.LeftListofFiles.Exists(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder)))
+                    {
+                        LI.Left = listsOfFiles.LeftListofFiles.FindIndex(x => x.Name == FIW.Name);
+                        LI.Relations = LinksInfo.EqualIcon;
+                    }
+                    LI.Right = leftListIndex;
+                    if (listsOfFiles.linksInfo.FindAll(x => (x.Left == LI.Left) && (x.Right == LI.Right) && (x.Relations == LI.Relations)).Count == 0)
+                    {
+                        listsOfFiles.linksInfo.Add(LI);
+                    }
+                    leftListIndex++;
                 }
-                LI.Right = leftListIndex;
-                if (listsOfFiles.linksInfo.FindAll(x => (x.Left==LI.Left)&& (x.Right == LI.Right)&& (x.Relations == LI.Relations)).Count==0)
-                {
-                    listsOfFiles.linksInfo.Add(LI);
-                }
-                leftListIndex++;
+                Console.Beep();
+                listsOfFiles.linksInfo = listsOfFiles.linksInfo.Distinct().ToList<LinksInfo>();
             }
-            Console.Beep();
-            listsOfFiles.linksInfo=listsOfFiles.linksInfo.Distinct().ToList<LinksInfo>();
         }
 
         public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 

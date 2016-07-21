@@ -124,10 +124,11 @@ namespace FolderSynchronizer
         private void buttonSyncronize_Click(object sender, EventArgs e)
         {
             Synchronization syncFiles = new Synchronization();
-            syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
-            syncFiles.WohaAsymetricSynchronize(listsofFiles);
-            syncFiles.WohaSymetricSynchronize(listsofFiles);
+            //syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
 
+            syncFiles.WohaAsymetricSynchronize(listsofFiles);
+            //if (isAsymmetricChecked
+            syncFiles.WohaSymetricSynchronize(listsofFiles, isAsymmetricChecked);
 
             listViewIcons.Items.Clear();
             //

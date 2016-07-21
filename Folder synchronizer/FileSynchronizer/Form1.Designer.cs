@@ -41,7 +41,7 @@
             this.checkBoxByContent = new System.Windows.Forms.CheckBox();
             this.checkBoxIgnoreDate = new System.Windows.Forms.CheckBox();
             this.buttonCompare = new System.Windows.Forms.Button();
-            this.buttonSyncronize = new System.Windows.Forms.Button();
+            this.buttonSyncWoha = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonDuplicates = new System.Windows.Forms.Button();
             this.buttonSingles = new System.Windows.Forms.Button();
@@ -53,6 +53,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonSyncSlava = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -142,6 +143,7 @@
             this.checkBoxWithsubdirs.TabIndex = 8;
             this.checkBoxWithsubdirs.Text = "With subdirs";
             this.checkBoxWithsubdirs.UseVisualStyleBackColor = true;
+            this.checkBoxWithsubdirs.CheckedChanged += new System.EventHandler(this.checkBoxWithsubdirs_CheckedChanged);
             // 
             // checkBoxByContent
             // 
@@ -173,15 +175,15 @@
             this.buttonCompare.Text = "Compare";
             this.buttonCompare.UseVisualStyleBackColor = true;
             // 
-            // buttonSyncronize
+            // buttonSyncWoha
             // 
-            this.buttonSyncronize.Location = new System.Drawing.Point(436, 83);
-            this.buttonSyncronize.Name = "buttonSyncronize";
-            this.buttonSyncronize.Size = new System.Drawing.Size(73, 23);
-            this.buttonSyncronize.TabIndex = 12;
-            this.buttonSyncronize.Text = "Syncronize";
-            this.buttonSyncronize.UseVisualStyleBackColor = true;
-            this.buttonSyncronize.Click += new System.EventHandler(this.buttonSyncronize_Click);
+            this.buttonSyncWoha.Location = new System.Drawing.Point(399, 83);
+            this.buttonSyncWoha.Name = "buttonSyncWoha";
+            this.buttonSyncWoha.Size = new System.Drawing.Size(73, 23);
+            this.buttonSyncWoha.TabIndex = 12;
+            this.buttonSyncWoha.Text = "Sync Woha";
+            this.buttonSyncWoha.UseVisualStyleBackColor = true;
+            this.buttonSyncWoha.Click += new System.EventHandler(this.buttonSyncronize_Click);
             // 
             // buttonClose
             // 
@@ -313,17 +315,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Synchronize options";
             // 
+            // buttonSyncSlava
+            // 
+            this.buttonSyncSlava.Location = new System.Drawing.Point(475, 83);
+            this.buttonSyncSlava.Name = "buttonSyncSlava";
+            this.buttonSyncSlava.Size = new System.Drawing.Size(73, 23);
+            this.buttonSyncSlava.TabIndex = 28;
+            this.buttonSyncSlava.Text = "Sync Slava";
+            this.buttonSyncSlava.UseVisualStyleBackColor = true;
+            // 
             // FolderSynchronizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(947, 477);
+            this.Controls.Add(this.buttonSyncSlava);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxFileMask);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.buttonSyncronize);
+            this.Controls.Add(this.buttonSyncWoha);
             this.Controls.Add(this.buttonCompare);
             this.Controls.Add(this.listViewIcons);
             this.Controls.Add(this.listViewRightListofFiles);
@@ -358,7 +370,7 @@
         private System.Windows.Forms.CheckBox checkBoxByContent;
         private System.Windows.Forms.CheckBox checkBoxIgnoreDate;
         private System.Windows.Forms.Button buttonCompare;
-        private System.Windows.Forms.Button buttonSyncronize;
+        private System.Windows.Forms.Button buttonSyncWoha;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonDuplicates;
         private System.Windows.Forms.Button buttonSingles;
@@ -370,6 +382,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button buttonSyncSlava;
     }
 }
 

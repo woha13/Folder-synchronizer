@@ -150,17 +150,16 @@ namespace LogicofCMP
         {
             //FileInfoWoha FIW = new FileInfoWoha();
             int leftListIndex = 0;
-
+            listsOfFiles.linksInfo.Clear();
             foreach (FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
             {
                 LinksInfo LI = new LinksInfo();
                 LI.Relations = LinksInfo.RightIcon;
-                if (listsOfFiles.RightListofFiles.Exists(x => x.Name == FIW.Name))
+                if (listsOfFiles.RightListofFiles.Exists(x => (x.Name == FIW.Name)&&(x.PathInFolder == FIW.PathInFolder)))
                 {
                     LI.Right = listsOfFiles.RightListofFiles.FindIndex(x => x.Name == FIW.Name);
                     LI.Relations =LinksInfo.EqualIcon;
                 }
-                //LI.Right = listsOfFiles.RightListofFiles.IndexOf(FIW.Name);
                 LI.Left = leftListIndex;
                 listsOfFiles.linksInfo.Add(LI);
                 leftListIndex++;

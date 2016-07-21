@@ -146,7 +146,7 @@ namespace LogicofCMP
     }
     public partial class Synchronization
     {
-        public void SymetricSynchronize(ListsofFiles listsOfFiles)
+        public void WohaAsymetricSynchronize(ListsofFiles listsOfFiles)
         {
             //FileInfoWoha FIW = new FileInfoWoha();
             int leftListIndex = 0;
@@ -164,11 +164,33 @@ namespace LogicofCMP
                 listsOfFiles.linksInfo.Add(LI);
                 leftListIndex++;
             }
-
-
             Console.Beep();
-
         }
+        public void WohaSymetricSynchronize(ListsofFiles listsOfFiles)
+        {
+            //FileInfoWoha FIW = new FileInfoWoha();
+            int leftListIndex = 0;
+            //listsOfFiles.linksInfo.Clear();
+            foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
+            {
+                LinksInfo LI = new LinksInfo();
+                LI.Relations = LinksInfo.RightIcon;
+                if (listsOfFiles.LeftListofFiles.Exists(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder)))
+                {
+                    LI.Left = listsOfFiles.LeftListofFiles.FindIndex(x => x.Name == FIW.Name);
+                    LI.Relations = LinksInfo.EqualIcon;
+                }
+                LI.Right = leftListIndex;
+                if (listsOfFiles.linksInfo.FindAll(x => (x.Left==LI.Left)&& (x.Right == LI.Right)&& (x.Relations == LI.Relations)).Count==0)
+                {
+                    listsOfFiles.linksInfo.Add(LI);
+                }
+                leftListIndex++;
+            }
+            Console.Beep();
+            listsOfFiles.linksInfo=listsOfFiles.linksInfo.Distinct().ToList<LinksInfo>();
+        }
+
         public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 
                                 bool isIgnoreDateChecked)
         {

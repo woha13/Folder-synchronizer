@@ -84,12 +84,12 @@ namespace FolderSynchronizer
             listViewLeftListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.LeftListofFiles)
             {
-                listViewLeftListofFiles.Items.Add(FIW.Path + FIW.Name);
+                listViewLeftListofFiles.Items.Add(FIW.PathInFolder + FIW.Name);
             }
             listViewRightListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.RightListofFiles)
             {
-                listViewRightListofFiles.Items.Add(FIW.Path + FIW.Name);
+                listViewRightListofFiles.Items.Add(FIW.PathInFolder + FIW.Name);
             }
         }
 

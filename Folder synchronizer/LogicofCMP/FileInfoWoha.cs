@@ -73,6 +73,8 @@ namespace LogicofCMP
             RightListofFiles.Clear();
             FillSourcePathList(SourcePath);
             FillTargetPathList(TargetPath);
+            RemoveStartFolder(SourcePath, LeftListofFiles);
+            RemoveStartFolder(SourcePath, RightListofFiles);
         }
 
         //private void FillSourcePathList(string SourcePath)
@@ -99,13 +101,13 @@ namespace LogicofCMP
         {
             // Process the list of files found in the directory.
 
-            //LeftListofFiles.Clear();
             var fileEntries = Directory.EnumerateFiles(SourcePath, FileMask);
             foreach (string fileName in fileEntries)
             {
                 FileInfoWoha fileData = new FileInfoWoha();
                 fileData.Name = fileName.Substring(SourcePath.Length + 1);
-                fileData.Path = fileName.Remove(SourcePath.Length + 1, fileName.Length - SourcePath.Length - 1);
+                fileData.PathInFolder= fileName.Remove(SourcePath.Length + 1, fileName.Length - SourcePath.Length - 1);
+                fileData.Path = SourcePath;
                 LeftListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.
@@ -113,18 +115,26 @@ namespace LogicofCMP
             foreach (string subdirectory in subdirectoryEntries)
                 FillSourcePathList(subdirectory);
         }
+        private void RemoveStartFolder(string Path, List<FileInfoWoha> listFIW)
+        {            
+            foreach (FileInfoWoha FIW in listFIW)
+            {
+                FIW.Path = Path;
+                FIW.PathInFolder = FIW.PathInFolder.Remove(0, Path.Length + 1);
+            }
+        }
 
         private void FillTargetPathList(string TargetPath)
         {
             // Process the list of files found in the directory.
 
-            //RightListofFiles.Clear();
             var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
             foreach (string fileName in fileEntries)
             {
                 FileInfoWoha fileData = new FileInfoWoha();
                 fileData.Name = fileName.Substring(TargetPath.Length + 1);
-                fileData.Path = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
+                fileData.PathInFolder = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
+                fileData.Path = TargetPath;
                 RightListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.

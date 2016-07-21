@@ -79,7 +79,9 @@ namespace FolderSynchronizer
             //наповнюються логічні класи LeftListofFiles і RightListofFiles
 
             listsofFiles.FileMask = textBoxFileMask.Text;
-            listsofFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text);
+            listsofFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text,
+                checkBoxAsymmetric.Checked,checkBoxByContent.Checked,
+                checkBoxIgnoreDate.Checked, checkBoxWithsubdirs.Checked);
             
             //наповнюються listView 
             listViewLeftListofFiles.Items.Clear();

@@ -67,18 +67,21 @@ namespace LogicofCMP
             linksInfo = new List<LinksInfo>(); // відносини між лівим та правим
         }
 
-        public void FillListsFromPath(string SourcePath, string TargetPath)
+        public void FillListsFromPath(string SourcePath, string TargetPath,
+                            bool isCheckBoxAsymmetric, bool isCheckBoxByContent,
+                            bool isCheckBoxIgnoreDate, bool isCheckBoxWithsubdirs)
         {
             LeftListofFiles.Clear();
             RightListofFiles.Clear();
-            FillSourcePathList(SourcePath);
-            FillTargetPathList(TargetPath);
+            //FillSourcePathList(SourcePath, //FolderSynchronizerForm.isWithSubdirsChecked);
+            FillPathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs);
+            FillPathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs);
             RemoveStartFolder(SourcePath, LeftListofFiles);
-            RemoveStartFolder(SourcePath, RightListofFiles);
+            RemoveStartFolder(TargetPath, RightListofFiles);
         }
 
 
-        private void FillSourcePathList(string SourcePath)
+        private void FillPathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
         {
             // Process the list of files found in the directory.
 
@@ -89,12 +92,15 @@ namespace LogicofCMP
                 fileData.Name = fileName.Substring(SourcePath.Length + 1);
                 fileData.PathInFolder= fileName.Remove(SourcePath.Length + 1, fileName.Length - SourcePath.Length - 1);
                 fileData.Path = SourcePath;
-                LeftListofFiles.Add(fileData);
+                ListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.
-            string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
-            foreach (string subdirectory in subdirectoryEntries)
-                FillSourcePathList(subdirectory);
+            if (withSubDirs)
+            {
+                string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
+                foreach (string subdirectory in subdirectoryEntries)
+                    FillPathList(subdirectory, ListofFiles, withSubDirs);
+            }
         }
 
         private void RemoveStartFolder(string Path, List<FileInfoWoha> listFIW)
@@ -106,24 +112,26 @@ namespace LogicofCMP
             }
         }
 
-        private void FillTargetPathList(string TargetPath)
-        {
-            // Process the list of files found in the directory.
 
-            var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
-            foreach (string fileName in fileEntries)
-            {
-                FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fileName.Substring(TargetPath.Length + 1);
-                fileData.PathInFolder = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
-                fileData.Path = TargetPath;
-                RightListofFiles.Add(fileData);
-            }
-            // Recurse into subdirectories of this directory.
-            string[] subdirectoryEntries = Directory.GetDirectories(TargetPath);
-            foreach (string subdirectory in subdirectoryEntries)
-                FillTargetPathList(subdirectory);
-        }
+        //private void FillTargetPathList(string TargetPath)
+        //{
+        //    // Process the list of files found in the directory.
+
+        //    var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
+        //    foreach (string fileName in fileEntries)
+        //    {
+        //        FileInfoWoha fileData = new FileInfoWoha();
+        //        fileData.Name = fileName.Substring(TargetPath.Length + 1);
+        //        fileData.PathInFolder = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
+        //        fileData.Path = TargetPath;
+        //        RightListofFiles.Add(fileData);
+        //    }
+        //    // Recurse into subdirectories of this directory.
+        //    string[] subdirectoryEntries = Directory.GetDirectories(TargetPath);
+        //    foreach (string subdirectory in subdirectoryEntries)
+        //        FillTargetPathList(subdirectory);
+        //}
+        
     }
     public partial class Synchronization
     {

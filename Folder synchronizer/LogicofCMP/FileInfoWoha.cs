@@ -27,7 +27,7 @@ namespace LogicofCMP
             IsInSubDir = false;
         }
     }
-    public class LinksInfo
+    public class LinksInfo : IEquatable<LinksInfo>
     {
         public int Left;
         public int Right;
@@ -50,6 +50,22 @@ namespace LogicofCMP
         public const int NotEqualToLeft = 6;   // Лівий новіший
         public const int NotEqualToRight = 7;  // Правий новіший
         public const int DeleteIcon = 5; //File needed to be deleted
+
+        public bool Equals(LinksInfo other)
+        {
+            if ((Left==other.Left)&&(Right==other.Right)&&(Relations==other.Relations))
+                {
+                return true;
+                }
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            int hashLeft = Left == null ? 0 : Left.GetHashCode();
+            int hashRight = Right == null ? 0 : Right.GetHashCode();
+            int hashRelations = Relations == null ? 0 : Relations.GetHashCode();
+            return hashLeft  ^ hashRelations ^ hashRight;
+        }
     }
 
     public class ListsofFiles
@@ -135,15 +151,24 @@ namespace LogicofCMP
 
                 if (FIWRight!=null)
                 {
-                    if (!(isIgnoreDateChecked))
+                    if ((isIgnoreDateChecked))
                     {
-                        LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name&&x.PathInFolder==FIW.PathInFolder);
-                        LI.Relations = LinksInfo.EqualIcon;
+                        //if (FIWRight.DateModification >= FIW.DateModification)
+                        //{
+                            LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name && x.PathInFolder == FIW.PathInFolder);
+                            LI.Relations = LinksInfo.EqualIcon;
+                        //}
                     }
                     else if (FIW.DateModification==FIWRight.DateModification)
                     {
-                        LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name && x.PathInFolder == FIW.PathInFolder);
+                        LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name 
+                                                                   && x.PathInFolder == FIW.PathInFolder);
                         LI.Relations = LinksInfo.EqualIcon;
+                    }
+                    else if (FIWRight.DateModification >= FIW.DateModification)
+                    {
+                        LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name && x.PathInFolder == FIW.PathInFolder);
+                        LI.Relations = LinksInfo.LeftIcon;
                     }
                 }
                 LI.Left = leftListIndex;
@@ -169,11 +194,11 @@ namespace LogicofCMP
 
                     if (FIWLeft != null)
                     {
-                        if (!(isIgnoreDateChecked))
+                        if ((isIgnoreDateChecked))
                         {
-                            LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name 
+                                LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name
                                                                      && x.PathInFolder == FIW.PathInFolder);
-                            LI.Relations = LinksInfo.EqualIcon;
+                                LI.Relations = LinksInfo.EqualIcon;
                         }
                         else if (FIW.DateModification == FIWLeft.DateModification)
                         {
@@ -181,12 +206,17 @@ namespace LogicofCMP
                                                                       && x.PathInFolder == FIW.PathInFolder);
                             LI.Relations = LinksInfo.EqualIcon;
                         }
+                        else if (FIWLeft.DateModification > FIW.DateModification)
+                            {
+                            LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name
+                                                                 && x.PathInFolder == FIW.PathInFolder);
+                            LI.Relations = LinksInfo.RightIcon;
+                            }
                     }
                     LI.Right= leftListIndex;
                     listLinksInfo.Add(LI);
                     leftListIndex++;
                 }
-
                 Console.Beep();
                 listLinksInfo = listLinksInfo.Distinct().ToList<LinksInfo>();
             }

@@ -103,7 +103,32 @@ namespace FolderSynchronizer
             listViewIcons.Items.Clear();
             foreach (LinksInfo LI in listsofFiles.listLinksInfo)
             {
-                listViewIcons.Items.Add(LI.Left.ToString() + '-' + LI.Relations.ToString() + ' ' + LI.Right.ToString());
+                string strIcon="error";
+                switch (LI.Relations)
+                {
+                    case (LinksInfo.RightIcon):
+                        strIcon = @"=>";
+                        break;
+                    case (LinksInfo.LeftIcon):
+                        strIcon = @"<=";
+                        break;
+                    case (LinksInfo.EqualIcon):
+                        strIcon = @"==";
+                        break;
+                    case (LinksInfo.NotEqualIcon):
+                        strIcon = @"!=";
+                        break;
+                    case (LinksInfo.DeleteIcon):
+                        strIcon = @"xx";
+                        break;
+                    case (LinksInfo.NotEqualToLeft):
+                        strIcon = @"!=<";
+                        break;
+                    case (LinksInfo.NotEqualToRight):
+                        strIcon = @"!=>";
+                        break;
+                }
+                listViewIcons.Items.Add(LI.Left.ToString() + ' ' + strIcon + ' ' + LI.Right.ToString());
             }
         }
 

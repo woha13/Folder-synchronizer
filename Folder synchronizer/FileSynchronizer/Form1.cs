@@ -87,13 +87,17 @@ namespace FolderSynchronizer
             listViewLeftListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.LeftListofFiles)
             {
-                listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+" - "+ FIW.Path+'~'+FIW.PathInFolder+'~' + FIW.Name);
+                listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+
+                    " - "+ FIW.Path+'~'+FIW.PathInFolder+
+                    '~' + FIW.Name+ " size:" + FIW.Size.ToString());
             }
 
             listViewRightListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.RightListofFiles)
             {
-                listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + " - "+FIW.Path + '~' + FIW.PathInFolder + '~' + FIW.Name);
+                listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
+                    " - "+FIW.Path + '~' + FIW.PathInFolder + 
+                    '~' + FIW.Name + " size:" + FIW.Size.ToString());
             }
 
             listViewIcons.Items.Clear();

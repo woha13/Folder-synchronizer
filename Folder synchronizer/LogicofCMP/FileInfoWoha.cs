@@ -88,13 +88,15 @@ namespace LogicofCMP
         {
             // Process the list of files found in the directory.
 
-            var fileEntries = Directory.EnumerateFiles(SourcePath, FileMask);
-            foreach (string fileName in fileEntries)
+            //var fileEntries = Directory.EnumerateFiles(SourcePath, FileMask);
+            DirectoryInfo di = new DirectoryInfo(SourcePath);
+            foreach (var fi in di.GetFiles())
             {
                 FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fileName.Substring(SourcePath.Length + 1);
-                fileData.PathInFolder= fileName.Remove(SourcePath.Length + 1, fileName.Length - SourcePath.Length - 1);
+                fileData.Name = fi.Name;
+                fileData.PathInFolder = fi.Directory.ToString();
                 fileData.Path = SourcePath;
+                fileData.Size = fi.Length;
                 ListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.
@@ -111,29 +113,10 @@ namespace LogicofCMP
             foreach (FileInfoWoha FIW in listFIW)
             {
                 FIW.Path = Path;
-                FIW.PathInFolder = FIW.PathInFolder.Remove(0, Path.Length + 1);
+                FIW.PathInFolder = FIW.PathInFolder.Remove(0, Path.Length);
             }
         }
 
-
-        //private void FillTargetPathList(string TargetPath)
-        //{
-        //    // Process the list of files found in the directory.
-
-        //    var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
-        //    foreach (string fileName in fileEntries)
-        //    {
-        //        FileInfoWoha fileData = new FileInfoWoha();
-        //        fileData.Name = fileName.Substring(TargetPath.Length + 1);
-        //        fileData.PathInFolder = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
-        //        fileData.Path = TargetPath;
-        //        RightListofFiles.Add(fileData);
-        //    }
-        //    // Recurse into subdirectories of this directory.
-        //    string[] subdirectoryEntries = Directory.GetDirectories(TargetPath);
-        //    foreach (string subdirectory in subdirectoryEntries)
-        //        FillTargetPathList(subdirectory);
-        //}
         public void WohaAsymetricSynchronize()
         {
             //FileInfoWoha FIW = new FileInfoWoha();

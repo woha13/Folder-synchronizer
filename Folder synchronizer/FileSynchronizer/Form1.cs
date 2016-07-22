@@ -80,7 +80,7 @@ namespace FolderSynchronizer
 
             listsofFiles.FileMask = textBoxFileMask.Text;
             listsofFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text,
-                checkBoxAsymmetric.Checked,checkBoxByContent.Checked,
+                checkBoxAsymmetric.Checked, checkBoxByContent.Checked, //поміняти на змінні
                 checkBoxIgnoreDate.Checked, checkBoxWithsubdirs.Checked);
             
             //наповнюються listView 
@@ -97,7 +97,7 @@ namespace FolderSynchronizer
             }
 
             listViewIcons.Items.Clear();
-            foreach (LinksInfo LI in listsofFiles.linksInfo)
+            foreach (LinksInfo LI in listsofFiles.listLinksInfo)
             {
                 listViewIcons.Items.Add(LI.Left.ToString() + '-' + LI.Relations.ToString() + ' ' + LI.Right.ToString());
             }
@@ -135,13 +135,9 @@ namespace FolderSynchronizer
             Synchronization syncFiles = new Synchronization();
             syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
 
-            syncFiles.WohaAsymetricSynchronize(listsofFiles);
-            //if (isAsymmetricChecked
-            syncFiles.WohaSymetricSynchronize(listsofFiles, isAsymmetricChecked);
-
             listViewIcons.Items.Clear();
             
-            foreach (LinksInfo LI in listsofFiles.linksInfo)
+            foreach (LinksInfo LI in listsofFiles.listLinksInfo)
             {
                 listViewIcons.Items.Add(LI.Left.ToString()+LI.Relations.ToString()+LI.Right.ToString());
             }

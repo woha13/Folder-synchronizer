@@ -80,26 +80,55 @@ namespace FolderSynchronizer
 
             listsofFiles.FileMask = textBoxFileMask.Text;
             listsofFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text,
-                checkBoxAsymmetric.Checked,checkBoxByContent.Checked,
+                checkBoxAsymmetric.Checked, checkBoxByContent.Checked, //поміняти на змінні
                 checkBoxIgnoreDate.Checked, checkBoxWithsubdirs.Checked);
             
             //наповнюються listView 
             listViewLeftListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.LeftListofFiles)
             {
-                listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+" - "+ FIW.Path+'~'+FIW.PathInFolder+'~' + FIW.Name);
+                listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+
+                    " - "+ FIW.Path+'~'+FIW.PathInFolder+
+                    '~' + FIW.Name+ " size:" + FIW.Size.ToString());
             }
 
             listViewRightListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsofFiles.RightListofFiles)
             {
-                listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + " - "+FIW.Path + '~' + FIW.PathInFolder + '~' + FIW.Name);
+                listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
+                    " - "+FIW.Path + '~' + FIW.PathInFolder + 
+                    '~' + FIW.Name + " size:" + FIW.Size.ToString());
             }
 
             listViewIcons.Items.Clear();
-            foreach (LinksInfo LI in listsofFiles.linksInfo)
+            foreach (LinksInfo LI in listsofFiles.listLinksInfo)
             {
-                listViewIcons.Items.Add(LI.Left.ToString() + '-' + LI.Relations.ToString() + ' ' + LI.Right.ToString());
+                string strIcon="error";
+                switch (LI.Relations)
+                {
+                    case (LinksInfo.RightIcon):
+                        strIcon = @"=>";
+                        break;
+                    case (LinksInfo.LeftIcon):
+                        strIcon = @"<=";
+                        break;
+                    case (LinksInfo.EqualIcon):
+                        strIcon = @"==";
+                        break;
+                    case (LinksInfo.NotEqualIcon):
+                        strIcon = @"!=";
+                        break;
+                    case (LinksInfo.DeleteIcon):
+                        strIcon = @"xx";
+                        break;
+                    case (LinksInfo.NotEqualToLeft):
+                        strIcon = @"!=<";
+                        break;
+                    case (LinksInfo.NotEqualToRight):
+                        strIcon = @"!=>";
+                        break;
+                }
+                listViewIcons.Items.Add(LI.Left.ToString() + ' ' + strIcon + ' ' + LI.Right.ToString());
             }
         }
 
@@ -135,13 +164,9 @@ namespace FolderSynchronizer
             Synchronization syncFiles = new Synchronization();
             syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
 
-            syncFiles.WohaAsymetricSynchronize(listsofFiles);
-            //if (isAsymmetricChecked
-            syncFiles.WohaSymetricSynchronize(listsofFiles, isAsymmetricChecked);
-
             listViewIcons.Items.Clear();
             
-            foreach (LinksInfo LI in listsofFiles.linksInfo)
+            foreach (LinksInfo LI in listsofFiles.listLinksInfo)
             {
                 listViewIcons.Items.Add(LI.Left.ToString()+LI.Relations.ToString()+LI.Right.ToString());
             }

@@ -27,7 +27,7 @@ namespace LogicofCMP
             IsInSubDir = false;
         }
     }
-    public class LinksInfo
+    public class LinksInfo : IEquatable<LinksInfo>
     {
         public int Left;
         public int Right;
@@ -49,14 +49,30 @@ namespace LogicofCMP
         public const int NotEqualIcon = 4;
         public const int NotEqualToLeft = 6;   // Лівий новіший
         public const int NotEqualToRight = 7;  // Правий новіший
-        public const int DNEIcon = 5; //does not exist
+        public const int DeleteIcon = 5; //File needed to be deleted
+
+        public bool Equals(LinksInfo other)
+        {
+            if ((Left==other.Left)&&(Right==other.Right)&&(Relations==other.Relations))
+                {
+                return true;
+                }
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            int hashLeft = Left == null ? 0 : Left.GetHashCode();
+            int hashRight = Right == null ? 0 : Right.GetHashCode();
+            int hashRelations = Relations == null ? 0 : Relations.GetHashCode();
+            return hashLeft  ^ hashRelations ^ hashRight;
+        }
     }
 
     public class ListsofFiles
     {
         public List<FileInfoWoha> LeftListofFiles;
         public List<FileInfoWoha> RightListofFiles;
-        public List<LinksInfo> linksInfo;
+        public List<LinksInfo> listLinksInfo;
         public List<int> WhatToDo;
         public string FileMask;
         public ListsofFiles()
@@ -64,7 +80,7 @@ namespace LogicofCMP
             LeftListofFiles = new List<FileInfoWoha>(); //лівий
             RightListofFiles = new List<FileInfoWoha>(); //правий
             //WhatToDo = new List<int>();
-            linksInfo = new List<LinksInfo>(); // відносини між лівим та правим
+            listLinksInfo = new List<LinksInfo>(); // відносини між лівим та правим
         }
 
         public void FillListsFromPath(string SourcePath, string TargetPath,
@@ -73,25 +89,32 @@ namespace LogicofCMP
         {
             LeftListofFiles.Clear();
             RightListofFiles.Clear();
+            listLinksInfo.Clear();
             //FillSourcePathList(SourcePath, //FolderSynchronizerForm.isWithSubdirsChecked);
-            FillSourcePathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs);
-            FillSourcePathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs);
+            FillPathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs);
+            FillPathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs);
             RemoveStartFolder(SourcePath, LeftListofFiles);
             RemoveStartFolder(TargetPath, RightListofFiles);
+            WohaAsymetricSynchronize(isCheckBoxIgnoreDate, isCheckBoxByContent);
+            WohaSymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
         }
 
 
-        private void FillSourcePathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
+        private void FillPathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
         {
             // Process the list of files found in the directory.
 
-            var fileEntries = Directory.EnumerateFiles(SourcePath, FileMask);
-            foreach (string fileName in fileEntries)
+            //var fileEntries = Directory.EnumerateFiles(SourcePath, FileMask);
+            DirectoryInfo di = new DirectoryInfo(SourcePath);
+            foreach (var fi in di.GetFiles())
             {
                 FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fileName.Substring(SourcePath.Length + 1);
-                fileData.PathInFolder= fileName.Remove(SourcePath.Length + 1, fileName.Length - SourcePath.Length - 1);
+                fileData.Name = fi.Name;
+                fileData.PathInFolder = fi.Directory.ToString();
                 fileData.Path = SourcePath;
+                fileData.Size = fi.Length;
+                fileData.DateModification = fi.LastWriteTime;
+                fileData.DateCreation = fi.CreationTime;
                 ListofFiles.Add(fileData);
             }
             // Recurse into subdirectories of this directory.
@@ -99,7 +122,7 @@ namespace LogicofCMP
             {
                 string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
                 foreach (string subdirectory in subdirectoryEntries)
-                    FillSourcePathList(subdirectory, ListofFiles, withSubDirs);
+                    FillPathList(subdirectory, ListofFiles, withSubDirs);
             }
         }
 
@@ -108,80 +131,101 @@ namespace LogicofCMP
             foreach (FileInfoWoha FIW in listFIW)
             {
                 FIW.Path = Path;
-                FIW.PathInFolder = FIW.PathInFolder.Remove(0, Path.Length + 1);
+                FIW.PathInFolder = FIW.PathInFolder.Remove(0, Path.Length);
             }
         }
 
-
-        private void FillTargetPathList(string TargetPath)
-        {
-            // Process the list of files found in the directory.
-
-            var fileEntries = Directory.EnumerateFiles(TargetPath, FileMask);
-            foreach (string fileName in fileEntries)
-            {
-                FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fileName.Substring(TargetPath.Length + 1);
-                fileData.PathInFolder = fileName.Remove(TargetPath.Length + 1, fileName.Length - TargetPath.Length - 1);
-                fileData.Path = TargetPath;
-                RightListofFiles.Add(fileData);
-            }
-            // Recurse into subdirectories of this directory.
-            string[] subdirectoryEntries = Directory.GetDirectories(TargetPath);
-            foreach (string subdirectory in subdirectoryEntries)
-                FillTargetPathList(subdirectory);
-        }
-        
-    }
-    public partial class Synchronization
-    {
-        public void WohaAsymetricSynchronize(ListsofFiles listsOfFiles)
+        public void WohaAsymetricSynchronize(bool isIgnoreDateChecked, bool isByContentChecked)
         {
             //FileInfoWoha FIW = new FileInfoWoha();
             int leftListIndex = 0;
-            listsOfFiles.linksInfo.Clear();
-            foreach (FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
+            listLinksInfo.Clear();
+            FileInfoWoha FIWRight = new FileInfoWoha();
+            foreach (FileInfoWoha FIW in LeftListofFiles)
             {
                 LinksInfo LI = new LinksInfo();
+
                 LI.Relations = LinksInfo.RightIcon;
-                if (listsOfFiles.RightListofFiles.Exists(x => (x.Name == FIW.Name)&&(x.PathInFolder == FIW.PathInFolder)))
+
+                FIWRight=RightListofFiles.Find(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder));
+
+                if (FIWRight!=null)
                 {
-                    LI.Right = listsOfFiles.RightListofFiles.FindIndex(x => x.Name == FIW.Name);
-                    LI.Relations =LinksInfo.EqualIcon;
+                    if ((isIgnoreDateChecked))
+                    {
+                        //if (FIWRight.DateModification >= FIW.DateModification)
+                        //{
+                            LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name && x.PathInFolder == FIW.PathInFolder);
+                            LI.Relations = LinksInfo.EqualIcon;
+                        //}
+                    }
+                    else if (FIW.DateModification==FIWRight.DateModification)
+                    {
+                        LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name 
+                                                                   && x.PathInFolder == FIW.PathInFolder);
+                        LI.Relations = LinksInfo.EqualIcon;
+                    }
+                    else if (FIWRight.DateModification >= FIW.DateModification)
+                    {
+                        LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name && x.PathInFolder == FIW.PathInFolder);
+                        LI.Relations = LinksInfo.LeftIcon;
+                    }
                 }
                 LI.Left = leftListIndex;
-                listsOfFiles.linksInfo.Add(LI);
+                listLinksInfo.Add(LI);
                 leftListIndex++;
             }
             Console.Beep();
         }
-        public void WohaSymetricSynchronize(ListsofFiles listsOfFiles, bool isAsymmetricChecked)
+
+        public void WohaSymetricSynchronize(bool isAsymmetricChecked,bool isIgnoreDateChecked, bool isByContentChecked)
         {
             if (!(isAsymmetricChecked))
             {
-                //FileInfoWoha FIW = new FileInfoWoha();
                 int leftListIndex = 0;
-                //listsOfFiles.linksInfo.Clear();
-                foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
+                FileInfoWoha FIWLeft = new FileInfoWoha();
+                foreach (FileInfoWoha FIW in RightListofFiles)
                 {
                     LinksInfo LI = new LinksInfo();
-                    LI.Relations = LinksInfo.RightIcon;
-                    if (listsOfFiles.LeftListofFiles.Exists(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder)))
+
+                    LI.Relations = LinksInfo.LeftIcon;
+
+                    FIWLeft = LeftListofFiles.Find(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder));
+
+                    if (FIWLeft != null)
                     {
-                        LI.Left = listsOfFiles.LeftListofFiles.FindIndex(x => x.Name == FIW.Name);
-                        LI.Relations = LinksInfo.EqualIcon;
+                        if ((isIgnoreDateChecked))
+                        {
+                                LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name
+                                                                     && x.PathInFolder == FIW.PathInFolder);
+                                LI.Relations = LinksInfo.EqualIcon;
+                        }
+                        else if (FIW.DateModification == FIWLeft.DateModification)
+                        {
+                            LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name 
+                                                                      && x.PathInFolder == FIW.PathInFolder);
+                            LI.Relations = LinksInfo.EqualIcon;
+                        }
+                        else if (FIWLeft.DateModification > FIW.DateModification)
+                            {
+                            LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name
+                                                                 && x.PathInFolder == FIW.PathInFolder);
+                            LI.Relations = LinksInfo.RightIcon;
+                            }
                     }
-                    LI.Right = leftListIndex;
-                    if (listsOfFiles.linksInfo.FindAll(x => (x.Left == LI.Left) && (x.Right == LI.Right) && (x.Relations == LI.Relations)).Count == 0)
-                    {
-                        listsOfFiles.linksInfo.Add(LI);
-                    }
+                    LI.Right= leftListIndex;
+                    listLinksInfo.Add(LI);
                     leftListIndex++;
                 }
                 Console.Beep();
-                listsOfFiles.linksInfo = listsOfFiles.linksInfo.Distinct().ToList<LinksInfo>();
+                listLinksInfo = listLinksInfo.Distinct().ToList<LinksInfo>();
             }
         }
+
+    }
+    public partial class Synchronization
+    {
+       
 
         public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 
                                 bool isIgnoreDateChecked)

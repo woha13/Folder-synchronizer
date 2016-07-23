@@ -130,7 +130,7 @@ namespace LogicofCMP
             FileInfoWoha FIWLeft;
             FileInfoWoha FIWRight;
 
-            foreach (LinksInfo LI in Lists.linksInfo)
+            foreach (LinksInfo LI in Lists.listLinksInfo)
             {
                 
                 

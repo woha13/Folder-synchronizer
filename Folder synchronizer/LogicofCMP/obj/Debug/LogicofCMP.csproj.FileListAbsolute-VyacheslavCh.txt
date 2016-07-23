@@ -1,0 +1,10 @@
+D:\PRJ\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.dll
+D:\PRJ\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.pdb
+D:\PRJ\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.csprojResolveAssemblyReference.cache
+D:\PRJ\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.dll
+D:\PRJ\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.pdb
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.dll
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.pdb
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.csprojResolveAssemblyReference.cache
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.dll
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.pdb

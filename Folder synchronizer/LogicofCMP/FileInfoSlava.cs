@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 
-
-//woha added some changes
-
-//Adding some changes
-//
-//
-// adding more changes
+//QQ
+//1 PathinFolder for right files?
 
 namespace LogicofCMP
 {
@@ -135,7 +130,7 @@ namespace LogicofCMP
                 
                 
                 //if file from left folder doesn't exist in right folder
-                if (LI.Right == -1)
+                if (LI.Relations == 1)
                 {
 
                     FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
@@ -159,7 +154,7 @@ namespace LogicofCMP
 
 
                 // if file from right folder doesn't exist in left folder
-                if (LI.Left == -1)
+                if (LI.Relations == 2)
                 {
                     FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
                     FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
@@ -221,6 +216,25 @@ namespace LogicofCMP
                         ShowExceptionMessage(e.ToString(), "Error copying file");
                     }
                 }
+
+                // 23.07.16 slava - added file deletion section
+                //If file from right need to be deleted
+                if (LI.Relations == 5)
+                {
+                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+
+                    string fileForDeletion = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
+                    try
+                    {
+                        File.Delete(fileForDeletion);
+                    }
+                    catch (IOException e)
+                    {
+                        
+                        ShowExceptionMessage(e.ToString(), "Error deleting file");
+                    }
+                }
+
             }
         }
         

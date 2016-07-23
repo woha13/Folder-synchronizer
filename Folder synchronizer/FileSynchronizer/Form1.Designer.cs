@@ -279,11 +279,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(225, 81);
+            this.button1.Location = new System.Drawing.Point(212, 106);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(70, 36);
             this.button1.TabIndex = 25;
-            this.button1.Text = "FileHandler";
+            this.button1.Text = "ConfimationAndFileHandler";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -328,7 +328,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(947, 477);
+            this.ClientSize = new System.Drawing.Size(949, 477);
             this.Controls.Add(this.buttonSyncSlava);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -345,6 +345,8 @@
             this.Controls.Add(this.buttonFolderPathLeft);
             this.Controls.Add(this.textBoxFolderPathLeft);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(965, 515);
+            this.MinimumSize = new System.Drawing.Size(965, 515);
             this.Name = "FolderSynchronizerForm";
             this.Text = "Folder Synchronizer";
             this.Shown += new System.EventHandler(this.FolderSynchronizerForm_Load);

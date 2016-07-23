@@ -31,3 +31,4 @@ D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder
 D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.FolderSynchronizerForm.resources
 D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.Properties.Resources.resources
 D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder Synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.csproj.GenerateResource.Cache
+D:\Arch_Slavik\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.ConfirmationForm.resources

@@ -37,8 +37,9 @@ namespace FolderSynchronizer
 
         FolderBrowserDialog FolderPathLeftDialog = new FolderBrowserDialog(); //creating dialog window instance for left file path
         FolderBrowserDialog FolderPathRightDialog = new FolderBrowserDialog(); //creating dialog window instance for right file path
-        ListsofFiles listsofFiles = new ListsofFiles();
+        ListsofFiles listsOfFiles = new ListsofFiles();
 
+        
 
         private void buttonFolderPathLeft_Click(object sender, EventArgs e)
         {
@@ -78,14 +79,14 @@ namespace FolderSynchronizer
         {
             //наповнюються логічні класи LeftListofFiles і RightListofFiles
 
-            listsofFiles.FileMask = textBoxFileMask.Text;
-            listsofFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text,
+            listsOfFiles.FileMask = textBoxFileMask.Text;
+            listsOfFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text,
                 checkBoxAsymmetric.Checked, checkBoxByContent.Checked, //поміняти на змінні
                 checkBoxIgnoreDate.Checked, checkBoxWithsubdirs.Checked);
             
             //наповнюються listView 
             listViewLeftListofFiles.Items.Clear();
-            foreach (FileInfoWoha FIW in listsofFiles.LeftListofFiles)
+            foreach (FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
             {
                 listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+
                     " - "+ FIW.Path+'~'+FIW.PathInFolder+
@@ -93,7 +94,7 @@ namespace FolderSynchronizer
             }
 
             listViewRightListofFiles.Items.Clear();
-            foreach (FileInfoWoha FIW in listsofFiles.RightListofFiles)
+            foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
             {
                 listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
                     " - "+FIW.Path + '~' + FIW.PathInFolder + 
@@ -101,7 +102,7 @@ namespace FolderSynchronizer
             }
 
             listViewIcons.Items.Clear();
-            foreach (LinksInfo LI in listsofFiles.listLinksInfo)
+            foreach (LinksInfo LI in listsOfFiles.listLinksInfo)
             {
                 string strIcon="error";
                 switch (LI.Relations)
@@ -162,11 +163,11 @@ namespace FolderSynchronizer
         private void buttonSyncronize_Click(object sender, EventArgs e)
         {
             Synchronization syncFiles = new Synchronization();
-            syncFiles.Synchronize(listsofFiles, isAsymmetricChecked, isByContentChecked);
+            syncFiles.Synchronize(listsOfFiles, isAsymmetricChecked, isByContentChecked);
 
             listViewIcons.Items.Clear();
             
-            foreach (LinksInfo LI in listsofFiles.listLinksInfo)
+            foreach (LinksInfo LI in listsOfFiles.listLinksInfo)
             {
                 listViewIcons.Items.Add(LI.Left.ToString()+LI.Relations.ToString()+LI.Right.ToString());
             }
@@ -175,13 +176,18 @@ namespace FolderSynchronizer
 
 
         // 20.07.16 23.27 slava - temprory using for checking equalByContent method 
+        // 24.07.16 0.04 slava - temprory using for confirmation window
         private void button1_Click(object sender, EventArgs e)
         {
 
+            ConfirmationForm confirmation = new ConfirmationForm();
 
-            Synchronization sync = new Synchronization();
+            confirmation.ShowConfirmation(listsOfFiles);
 
-            sync.FileHandler(listsofFiles);
+
+            //Synchronization sync = new Synchronization();
+
+            //sync.FileHandler(listsofFiles);
 
 
             FolderSynchronizerForm_Load(this, e);

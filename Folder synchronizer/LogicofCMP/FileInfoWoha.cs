@@ -8,15 +8,36 @@ using System.Windows.Forms;
 
 namespace LogicofCMP
 {
+    public class WohaAllConnected
+    {
+        public int Left;
+        public int Right;
+        public int Relations;
+        public string PathInFolderLeft;
+        public string NameLeft;
+        public string PathInFolderRight;
+        public string NameRight;
+        public WohaAllConnected()
+        {
+            Left = -1;
+            Right = -1;
+            Relations = 0;
+            PathInFolderLeft = ""; //Шлях у папці
+            NameLeft = "";
+            PathInFolderRight = ""; //Шлях у папці
+            NameRight = "";
+        }
+    }
+
     public class FileInfoWoha
     {
         public string Path;
-        public string PathInFolder;
-        public string Name;
         public Int64 Size;
         public DateTime DateCreation;
         public DateTime DateModification;
         public bool IsInSubDir;
+        public string PathInFolder;
+        public string Name;
         public FileInfoWoha()
         {
             Path = ""; //Шлях до папки
@@ -52,6 +73,8 @@ namespace LogicofCMP
         public const int NotEqualToRight = 7;  // Правий новіший
         public const int DeleteIcon = 5; //File needed to be deleted
 
+        //тре таке створити в асінхронному режимі
+
         public bool Equals(LinksInfo other)
         {
             if ((Left==other.Left)&&(Right==other.Right)&&(Relations==other.Relations))
@@ -74,7 +97,7 @@ namespace LogicofCMP
         public List<FileInfoWoha> LeftListofFiles;
         public List<FileInfoWoha> RightListofFiles;
         public List<LinksInfo> listLinksInfo;
-        public List<int> WhatToDo;
+        public List<WohaAllConnected> listWohaAllConnected;
         public string FileMask;
         public ListsofFiles()
         {
@@ -82,6 +105,7 @@ namespace LogicofCMP
             RightListofFiles = new List<FileInfoWoha>(); //правий
             //WhatToDo = new List<int>();
             listLinksInfo = new List<LinksInfo>(); // відносини між лівим та правим
+            listWohaAllConnected = new List<WohaAllConnected>();
         }
 
         public void FillListsFromPath(string SourcePath, string TargetPath,
@@ -98,7 +122,39 @@ namespace LogicofCMP
             RemoveStartFolder(TargetPath, RightListofFiles);
             WohaAsymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
             WohaSymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
+            WohaFillListBoxesNice(LeftListofFiles, RightListofFiles, listLinksInfo);
             //якшо треба асіметрік - вичищаємо все, що копіює наліво
+        }
+
+        public void WohaFillListBoxesNice(List<FileInfoWoha> LeftListofFiles, List<FileInfoWoha> RightListofFiles, List<LinksInfo> listLinksInfo)
+        {
+            FileInfoWoha EmptyFile = new FileInfoWoha();
+            
+            foreach (LinksInfo LI in listLinksInfo)
+            {
+                WohaAllConnected AllConnected = new WohaAllConnected();
+                AllConnected.Left = LI.Left;
+                if (LI.Left != -1)
+                {
+                    AllConnected.NameLeft = LeftListofFiles.ElementAt(LI.Left).Name;
+                }
+                AllConnected.Right = LI.Right;
+                if (LI.Right != -1)
+                {
+                    AllConnected.NameRight = RightListofFiles.ElementAt(LI.Right).Name;
+                }
+                listWohaAllConnected.Add(AllConnected);
+            }
+            //listLinksInfo.OrderBy
+
+            //public const int RightIcon = 1;
+            //public const int LeftIcon = 2;
+            //public const int EqualIcon = 3;
+            //public const int NotEqualIcon = 4;
+            //public const int NotEqualToLeft = 6;   // Лівий новіший
+            //public const int NotEqualToRight = 7;  // Правий новіший
+            //public const int DeleteIcon = 5; //File needed to be deleted
+
         }
 
         public void ShowExceptionMessage(string message, string caption)
@@ -219,12 +275,14 @@ namespace LogicofCMP
                             else                                                    //якщо симетричне порівняння  - то тре з право на ліво закидати
                             {
                                 LI.Relations = LinksInfo.LeftIcon;
+                                //LI.Relations = LinksInfo.NotEqualToLeft; // лівий новіший
                             }
                         }
                         else
                         if (FIWRight.DateModification < FIW.DateModification)  //якщо ліве новіше, то тре закинути його направо
                         {
                             LI.Relations = LinksInfo.RightIcon;
+                            //LI.Relations = LinksInfo.NotEqualToRight; // правий новіший
                         }
                     }
                     else

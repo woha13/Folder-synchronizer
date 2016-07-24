@@ -78,6 +78,26 @@ namespace FolderSynchronizer
         private void FolderSynchronizerForm_Load(object sender, EventArgs e)
         {
             //наповнюються логічні класи LeftListofFiles і RightListofFiles
+            
+            //знайшов
+            listViewRightListofFiles.View = View.Details;
+            listViewRightListofFiles.HeaderStyle = ColumnHeaderStyle.None;
+            ColumnHeader h = new ColumnHeader();
+            h.Width = listViewRightListofFiles.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            listViewRightListofFiles.Columns.Add(h);
+
+            listViewLeftListofFiles.View = View.Details;
+            listViewLeftListofFiles.HeaderStyle = ColumnHeaderStyle.None;
+            ColumnHeader h1 = new ColumnHeader();
+            h1.Width = listViewLeftListofFiles.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            listViewLeftListofFiles.Columns.Add(h1);
+
+            listViewIcons.View = View.Details;
+            listViewIcons.HeaderStyle = ColumnHeaderStyle.None;
+            ColumnHeader h2 = new ColumnHeader();
+            h2.Width = listViewIcons.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            listViewIcons.Columns.Add(h2);
+            //знайшов
 
             listsOfFiles.FileMask = textBoxFileMask.Text;
             listsOfFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text,
@@ -88,19 +108,33 @@ namespace FolderSynchronizer
             listViewLeftListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
             {
-                listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+
-                    " - "+ FIW.Path+'~'+FIW.PathInFolder+
-                    '~' + FIW.Name+ " size:" + FIW.Size.ToString() +
-                    " Time:" + FIW.DateModification.ToString());
+                if (FIW.Name != "")
+                {
+                    listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString() +
+                        " - " + FIW.Path + '~' + FIW.PathInFolder +
+                        '~' + FIW.Name + " size:" + FIW.Size.ToString() +
+                        " Time:" + FIW.DateModification.ToString());
+                }
+                else
+                {
+                    listViewLeftListofFiles.Items.Add("");
+                }
             }
 
             listViewRightListofFiles.Items.Clear();
             foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
             {
-                listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
+                if (FIW.Name != "")
+                {
+                    listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
                     " - "+FIW.Path + '~' + FIW.PathInFolder + 
                     '~' + FIW.Name + " size:" + FIW.Size.ToString()+
                     " Time:" + FIW.DateModification.ToString());
+                }
+                else
+                {
+                    listViewRightListofFiles.Items.Add("");
+                }
             }
 
             listViewIcons.Items.Clear();

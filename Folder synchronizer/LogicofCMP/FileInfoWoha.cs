@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace LogicofCMP
 {
@@ -100,6 +101,57 @@ namespace LogicofCMP
             //якшо треба асіметрік - вичищаємо все, що копіює наліво
         }
 
+        public void ShowExceptionMessage(string message, string caption)
+        {
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result;
+            result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
+        }
+
+        public bool EqualByContent(FileInfoWoha leftFile, FileInfoWoha rightFile)
+        {
+            bool result = false;
+            int LeftFileByte;
+            int RightFileByte;
+
+            //checking if files equal by size 
+
+            if (leftFile.Size == rightFile.Size)
+            {
+                // comparing by content
+                try
+                {
+                    FileStream leftFS = new FileStream(leftFile.Path + leftFile.Name, FileMode.Open);
+                    FileStream rightFS = new FileStream(rightFile.Path + rightFile.Name, FileMode.Open);
+
+                    // reading and comparing bytes from each file until bytes will be NOT equal or until end of left file
+                    do
+                    {
+                        LeftFileByte = leftFS.ReadByte();
+                        RightFileByte = rightFS.ReadByte();
+                    }
+                    while ((LeftFileByte == RightFileByte) && (LeftFileByte != -1));
+
+                    result = (LeftFileByte - RightFileByte == 0);
+
+                    //closing files
+                    leftFS.Close();
+                    rightFS.Close();
+                }
+
+                catch (IOException e)
+                {
+                    ShowExceptionMessage(e.ToString(), "Error opening file");
+                }
+            }
+            else
+            {
+                result = false;
+            }
+
+
+            return result;
+        }
 
         private void FillPathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
         {

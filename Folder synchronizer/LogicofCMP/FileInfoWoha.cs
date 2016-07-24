@@ -95,7 +95,7 @@ namespace LogicofCMP
             FillPathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs);
             RemoveStartFolder(SourcePath, LeftListofFiles);
             RemoveStartFolder(TargetPath, RightListofFiles);
-            WohaAsymetricSynchronize(isCheckBoxIgnoreDate, isCheckBoxByContent);
+            WohaAsymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
             WohaSymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
             //якшо треба асіметрік - вичищаємо все, що копіює наліво
         }
@@ -136,7 +136,7 @@ namespace LogicofCMP
             }
         }
 
-        public void WohaAsymetricSynchronize(bool isIgnoreDateChecked, bool isByContentChecked)
+        public void WohaAsymetricSynchronize(bool isAsymmetricChecked, bool isIgnoreDateChecked, bool isByContentChecked)
         {
             //FileInfoWoha FIW = new FileInfoWoha();
             int leftListIndex = 0;
@@ -163,7 +163,15 @@ namespace LogicofCMP
                     else 
                     if (FIWRight.DateModification > FIW.DateModification)
                     {
-                        LI.Relations = LinksInfo.LeftIcon;
+                        if (isAsymmetricChecked)
+                        {
+                            LI.Relations = LinksInfo.EqualIcon; //можна поставити таку саму 
+                                                                //сіру іконку, як в УС
+                        }
+                        else
+                        {
+                            LI.Relations = LinksInfo.LeftIcon;
+                        }
                     }
                     else if (FIWRight.DateModification < FIW.DateModification)
                     {

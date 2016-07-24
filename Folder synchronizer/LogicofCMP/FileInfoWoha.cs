@@ -121,8 +121,8 @@ namespace LogicofCMP
                 // comparing by content
                 try
                 {
-                    FileStream leftFS = new FileStream(leftFile.Path + leftFile.Name, FileMode.Open);
-                    FileStream rightFS = new FileStream(rightFile.Path + rightFile.Name, FileMode.Open);
+                    FileStream leftFS = new FileStream(leftFile.Path + leftFile.PathInFolder+  "\\" + leftFile.Name, FileMode.Open);
+                    FileStream rightFS = new FileStream(rightFile.Path + rightFile.PathInFolder + "\\" + rightFile.Name, FileMode.Open);
                     // reading and comparing bytes from each file until bytes will be NOT equal or until end of left file
                     do
                     {
@@ -196,17 +196,13 @@ namespace LogicofCMP
                 FIWRight=RightListofFiles.Find(x => (x.Name == FIW.Name) 
                                                  && (x.PathInFolder == FIW.PathInFolder));
                 //порівнюємо лівий файл
-                if (FIWRight != null) //якщо э з таким ім'ям і шляхом з права, то йдем далі
+                if (FIWRight != null) //якщо э з таким ім'ям і шляхом зправа, то йдем далі
                 {
                     LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name 
                                                             && x.PathInFolder == FIW.PathInFolder); //заповняємо структуру даних файла зправа, 
                                                                                                     //з яким будемо порівнювати
                                                                                                     //схоже тре міняти на Switch
-                    if ((isIgnoreDateChecked)) //якщо ігнорувати дату та контент (контент імплементувати), то файли рівні.
-                    {
-                        LI.Relations = LinksInfo.EqualIcon;
-                    }
-                    else
+                    if (!(isIgnoreDateChecked)) //якщо ігнорувати дату то копіюємо новіший.
                     {
                         if (FIW.DateModification == FIWRight.DateModification) // інакше якщо тре перевіряти дату, а вона рівна, то файли рівні
                         {
@@ -229,6 +225,39 @@ namespace LogicofCMP
                         if (FIWRight.DateModification < FIW.DateModification)  //якщо ліве новіше, то тре закинути його направо
                         {
                             LI.Relations = LinksInfo.RightIcon;
+                        }
+                    }
+                    else
+                    {
+                        if (isByContentChecked)
+                        {
+                            //Копіюємо той, що більший, або зліва направо
+                            if(FIW.Size>FIWRight.Size)
+                            {
+                                LI.Relations = LinksInfo.RightIcon;
+                            }
+                            //else
+                            //if (FIW.Size < FIWRight.Size)
+                            //{
+                            //    LI.Relations = LinksInfo.LeftIcon;
+                            //}
+                            else
+                            {
+                                if (EqualByContent(FIW, FIWRight))
+                                {
+                                    LI.Relations = LinksInfo.EqualIcon;
+                                }
+                                else
+                                {
+                                    LI.Relations = LinksInfo.RightIcon;
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            //повертаємо, що вони рівні
+                            LI.Relations = LinksInfo.EqualIcon;
                         }
                     }
                 }

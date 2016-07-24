@@ -142,9 +142,18 @@ namespace LogicofCMP
                 if (LI.Right != -1)
                 {
                     AllConnected.NameRight = RightListofFiles.ElementAt(LI.Right).Name;
+                    AllConnected.NameLeft = RightListofFiles.ElementAt(LI.Right).Name;
                 }
+                AllConnected.Relations = LI.Relations;
                 listWohaAllConnected.Add(AllConnected);
             }
+            var new1 = listWohaAllConnected.OrderBy(x => x.NameLeft).ToList();
+            listWohaAllConnected = new1;
+            //listWohaAllConnected = listWohaAllConnected.OrderBy(x => x.NameLeft).ToString();
+
+            //listWohaAllConnected = listWohaAllConnected.OrderBy(x => x.NameLeft).ToString();
+
+            //people.OrderBy(person => person.lastname).ToList();
             //listLinksInfo.OrderBy
 
             //public const int RightIcon = 1;

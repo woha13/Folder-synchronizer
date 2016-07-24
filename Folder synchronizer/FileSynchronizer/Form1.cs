@@ -122,18 +122,27 @@ namespace FolderSynchronizer
             }
 
             listViewRightListofFiles.Items.Clear();
-            foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
+            //foreach (FileInfoWoha FIW in listsOfFiles.RightListofFiles)
+            //{
+            //    if (FIW.Name != "")
+            //    {
+            //        listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
+            //        " - "+FIW.Path + '~' + FIW.PathInFolder + 
+            //        '~' + FIW.Name + " size:" + FIW.Size.ToString()+
+            //        " Time:" + FIW.DateModification.ToString());
+            //    }
+            //    else
+            //    {
+            //        listViewRightListofFiles.Items.Add("");
+            //    }
+            //}
+
+            foreach (WohaAllConnected WAC in listsOfFiles.listWohaAllConnected)
             {
-                if (FIW.Name != "")
                 {
-                    listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
-                    " - "+FIW.Path + '~' + FIW.PathInFolder + 
-                    '~' + FIW.Name + " size:" + FIW.Size.ToString()+
-                    " Time:" + FIW.DateModification.ToString());
-                }
-                else
-                {
-                    listViewRightListofFiles.Items.Add("");
+                    listViewRightListofFiles.Items.Add(WAC.Left + "-" + WAC.PathInFolderLeft + "-" + WAC.NameLeft + "***" 
+                                                        + WAC.Relations + "***"
+                                                                      + WAC.PathInFolderRight + '-' + WAC.NameRight+'-'+ WAC.Right);
                 }
             }
 

@@ -90,7 +90,8 @@ namespace FolderSynchronizer
             {
                 listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString()+
                     " - "+ FIW.Path+'~'+FIW.PathInFolder+
-                    '~' + FIW.Name+ " size:" + FIW.Size.ToString());
+                    '~' + FIW.Name+ " size:" + FIW.Size.ToString() +
+                    " Time:" + FIW.DateModification.ToString());
             }
 
             listViewRightListofFiles.Items.Clear();
@@ -98,7 +99,8 @@ namespace FolderSynchronizer
             {
                 listViewRightListofFiles.Items.Add(listViewRightListofFiles.Items.Count.ToString() + 
                     " - "+FIW.Path + '~' + FIW.PathInFolder + 
-                    '~' + FIW.Name + " size:" + FIW.Size.ToString());
+                    '~' + FIW.Name + " size:" + FIW.Size.ToString()+
+                    " Time:" + FIW.DateModification.ToString());
             }
 
             listViewIcons.Items.Clear();
@@ -163,7 +165,8 @@ namespace FolderSynchronizer
         private void buttonSyncronize_Click(object sender, EventArgs e)
         {
             Synchronization syncFiles = new Synchronization();
-            syncFiles.Synchronize(listsOfFiles, isAsymmetricChecked, isByContentChecked);
+            //syncFiles.Synchronize(listsOfFiles, isAsymmetricChecked, isByContentChecked);
+            //викликається копіювання файлів - поки закоментив
 
             listViewIcons.Items.Clear();
             

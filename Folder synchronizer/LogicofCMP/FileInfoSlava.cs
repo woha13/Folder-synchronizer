@@ -7,7 +7,8 @@ using System.IO;
 using System.Windows.Forms;
 
 //QQ
-//1 PathinFolder for right files?
+//1 How to recieve folder path if there is no file in the list?
+//2. Check subfolder path for right files.
 
 namespace LogicofCMP
 {

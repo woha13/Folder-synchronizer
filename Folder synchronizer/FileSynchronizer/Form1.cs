@@ -226,9 +226,9 @@ namespace FolderSynchronizer
         private void button1_Click(object sender, EventArgs e)
         {
 
-            ConfirmationForm confirmation = new ConfirmationForm();
+            ConfirmationForm confirmation = new ConfirmationForm(listsOfFiles);
 
-            confirmation.ShowConfirmation(listsOfFiles);
+            confirmation.ShowConfirmation();
 
 
             //Synchronization sync = new Synchronization();

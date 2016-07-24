@@ -123,7 +123,6 @@ namespace LogicofCMP
                 {
                     FileStream leftFS = new FileStream(leftFile.Path + leftFile.Name, FileMode.Open);
                     FileStream rightFS = new FileStream(rightFile.Path + rightFile.Name, FileMode.Open);
-
                     // reading and comparing bytes from each file until bytes will be NOT equal or until end of left file
                     do
                     {
@@ -133,12 +132,10 @@ namespace LogicofCMP
                     while ((LeftFileByte == RightFileByte) && (LeftFileByte != -1));
 
                     result = (LeftFileByte - RightFileByte == 0);
-
                     //closing files
                     leftFS.Close();
                     rightFS.Close();
                 }
-
                 catch (IOException e)
                 {
                     ShowExceptionMessage(e.ToString(), "Error opening file");
@@ -148,8 +145,6 @@ namespace LogicofCMP
             {
                 result = false;
             }
-
-
             return result;
         }
 
@@ -200,37 +195,44 @@ namespace LogicofCMP
 
                 FIWRight=RightListofFiles.Find(x => (x.Name == FIW.Name) 
                                                  && (x.PathInFolder == FIW.PathInFolder));
-
-                if (FIWRight != null)
+                //порівнюємо лівий файл
+                if (FIWRight != null) //якщо э з таким ім'ям і шляхом з права, то йдем далі
                 {
-                    LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name && x.PathInFolder == FIW.PathInFolder);
-                    if ((isIgnoreDateChecked))
+                    LI.Right = RightListofFiles.FindIndex(x => x.Name == FIW.Name 
+                                                            && x.PathInFolder == FIW.PathInFolder); //заповняємо структуру даних файла зправа, 
+                                                                                                    //з яким будемо порівнювати
+                                                                                                    //схоже тре міняти на Switch
+                    if ((isIgnoreDateChecked)) //якщо ігнорувати дату та контент (контент імплементувати), то файли рівні.
                     {
                         LI.Relations = LinksInfo.EqualIcon;
                     }
-                    else if (FIW.DateModification == FIWRight.DateModification)
+                    else
                     {
-                        LI.Relations = LinksInfo.EqualIcon;
-                    }
-                    else 
-                    if (FIWRight.DateModification > FIW.DateModification)
-                    {
-                        if (isAsymmetricChecked)
+                        if (FIW.DateModification == FIWRight.DateModification) // інакше якщо тре перевіряти дату, а вона рівна, то файли рівні
                         {
-                            LI.Relations = LinksInfo.EqualIcon; //можна поставити таку саму 
-                                                                //сіру іконку, як в УС
+                            LI.Relations = LinksInfo.EqualIcon;
                         }
                         else
+                        if (FIWRight.DateModification > FIW.DateModification)  //інакше якшо дата новіша, то
                         {
-                            LI.Relations = LinksInfo.LeftIcon;
+                            if (isAsymmetricChecked)                                //якщо асиметричне порівняння - то вони рівні, бо не тре зправа наліво 
+                            {
+                                LI.Relations = LinksInfo.EqualIcon; //можна поставити таку саму 
+                                                                    //сіру іконку, як в УС
+                            }
+                            else                                                    //якщо симетричне порівняння  - то тре з право на ліво закидати
+                            {
+                                LI.Relations = LinksInfo.LeftIcon;
+                            }
+                        }
+                        else
+                        if (FIWRight.DateModification < FIW.DateModification)  //якщо ліве новіше, то тре закинути його направо
+                        {
+                            LI.Relations = LinksInfo.RightIcon;
                         }
                     }
-                    else if (FIWRight.DateModification < FIW.DateModification)
-                    {
-                        LI.Relations = LinksInfo.RightIcon;
-                    }
                 }
-                else
+                else //якщо зправа файла немає, його тре туди зкопіювати
                 {
                     LI.Relations = LinksInfo.RightIcon;
                 }

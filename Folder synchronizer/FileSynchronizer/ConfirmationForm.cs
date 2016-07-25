@@ -107,8 +107,8 @@ namespace FolderSynchronizer
             Synchronization sync = new Synchronization();
 
             // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+            //sync.FileHandler(listsOfFiles, folderPathLeft, folderPathRight, checkBoxLeftToRight.Checked, checkBoxRightToLeft.Checked, checkBoxRightDeleteFiles.Checked);
             sync.FileHandler(listsOfFiles, folderPathLeft, folderPathRight, checkBoxLeftToRight.Checked, checkBoxRightToLeft.Checked, checkBoxRightDeleteFiles.Checked);
-
             Close();
 
         }

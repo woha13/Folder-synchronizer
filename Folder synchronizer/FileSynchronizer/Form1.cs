@@ -249,9 +249,5 @@ namespace FolderSynchronizer
             listViewRightListofFiles.TopItem = listViewLeftListofFiles.TopItem;
         }
 
-        private void ScrollAll(object sender, EventArgs e)
-        {
-            listViewRightListofFiles.
-        }
     }
 }

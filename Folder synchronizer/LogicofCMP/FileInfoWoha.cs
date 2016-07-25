@@ -152,7 +152,8 @@ namespace LogicofCMP
                 AllConnected.Relations = LI.Relations;
                 listWohaAllConnected.Add(AllConnected);
             }
-            //var new1 = listWohaAllConnected.OrderBy(x => x.PathInFolderLeft+x.NameLeft).ToList();
+            var new1 = listWohaAllConnected.OrderBy(x => x.PathInFolderLeft+x.NameLeft).ToList();
+            listWohaAllConnected = new1;
 
         }
 

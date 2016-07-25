@@ -51,6 +51,7 @@
             this.checkBoxLeftToRight.TabIndex = 0;
             this.checkBoxLeftToRight.Text = "Left to right:";
             this.checkBoxLeftToRight.UseVisualStyleBackColor = true;
+            this.checkBoxLeftToRight.CheckedChanged += new System.EventHandler(this.checkBoxLeftToRight_CheckedChanged);
             // 
             // textBoxLeftToRight
             // 
@@ -70,6 +71,7 @@
             this.checkBoxRightToLeft.TabIndex = 2;
             this.checkBoxRightToLeft.Text = "Right to left:";
             this.checkBoxRightToLeft.UseVisualStyleBackColor = true;
+            this.checkBoxRightToLeft.CheckedChanged += new System.EventHandler(this.checkBoxRightToLeft_CheckedChanged);
             // 
             // textBoxRightToLeft
             // 
@@ -89,6 +91,7 @@
             this.checkBoxRightDeleteFiles.TabIndex = 4;
             this.checkBoxRightDeleteFiles.Text = "Right delete files:";
             this.checkBoxRightDeleteFiles.UseVisualStyleBackColor = true;
+            this.checkBoxRightDeleteFiles.CheckedChanged += new System.EventHandler(this.checkBoxRightDeleteFiles_CheckedChanged);
             // 
             // buttonOk
             // 
@@ -138,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 242);
+            this.ClientSize = new System.Drawing.Size(424, 241);
             this.Controls.Add(this.labelDeleteFiles);
             this.Controls.Add(this.labelRightToLeft);
             this.Controls.Add(this.labelLeftToRight);

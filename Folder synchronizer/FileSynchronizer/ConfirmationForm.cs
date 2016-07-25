@@ -13,14 +13,20 @@ namespace FolderSynchronizer
 {
     public partial class ConfirmationForm : Form
     {
-        public ConfirmationForm(ListsofFiles inputlistsOfFiles, string s1, string s2)
+        public ConfirmationForm(ListsofFiles inputlistsOfFiles, string folderPathLeft, string folderPathRight)
         {
             InitializeComponent();
 
             listsOfFiles = inputlistsOfFiles;
+            this.folderPathLeft = folderPathLeft;
+            this.folderPathRight = folderPathRight;
+            
         }
 
         ListsofFiles listsOfFiles;
+        string folderPathLeft;
+        string folderPathRight;
+        
         
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -30,9 +36,9 @@ namespace FolderSynchronizer
         //24.07 22.30 slava - implement confirmation form with all relevant information and functions
         public void ShowConfirmation ()
         {
-            
-            textBoxLeftToRight.Text = listsOfFiles.LeftListofFiles.ElementAt(0).Path;
-            textBoxRightToLeft.Text = listsOfFiles.RightListofFiles.ElementAt(0).Path;
+            //25.07 1.33 slava - changed getting folder paths 
+            textBoxLeftToRight.Text = folderPathLeft;
+            textBoxRightToLeft.Text = folderPathRight;
 
             int LeftToRightAmountOfFiles = 0;
             long LeftToRightSizeOfFiles = 0;
@@ -100,11 +106,50 @@ namespace FolderSynchronizer
 
             Synchronization sync = new Synchronization();
 
-            sync.FileHandler(listsOfFiles);
+            // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+            sync.FileHandler(listsOfFiles, folderPathLeft, folderPathRight, checkBoxLeftToRight.Checked, checkBoxRightToLeft.Checked, checkBoxRightDeleteFiles.Checked);
 
             Close();
 
         }
-        
+
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        private void checkBoxLeftToRight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxLeftToRight.Checked)
+            {
+                checkBoxLeftToRight.Checked = true;
+            }
+            else
+            {
+                checkBoxLeftToRight.Checked = false;
+            }
+        }
+
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        private void checkBoxRightToLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxRightToLeft.Checked)
+            {
+                checkBoxRightToLeft.Checked = true;
+            }
+            else
+            {
+                checkBoxRightToLeft.Checked = false;
+            }
+        }
+
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        private void checkBoxRightDeleteFiles_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxRightDeleteFiles.Checked)
+            {
+                checkBoxRightDeleteFiles.Checked = true;
+            }
+            else
+            {
+                checkBoxRightDeleteFiles.Checked = false;
+            }
+        }
     }
 }

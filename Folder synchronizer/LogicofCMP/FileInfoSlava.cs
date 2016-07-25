@@ -80,122 +80,108 @@ namespace LogicofCMP
             result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
         }
 
-        public void FileHandler(ListsofFiles Lists)
+        //25.07.16 13.38 slava - inserting folderpaths parameters into methos and change implementation
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        public void FileHandler(ListsofFiles Lists, string folderPathLeft, string folderPathRight, bool checkboxLeftToRightIsChecked, bool checkboxRightToLeftIsChecked, bool checkboxDeleteFromRightIsChecked)
         {
-            
-            FileInfoWoha FIWLeft;
-            FileInfoWoha FIWRight;
+
+            FileInfoWoha FIWLeft = null;
+            FileInfoWoha FIWRight = null;
+
+            //25.07.16 13.38 slava - if one of folder is empty by default subfolderas are empty but not null
+            string pathInFolderLeft = "";
+            string patInFolderRight = "";
 
             foreach (LinksInfo LI in Lists.listLinksInfo)
             {
-                
-                
+
+                //25.07.16 13.38 slava - if some list is not empty or Left or Right list does't containf -1 than we create a list instance and getting puth in folder
+                if (Lists.LeftListofFiles.Count != 0 && LI.Left != -1)
+                {
+                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
+                    pathInFolderLeft = Lists.LeftListofFiles.ElementAt(LI.Left).PathInFolder;
+                }
+
+                if (Lists.RightListofFiles.Count !=0 && LI.Right != -1)
+                {
+                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+                    patInFolderRight = Lists.RightListofFiles.ElementAt(LI.Right).PathInFolder;
+                }
+
+
                 //if file from left folder doesn't exist in right folder
-                if (LI.Relations == 1)
+
+                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+                if (checkboxLeftToRightIsChecked)
                 {
-
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(0); //getting right file info
-
-                    string sourceFile = Path.Combine(FIWLeft.Path+ FIWLeft.PathInFolder, FIWLeft.Name);
-                    string destFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWLeft.Name);
-
-                    // copying left file to right folder
-                    try
-                    {
-                        File.Copy(sourceFile, destFile, false);
-                    }
-                    catch (IOException e)
+                    if (LI.Relations == 1 || LI.Relations == 6)
                     {
                         
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                        string sourceFile = Path.Combine(folderPathLeft + pathInFolderLeft, FIWLeft.Name);
+                        string destFile = Path.Combine(folderPathRight + pathInFolderLeft, FIWLeft.Name);
+
+                        // copying left file to right folder
+                        try
+                        {
+                            File.Copy(sourceFile, destFile, true);
+                        }
+                        catch (IOException e)
+                        {
+
+                            ShowExceptionMessage(e.ToString(), "Error copying file");
+                        }
                     }
+
                 }
 
-
-
-                // if file from right folder doesn't exist in left folder
-                if (LI.Relations == 2)
+                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+                if (checkboxRightToLeftIsChecked)
                 {
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
-                    string sourceFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
-                    string destFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWRight.Name);
-
-                    // copying right file to left folder
-                    try
+                    // if file from right folder doesn't exist in left folder
+                    if (LI.Relations == 2 || LI.Relations == 7)
                     {
-                        File.Copy(sourceFile, destFile, false);
-                    }
-                    catch (IOException e)
-                    {
+                        //FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
+                        //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
 
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                        string sourceFile = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
+                        string destFile = Path.Combine(folderPathLeft + patInFolderRight, FIWRight.Name);
+
+                        // copying right file to left folder
+                        try
+                        {
+                            File.Copy(sourceFile, destFile, true);
+                        }
+                        catch (IOException e)
+                        {
+
+                            ShowExceptionMessage(e.ToString(), "Error copying file");
+                        }
                     }
+
                 }
 
-                //if files equal but left is newer
-                if (LI.Relations == 6)
+                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+                if (checkboxDeleteFromRightIsChecked)
                 {
-
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(0); //getting right file info
-
-                    string sourceFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWLeft.Name);
-                    string destFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWLeft.Name);
-
-                    // copying left file to right folder
-                    try
+                    // 23.07.16 slava - added file deletion section
+                    //If file from right need to be deleted
+                    if (LI.Relations == 5)
                     {
-                        File.Copy(sourceFile, destFile, false);
-                    }
-                    catch (IOException e)
-                    {
+                        //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
 
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
-                    }
-                }
+                        string fileForDeletion = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
+                        try
+                        {
+                            File.Delete(fileForDeletion);
+                        }
+                        catch (IOException e)
+                        {
 
-                // if files are equal but right file is newer
-                if (LI.Relations == 7)
-                {
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
-                    string sourceFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
-                    string destFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWRight.Name);
-
-                    // copying right file to left folder
-                    try
-                    {
-                        File.Copy(sourceFile, destFile, false);
-                    }
-                    catch (IOException e)
-                    {
-
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                            ShowExceptionMessage(e.ToString(), "Error deleting file");
+                        }
                     }
                 }
-
-                // 23.07.16 slava - added file deletion section
-                //If file from right need to be deleted
-                if (LI.Relations == 5)
-                {
-                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
-                    string fileForDeletion = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
-                    try
-                    {
-                        File.Delete(fileForDeletion);
-                    }
-                    catch (IOException e)
-                    {
-                        
-                        ShowExceptionMessage(e.ToString(), "Error deleting file");
-                    }
-                }
-
+                
             }
         }
         

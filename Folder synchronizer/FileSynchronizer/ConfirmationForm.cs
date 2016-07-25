@@ -13,7 +13,7 @@ namespace FolderSynchronizer
 {
     public partial class ConfirmationForm : Form
     {
-        public ConfirmationForm(ListsofFiles inputlistsOfFiles)
+        public ConfirmationForm(ListsofFiles inputlistsOfFiles, string s1, string s2)
         {
             InitializeComponent();
 

@@ -129,7 +129,7 @@ namespace LogicofCMP
         public void WohaFillListBoxesNice(List<FileInfoWoha> LeftListofFiles, List<FileInfoWoha> RightListofFiles, List<LinksInfo> listLinksInfo)
         {
             FileInfoWoha EmptyFile = new FileInfoWoha();
-            
+            listWohaAllConnected.Clear();
             foreach (LinksInfo LI in listLinksInfo)
             {
                 WohaAllConnected AllConnected = new WohaAllConnected();

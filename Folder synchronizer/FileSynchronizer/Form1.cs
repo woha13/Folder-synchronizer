@@ -75,39 +75,16 @@ namespace FolderSynchronizer
             }
         }
 
-        private void FolderSynchronizerForm_Load(object sender, EventArgs e)
+        private void FilllistsOfFiles(ListsofFiles listsOfFiles)
         {
-            //наповнюються логічні класи LeftListofFiles і RightListofFiles
-            
-            //знайшов початок
-            listViewRightListofFiles.View = View.Details;
-            listViewRightListofFiles.HeaderStyle = ColumnHeaderStyle.None;
-            ColumnHeader h = new ColumnHeader();
-            h.Width = listViewRightListofFiles.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
-            listViewRightListofFiles.Columns.Add(h);
-
-            listViewLeftListofFiles.View = View.Details;
-            listViewLeftListofFiles.HeaderStyle = ColumnHeaderStyle.None;
-            ColumnHeader h1 = new ColumnHeader();
-            h1.Width = listViewLeftListofFiles.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
-            listViewLeftListofFiles.Columns.Add(h1);
-
-            listViewIcons.View = View.Details;
-            listViewIcons.HeaderStyle = ColumnHeaderStyle.None;
-            ColumnHeader h2 = new ColumnHeader();
-            h2.Width = listViewIcons.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
-            listViewIcons.Columns.Add(h2);
-            //знайшов кінець
-
             listsOfFiles.FileMask = textBoxFileMask.Text;
             listsOfFiles.FillListsFromPath(textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text,
                 checkBoxAsymmetric.Checked, checkBoxByContent.Checked, //поміняти на змінні
                 checkBoxIgnoreDate.Checked, checkBoxWithsubdirs.Checked);
-            
-            //наповнюються listView 
-            listViewLeftListofFiles.Items.Clear();
-            listViewRightListofFiles.Items.Clear();
-            listViewIcons.Items.Clear();
+        }
+
+        private void FilllistViews()
+        {
             foreach (WohaAllConnected WAC in listsOfFiles.listWohaAllConnected)
             {
                 {
@@ -123,7 +100,7 @@ namespace FolderSynchronizer
                     //заповнюю праве
                     if (WAC.Right != -1)
                     {
-                        listViewRightListofFiles.Items.Add("#"+WAC.Right + "--" + WAC.PathInFolderRight + "\\" + WAC.NameRight);
+                        listViewRightListofFiles.Items.Add("#" + WAC.Right + "--" + WAC.PathInFolderRight + "\\" + WAC.NameRight);
                     }
                     else
                     {
@@ -158,6 +135,39 @@ namespace FolderSynchronizer
                     listViewIcons.Items.Add(WAC.Left.ToString() + ' ' + strIcon + ' ' + WAC.Right.ToString());
                 }
             }
+        }
+        private void FolderSynchronizerForm_Load(object sender, EventArgs e)
+        {
+            //наповнюються логічні класи LeftListofFiles і RightListofFiles
+            
+            //знайшов початок щоб намалювати листбокси
+            listViewRightListofFiles.View = View.Details;
+            listViewRightListofFiles.HeaderStyle = ColumnHeaderStyle.None;
+            ColumnHeader h = new ColumnHeader();
+            h.Width = listViewRightListofFiles.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            listViewRightListofFiles.Columns.Add(h);
+
+            listViewLeftListofFiles.View = View.Details;
+            listViewLeftListofFiles.HeaderStyle = ColumnHeaderStyle.None;
+            ColumnHeader h1 = new ColumnHeader();
+            h1.Width = listViewLeftListofFiles.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            listViewLeftListofFiles.Columns.Add(h1);
+
+            listViewIcons.View = View.Details;
+            listViewIcons.HeaderStyle = ColumnHeaderStyle.None;
+            ColumnHeader h2 = new ColumnHeader();
+            h2.Width = listViewIcons.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
+            listViewIcons.Columns.Add(h2);
+            //знайшов кінець
+
+            //створююється листи файлів
+            FilllistsOfFiles(listsOfFiles);
+
+            //наповнюються listView 
+            listViewLeftListofFiles.Items.Clear();
+            listViewRightListofFiles.Items.Clear();
+            listViewIcons.Items.Clear();
+            FilllistViews();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -199,6 +209,7 @@ namespace FolderSynchronizer
             {
                 listViewIcons.Items.Add(LI.Left.ToString()+LI.Relations.ToString()+LI.Right.ToString());
             }
+
             FolderSynchronizerForm_Load(this, e);
         }
 
@@ -249,10 +260,18 @@ namespace FolderSynchronizer
             listViewRightListofFiles.TopItem = listViewLeftListofFiles.TopItem;
         }
 
-        private void checkBoxRight_CheckedChanged(object sender, EventArgs e)
+        //private void checkBoxRight_CheckedChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        private void checkBoxNotEqual_CheckedChanged(object sender, EventArgs e)
         {
             listsOfFiles.deleteAllDelete();
-            form
+            listViewLeftListofFiles.Items.Clear();
+            listViewRightListofFiles.Items.Clear();
+            listViewIcons.Items.Clear();
+            FilllistViews();
         }
     }
 }

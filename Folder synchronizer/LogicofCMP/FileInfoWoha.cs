@@ -250,6 +250,7 @@ namespace LogicofCMP
                 }
 
             }
+
         }
 
         public void WohaAsymetricSynchronize(bool isAsymmetricChecked, bool isIgnoreDateChecked, bool isByContentChecked)

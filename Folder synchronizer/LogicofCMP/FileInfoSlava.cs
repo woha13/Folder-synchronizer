@@ -190,13 +190,17 @@ namespace LogicofCMP
     {
         public void deleteAllDelete()
         {
-            foreach (WohaAllConnected LI in listWohaAllConnected)
+            for (int ii = 0; ii<listWohaAllConnected.Count; ii++)
             {
-                if (LI.Relations==3)
+                int jj = listWohaAllConnected.ElementAt(ii).Relations;
+                if (jj==LinksInfo.DeleteIcon)
                 {
-                    LI.Relations = 100;
+                    string kk = listWohaAllConnected.ElementAt(ii).NameLeft;
+                    listWohaAllConnected.RemoveAt(ii);
+                    ii--;
                 }
             }
+
         }
     }
 }

@@ -235,7 +235,6 @@
             this.checkBoxRight.Text = ">";
             this.checkBoxRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxRight.UseVisualStyleBackColor = true;
-            this.checkBoxRight.CheckedChanged += new System.EventHandler(this.checkBoxRight_CheckedChanged);
             // 
             // checkBoxLeft
             // 
@@ -264,6 +263,7 @@
             this.checkBoxNotEqual.Text = "!=";
             this.checkBoxNotEqual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxNotEqual.UseVisualStyleBackColor = true;
+            this.checkBoxNotEqual.CheckedChanged += new System.EventHandler(this.checkBoxNotEqual_CheckedChanged);
             // 
             // checkBoxEqual
             // 

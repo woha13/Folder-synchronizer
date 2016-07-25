@@ -197,6 +197,14 @@ namespace FolderSynchronizer
             }
         }
 
+        private void fillLinksList()
+        {
+            foreach (LinksInfo LI in listsOfFiles.listLinksInfo)
+            {
+                listViewIcons.Items.Add(LI.Left.ToString() + LI.Relations.ToString() + LI.Right.ToString());
+            }
+        }
+
         private void buttonSyncronize_Click(object sender, EventArgs e)
         {
             Synchronization syncFiles = new Synchronization();
@@ -204,11 +212,8 @@ namespace FolderSynchronizer
             //викликається копіювання файлів - поки закоментив
 
             listViewIcons.Items.Clear();
-            
-            foreach (LinksInfo LI in listsOfFiles.listLinksInfo)
-            {
-                listViewIcons.Items.Add(LI.Left.ToString()+LI.Relations.ToString()+LI.Right.ToString());
-            }
+
+            fillLinksList();
 
             FolderSynchronizerForm_Load(this, e);
         }
@@ -260,18 +265,29 @@ namespace FolderSynchronizer
             listViewRightListofFiles.TopItem = listViewLeftListofFiles.TopItem;
         }
 
-        //private void checkBoxRight_CheckedChanged(object sender, EventArgs e)
-        //{
-
-        //}
-
         private void checkBoxNotEqual_CheckedChanged(object sender, EventArgs e)
         {
-            listsOfFiles.deleteAllDelete();
-            listViewLeftListofFiles.Items.Clear();
-            listViewRightListofFiles.Items.Clear();
-            listViewIcons.Items.Clear();
-            FilllistViews();
+            //fillLinksList();
+            //знайти, що перезаповнить листи по новій
+            if (checkBoxNotEqual.Checked)
+            {
+                listsOfFiles.deleteAllDelete();
+                listViewLeftListofFiles.Items.Clear();
+                listViewRightListofFiles.Items.Clear();
+                listViewIcons.Items.Clear();
+                FilllistViews();
+            }
+            else
+            {
+                fillLinksList();
+                listsOfFiles.WohaFillListBoxesNice(listsOfFiles.LeftListofFiles,
+                                                    listsOfFiles.RightListofFiles,
+                                                    listsOfFiles.listLinksInfo);
+                listViewLeftListofFiles.Items.Clear();
+                listViewRightListofFiles.Items.Clear();
+                listViewIcons.Items.Clear();
+                FilllistViews();
+            }
         }
     }
 }

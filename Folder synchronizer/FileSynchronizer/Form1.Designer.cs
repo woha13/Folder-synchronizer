@@ -102,6 +102,7 @@
             this.listViewLeftListofFiles.TabIndex = 4;
             this.listViewLeftListofFiles.UseCompatibleStateImageBehavior = false;
             this.listViewLeftListofFiles.View = System.Windows.Forms.View.List;
+            this.listViewLeftListofFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Down);
             // 
             // listViewRightListofFiles
             // 

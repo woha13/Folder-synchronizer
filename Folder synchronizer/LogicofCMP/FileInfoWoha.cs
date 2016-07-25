@@ -92,7 +92,7 @@ namespace LogicofCMP
         }
     }
 
-    public class ListsofFiles
+    public partial class ListsofFiles
     {
         public List<FileInfoWoha> LeftListofFiles;
         public List<FileInfoWoha> RightListofFiles;
@@ -103,7 +103,6 @@ namespace LogicofCMP
         {
             LeftListofFiles = new List<FileInfoWoha>(); //лівий
             RightListofFiles = new List<FileInfoWoha>(); //правий
-            //WhatToDo = new List<int>();
             listLinksInfo = new List<LinksInfo>(); // відносини між лівим та правим
             listWohaAllConnected = new List<WohaAllConnected>();
         }
@@ -137,32 +136,23 @@ namespace LogicofCMP
                 if (LI.Left != -1)
                 {
                     AllConnected.NameLeft = LeftListofFiles.ElementAt(LI.Left).Name;
+                    AllConnected.PathInFolderLeft = LeftListofFiles.ElementAt(LI.Left).PathInFolder;
                 }
                 AllConnected.Right = LI.Right;
                 if (LI.Right != -1)
                 {
                     AllConnected.NameRight = RightListofFiles.ElementAt(LI.Right).Name;
                     AllConnected.NameLeft = RightListofFiles.ElementAt(LI.Right).Name;
+                    if (LI.Left!=-1)
+                    {
+                        AllConnected.PathInFolderLeft = LeftListofFiles.ElementAt(LI.Left).PathInFolder;
+                    }
+                    AllConnected.PathInFolderRight = RightListofFiles.ElementAt(LI.Right).PathInFolder;
                 }
                 AllConnected.Relations = LI.Relations;
                 listWohaAllConnected.Add(AllConnected);
             }
-            var new1 = listWohaAllConnected.OrderBy(x => x.NameLeft).ToList();
-            listWohaAllConnected = new1;
-            //listWohaAllConnected = listWohaAllConnected.OrderBy(x => x.NameLeft).ToString();
-
-            //listWohaAllConnected = listWohaAllConnected.OrderBy(x => x.NameLeft).ToString();
-
-            //people.OrderBy(person => person.lastname).ToList();
-            //listLinksInfo.OrderBy
-
-            //public const int RightIcon = 1;
-            //public const int LeftIcon = 2;
-            //public const int EqualIcon = 3;
-            //public const int NotEqualIcon = 4;
-            //public const int NotEqualToLeft = 6;   // Лівий новіший
-            //public const int NotEqualToRight = 7;  // Правий новіший
-            //public const int DeleteIcon = 5; //File needed to be deleted
+            //var new1 = listWohaAllConnected.OrderBy(x => x.PathInFolderLeft+x.NameLeft).ToList();
 
         }
 
@@ -178,8 +168,6 @@ namespace LogicofCMP
             bool result = false;
             int LeftFileByte;
             int RightFileByte;
-
-            //checking if files equal by size 
 
             if (leftFile.Size == rightFile.Size)
             {
@@ -216,8 +204,6 @@ namespace LogicofCMP
         private void FillPathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
         {
             // Process the list of files found in the directory.
-
-            //var fileEntries = Directory.EnumerateFiles(SourcePath, FileMask);
             DirectoryInfo di = new DirectoryInfo(SourcePath);
             foreach (var fi in di.GetFiles())
             {
@@ -248,9 +234,20 @@ namespace LogicofCMP
             }
         }
 
+        private void ReplaceDeleteforAsimetic(List<LinksInfo> listLinksInfo)
+        {
+            foreach (LinksInfo LI in listLinksInfo)
+            {
+                if (LI.Relations==LinksInfo.LeftIcon)
+                {
+                    LI.Relations = LinksInfo.DeleteIcon;
+                }
+
+            }
+        }
+
         public void WohaAsymetricSynchronize(bool isAsymmetricChecked, bool isIgnoreDateChecked, bool isByContentChecked)
         {
-            //FileInfoWoha FIW = new FileInfoWoha();
             int leftListIndex = 0;
             listLinksInfo.Clear();
             FileInfoWoha FIWRight = new FileInfoWoha();
@@ -303,11 +300,6 @@ namespace LogicofCMP
                             {
                                 LI.Relations = LinksInfo.RightIcon;
                             }
-                            //else
-                            //if (FIW.Size < FIWRight.Size)
-                            //{
-                            //    LI.Relations = LinksInfo.LeftIcon;
-                            //}
                             else
                             {
                                 if (EqualByContent(FIW, FIWRight))
@@ -340,57 +332,32 @@ namespace LogicofCMP
             Console.Beep();
         }
 
-        public void WohaSymetricSynchronize(bool isAsymmetricChecked,bool isIgnoreDateChecked, bool isByContentChecked)
+        public void WohaSymetricSynchronize(bool isAsymmetricChecked, bool isIgnoreDateChecked, bool isByContentChecked)
         {
-            if (!(isAsymmetricChecked))
+            int leftListIndex = 0;
+            FileInfoWoha FIWLeft = new FileInfoWoha();
+            foreach (FileInfoWoha FIW in RightListofFiles)
             {
-                int leftListIndex = 0;
-                FileInfoWoha FIWLeft = new FileInfoWoha();
-                foreach (FileInfoWoha FIW in RightListofFiles)
-                { 
-                        LinksInfo LI = new LinksInfo();
-                        FIWLeft = LeftListofFiles.Find(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder));
+                LinksInfo LI = new LinksInfo();
+                FIWLeft = LeftListofFiles.Find(x => (x.Name == FIW.Name) && (x.PathInFolder == FIW.PathInFolder));
 
-                        if (FIWLeft == null)
-                        {
-                            LI.Relations = LinksInfo.LeftIcon;
-                            LI.Right = leftListIndex;
-                            listLinksInfo.Add(LI);
-                        }
-
-                    //if (FIWLeft != null)
-                    //{
-                    //    if ((isIgnoreDateChecked))
-                    //    {
-                    //        LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name
-                    //                                             && x.PathInFolder == FIW.PathInFolder);
-                    //        LI.Relations = LinksInfo.EqualIcon;
-                    //    }
-                    //    else if (FIW.DateModification == FIWLeft.DateModification)
-                    //    {
-                    //        LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name
-                    //                                                  && x.PathInFolder == FIW.PathInFolder);
-                    //        LI.Relations = LinksInfo.EqualIcon;
-                    //    }
-                    //    else if (FIWLeft.DateModification > FIW.DateModification)
-                    //    {
-                    //        LI.Left = LeftListofFiles.FindIndex(x => x.Name == FIW.Name
-                    //                                             && x.PathInFolder == FIW.PathInFolder);
-                    //        LI.Relations = LinksInfo.RightIcon;
-                    //    }
-                    //}
-                    leftListIndex++;
+                if (FIWLeft == null)
+                {
+                    LI.Relations = LinksInfo.LeftIcon;
+                    LI.Right = leftListIndex;
+                    listLinksInfo.Add(LI);
                 }
-                Console.Beep();
-                //listLinksInfo = listLinksInfo.Distinct().ToList<LinksInfo>();
+                leftListIndex++;
             }
+            if (isAsymmetricChecked)
+            {
+                ReplaceDeleteforAsimetic(listLinksInfo);
+            }
+            Console.Beep();
         }
-
     }
     public partial class Synchronization
     {
-       
-
         public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 
                                 bool isIgnoreDateChecked)
         {

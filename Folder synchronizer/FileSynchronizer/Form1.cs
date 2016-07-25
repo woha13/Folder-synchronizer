@@ -114,7 +114,7 @@ namespace FolderSynchronizer
                     //заповнюю ліве
                     if (WAC.Left != -1)
                     {
-                        listViewLeftListofFiles.Items.Add(WAC.Left + "-" + WAC.PathInFolderLeft + "-" + WAC.NameLeft);
+                        listViewLeftListofFiles.Items.Add("#" + WAC.Left + "--" + WAC.PathInFolderLeft + "\\" + WAC.NameLeft);
                     }
                     else
                     {
@@ -123,7 +123,7 @@ namespace FolderSynchronizer
                     //заповнюю праве
                     if (WAC.Right != -1)
                     {
-                        listViewRightListofFiles.Items.Add(WAC.Right + "-" + WAC.PathInFolderRight + "-" + WAC.NameRight);
+                        listViewRightListofFiles.Items.Add("#"+WAC.Right + "--" + WAC.PathInFolderRight + "\\" + WAC.NameRight);
                     }
                     else
                     {
@@ -158,62 +158,6 @@ namespace FolderSynchronizer
                     listViewIcons.Items.Add(WAC.Left.ToString() + ' ' + strIcon + ' ' + WAC.Right.ToString());
                 }
             }
-
-            ////foreach (FileInfoWoha FIW in listsOfFiles.LeftListofFiles)
-            ////{
-            ////    if (FIW.Name != "")
-            ////    {
-            ////        listViewLeftListofFiles.Items.Add(listViewLeftListofFiles.Items.Count.ToString() +
-            ////            " - " + FIW.Path + '~' + FIW.PathInFolder +
-            ////            '~' + FIW.Name + " size:" + FIW.Size.ToString() +
-            ////            " Time:" + FIW.DateModification.ToString());
-            ////    }
-            ////    else
-            ////    {
-            ////        listViewLeftListofFiles.Items.Add("");
-            ////    }
-            ////}
-
-            //заповнює те, як воно насправді пов'язано
-            //foreach (WohaAllConnected WAC in listsOfFiles.listWohaAllConnected)
-            //{
-            //    {
-            //        listViewRightListofFiles.Items.Add(WAC.Left + "/" + WAC.PathInFolderLeft + "-" + WAC.NameLeft + "***" 
-            //                                            + WAC.Relations + "***"
-            //                                                          + WAC.PathInFolderRight + '-' + WAC.NameRight+'-'+ WAC.Right);
-            //    }
-            //}
-
-            //listViewIcons.Items.Clear();
-            //foreach (LinksInfo LI in listsOfFiles.listLinksInfo)
-            //{
-            //    string strIcon="error";
-            //    switch (LI.Relations)
-            //    {
-            //        case (LinksInfo.RightIcon):
-            //            strIcon = @"=>";
-            //            break;
-            //        case (LinksInfo.LeftIcon):
-            //            strIcon = @"<=";
-            //            break;
-            //        case (LinksInfo.EqualIcon):
-            //            strIcon = @"==";
-            //            break;
-            //        case (LinksInfo.NotEqualIcon):
-            //            strIcon = @"!=";
-            //            break;
-            //        case (LinksInfo.DeleteIcon):
-            //            strIcon = @"xx";
-            //            break;
-            //        case (LinksInfo.NotEqualToLeft):
-            //            strIcon = @"!=<";
-            //            break;
-            //        case (LinksInfo.NotEqualToRight):
-            //            strIcon = @"!=>";
-            //            break;
-            //    }   
-            //    listViewIcons.Items.Add(LI.Left.ToString() + ' ' + strIcon + ' ' + LI.Right.ToString());
-            //}
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -298,6 +242,11 @@ namespace FolderSynchronizer
             {
                 isWithSubdirsChecked = false;
             }
+        }
+
+        private void Down(object sender, KeyEventArgs e)
+        {
+            listViewRightListofFiles.TopItem = listViewLeftListofFiles.TopItem;
         }
     }
 }

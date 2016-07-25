@@ -27,6 +27,7 @@ namespace FolderSynchronizer
         string folderPathLeft;
         string folderPathRight;
         
+        
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             ActiveForm.Close();
@@ -105,11 +106,50 @@ namespace FolderSynchronizer
 
             Synchronization sync = new Synchronization();
 
-            sync.FileHandler(listsOfFiles, folderPathLeft, folderPathRight);
+            // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+            sync.FileHandler(listsOfFiles, folderPathLeft, folderPathRight, checkBoxLeftToRight.Checked, checkBoxRightToLeft.Checked, checkBoxRightDeleteFiles.Checked);
 
             Close();
 
         }
-        
+
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        private void checkBoxLeftToRight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxLeftToRight.Checked)
+            {
+                checkBoxLeftToRight.Checked = true;
+            }
+            else
+            {
+                checkBoxLeftToRight.Checked = false;
+            }
+        }
+
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        private void checkBoxRightToLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxRightToLeft.Checked)
+            {
+                checkBoxRightToLeft.Checked = true;
+            }
+            else
+            {
+                checkBoxRightToLeft.Checked = false;
+            }
+        }
+
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        private void checkBoxRightDeleteFiles_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxRightDeleteFiles.Checked)
+            {
+                checkBoxRightDeleteFiles.Checked = true;
+            }
+            else
+            {
+                checkBoxRightDeleteFiles.Checked = false;
+            }
+        }
     }
 }

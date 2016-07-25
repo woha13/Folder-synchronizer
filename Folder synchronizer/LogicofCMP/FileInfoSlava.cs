@@ -81,7 +81,8 @@ namespace LogicofCMP
         }
 
         //25.07.16 13.38 slava - inserting folderpaths parameters into methos and change implementation
-        public void FileHandler(ListsofFiles Lists, string folderPathLeft, string folderPathRight)
+        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+        public void FileHandler(ListsofFiles Lists, string folderPathLeft, string folderPathRight, bool checkboxLeftToRightIsChecked, bool checkboxRightToLeftIsChecked, bool checkboxDeleteFromRightIsChecked)
         {
 
             FileInfoWoha FIWLeft = null;
@@ -109,66 +110,78 @@ namespace LogicofCMP
 
 
                 //if file from left folder doesn't exist in right folder
-                if (LI.Relations == 1 || LI.Relations == 6)
+
+                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+                if (checkboxLeftToRightIsChecked)
                 {
-
-                    
-                    string sourceFile = Path.Combine(folderPathLeft + pathInFolderLeft, FIWLeft.Name);
-                    string destFile = Path.Combine(folderPathRight + pathInFolderLeft, FIWLeft.Name);
-
-                    // copying left file to right folder
-                    try
-                    {
-                        File.Copy(sourceFile, destFile, true);
-                    }
-                    catch (IOException e)
+                    if (LI.Relations == 1 || LI.Relations == 6)
                     {
                         
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                        string sourceFile = Path.Combine(folderPathLeft + pathInFolderLeft, FIWLeft.Name);
+                        string destFile = Path.Combine(folderPathRight + pathInFolderLeft, FIWLeft.Name);
+
+                        // copying left file to right folder
+                        try
+                        {
+                            File.Copy(sourceFile, destFile, true);
+                        }
+                        catch (IOException e)
+                        {
+
+                            ShowExceptionMessage(e.ToString(), "Error copying file");
+                        }
                     }
+
                 }
 
-
-
-                // if file from right folder doesn't exist in left folder
-                if (LI.Relations == 2 || LI.Relations == 7)
+                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+                if (checkboxRightToLeftIsChecked)
                 {
-                    //FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
-                    //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
-                    string sourceFile = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
-                    string destFile = Path.Combine(folderPathLeft + patInFolderRight, FIWRight.Name);
-
-                    // copying right file to left folder
-                    try
+                    // if file from right folder doesn't exist in left folder
+                    if (LI.Relations == 2 || LI.Relations == 7)
                     {
-                        File.Copy(sourceFile, destFile, true);
+                        //FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
+                        //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+
+                        string sourceFile = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
+                        string destFile = Path.Combine(folderPathLeft + patInFolderRight, FIWRight.Name);
+
+                        // copying right file to left folder
+                        try
+                        {
+                            File.Copy(sourceFile, destFile, true);
+                        }
+                        catch (IOException e)
+                        {
+
+                            ShowExceptionMessage(e.ToString(), "Error copying file");
+                        }
                     }
-                    catch (IOException e)
-                    {
 
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
+                }
+
+                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
+                if (checkboxDeleteFromRightIsChecked)
+                {
+                    // 23.07.16 slava - added file deletion section
+                    //If file from right need to be deleted
+                    if (LI.Relations == 5)
+                    {
+                        //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+
+                        string fileForDeletion = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
+                        try
+                        {
+                            File.Delete(fileForDeletion);
+                        }
+                        catch (IOException e)
+                        {
+
+                            ShowExceptionMessage(e.ToString(), "Error deleting file");
+                        }
                     }
                 }
                 
-                // 23.07.16 slava - added file deletion section
-                //If file from right need to be deleted
-                if (LI.Relations == 5)
-                {
-                    //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
-                    string fileForDeletion = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
-                    try
-                    {
-                        File.Delete(fileForDeletion);
-                    }
-                    catch (IOException e)
-                    {
-                        
-                        ShowExceptionMessage(e.ToString(), "Error deleting file");
-                    }
-                }
-
             }
         }
         

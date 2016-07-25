@@ -124,11 +124,16 @@ namespace LogicofCMP
             WohaFillListBoxesNice(LeftListofFiles, RightListofFiles, listLinksInfo);
             //якшо треба асіметрік - вичищаємо все, що копіює наліво
         }
-
+        /// <summary>
+        /// WohaFillListBoxesNice - заповнює гарненько лисбокси
+        /// </summary>
+        /// <param name="LeftListofFiles"></param>  Лівий лист
+        /// <param name="RightListofFiles"></param> Правий лист
+        /// <param name="listLinksInfo"></param>    Віднисини між ними
         public void WohaFillListBoxesNice(List<FileInfoWoha> LeftListofFiles, List<FileInfoWoha> RightListofFiles, List<LinksInfo> listLinksInfo)
         {
             FileInfoWoha EmptyFile = new FileInfoWoha();
-            listWohaAllConnected.Clear();
+            listWohaAllConnected.Clear(); //все відбувається тут
             foreach (LinksInfo LI in listLinksInfo)
             {
                 WohaAllConnected AllConnected = new WohaAllConnected();

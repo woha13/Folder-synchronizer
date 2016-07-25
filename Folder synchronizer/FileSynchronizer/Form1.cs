@@ -249,5 +249,10 @@ namespace FolderSynchronizer
             listViewRightListofFiles.TopItem = listViewLeftListofFiles.TopItem;
         }
 
+        private void checkBoxRight_CheckedChanged(object sender, EventArgs e)
+        {
+            listsOfFiles.deleteAllDelete();
+            form
+        }
     }
 }

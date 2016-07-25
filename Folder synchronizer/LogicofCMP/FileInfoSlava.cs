@@ -186,4 +186,17 @@ namespace LogicofCMP
         }
         
     }
+    public partial class ListsofFiles
+    {
+        public void deleteAllDelete()
+        {
+            foreach (WohaAllConnected LI in listWohaAllConnected)
+            {
+                if (LI.Relations==3)
+                {
+                    LI.Relations = 100;
+                }
+            }
+        }
+    }
 }

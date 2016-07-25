@@ -13,14 +13,19 @@ namespace FolderSynchronizer
 {
     public partial class ConfirmationForm : Form
     {
-        public ConfirmationForm(ListsofFiles inputlistsOfFiles, string s1, string s2)
+        public ConfirmationForm(ListsofFiles inputlistsOfFiles, string folderPathLeft, string folderPathRight)
         {
             InitializeComponent();
 
             listsOfFiles = inputlistsOfFiles;
+            this.folderPathLeft = folderPathLeft;
+            this.folderPathRight = folderPathRight;
+            
         }
 
         ListsofFiles listsOfFiles;
+        string folderPathLeft;
+        string folderPathRight;
         
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -30,9 +35,9 @@ namespace FolderSynchronizer
         //24.07 22.30 slava - implement confirmation form with all relevant information and functions
         public void ShowConfirmation ()
         {
-            
-            textBoxLeftToRight.Text = listsOfFiles.LeftListofFiles.ElementAt(0).Path;
-            textBoxRightToLeft.Text = listsOfFiles.RightListofFiles.ElementAt(0).Path;
+            //25.07 1.33 slava - changed getting folder paths 
+            textBoxLeftToRight.Text = folderPathLeft;
+            textBoxRightToLeft.Text = folderPathRight;
 
             int LeftToRightAmountOfFiles = 0;
             long LeftToRightSizeOfFiles = 0;
@@ -100,7 +105,7 @@ namespace FolderSynchronizer
 
             Synchronization sync = new Synchronization();
 
-            sync.FileHandler(listsOfFiles);
+            sync.FileHandler(listsOfFiles, folderPathLeft, folderPathRight);
 
             Close();
 

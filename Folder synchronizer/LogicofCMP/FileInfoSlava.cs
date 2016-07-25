@@ -80,30 +80,46 @@ namespace LogicofCMP
             result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
         }
 
-        public void FileHandler(ListsofFiles Lists)
+        //25.07.16 13.38 slava - inserting folderpaths parameters into methos and change implementation
+        public void FileHandler(ListsofFiles Lists, string folderPathLeft, string folderPathRight)
         {
-            
-            FileInfoWoha FIWLeft;
-            FileInfoWoha FIWRight;
+
+            FileInfoWoha FIWLeft = null;
+            FileInfoWoha FIWRight = null;
+
+            //25.07.16 13.38 slava - if one of folder is empty by default subfolderas are empty but not null
+            string pathInFolderLeft = "";
+            string patInFolderRight = "";
 
             foreach (LinksInfo LI in Lists.listLinksInfo)
             {
-                
-                
+
+                //25.07.16 13.38 slava - if some list is not empty or Left or Right list does't containf -1 than we create a list instance and getting puth in folder
+                if (Lists.LeftListofFiles.Count != 0 && LI.Left != -1)
+                {
+                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
+                    pathInFolderLeft = Lists.LeftListofFiles.ElementAt(LI.Left).PathInFolder;
+                }
+
+                if (Lists.RightListofFiles.Count !=0 && LI.Right != -1)
+                {
+                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+                    patInFolderRight = Lists.RightListofFiles.ElementAt(LI.Right).PathInFolder;
+                }
+
+
                 //if file from left folder doesn't exist in right folder
-                if (LI.Relations == 1)
+                if (LI.Relations == 1 || LI.Relations == 6)
                 {
 
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(0); //getting right file info
-
-                    string sourceFile = Path.Combine(FIWLeft.Path+ FIWLeft.PathInFolder, FIWLeft.Name);
-                    string destFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWLeft.Name);
+                    
+                    string sourceFile = Path.Combine(folderPathLeft + pathInFolderLeft, FIWLeft.Name);
+                    string destFile = Path.Combine(folderPathRight + pathInFolderLeft, FIWLeft.Name);
 
                     // copying left file to right folder
                     try
                     {
-                        File.Copy(sourceFile, destFile, false);
+                        File.Copy(sourceFile, destFile, true);
                     }
                     catch (IOException e)
                     {
@@ -115,18 +131,18 @@ namespace LogicofCMP
 
 
                 // if file from right folder doesn't exist in left folder
-                if (LI.Relations == 2)
+                if (LI.Relations == 2 || LI.Relations == 7)
                 {
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+                    //FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
+                    //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
 
-                    string sourceFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
-                    string destFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWRight.Name);
+                    string sourceFile = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
+                    string destFile = Path.Combine(folderPathLeft + patInFolderRight, FIWRight.Name);
 
                     // copying right file to left folder
                     try
                     {
-                        File.Copy(sourceFile, destFile, false);
+                        File.Copy(sourceFile, destFile, true);
                     }
                     catch (IOException e)
                     {
@@ -134,57 +150,14 @@ namespace LogicofCMP
                         ShowExceptionMessage(e.ToString(), "Error copying file");
                     }
                 }
-
-                //if files equal but left is newer
-                if (LI.Relations == 6)
-                {
-
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(0); //getting right file info
-
-                    string sourceFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWLeft.Name);
-                    string destFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWLeft.Name);
-
-                    // copying left file to right folder
-                    try
-                    {
-                        File.Copy(sourceFile, destFile, false);
-                    }
-                    catch (IOException e)
-                    {
-
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
-                    }
-                }
-
-                // if files are equal but right file is newer
-                if (LI.Relations == 7)
-                {
-                    FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
-                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
-                    string sourceFile = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
-                    string destFile = Path.Combine(FIWLeft.Path + FIWLeft.PathInFolder, FIWRight.Name);
-
-                    // copying right file to left folder
-                    try
-                    {
-                        File.Copy(sourceFile, destFile, false);
-                    }
-                    catch (IOException e)
-                    {
-
-                        ShowExceptionMessage(e.ToString(), "Error copying file");
-                    }
-                }
-
+                
                 // 23.07.16 slava - added file deletion section
                 //If file from right need to be deleted
                 if (LI.Relations == 5)
                 {
-                    FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
+                    //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
 
-                    string fileForDeletion = Path.Combine(FIWRight.Path + FIWRight.PathInFolder, FIWRight.Name);
+                    string fileForDeletion = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
                     try
                     {
                         File.Delete(fileForDeletion);

@@ -52,14 +52,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonSyncSlava = new System.Windows.Forms.Button();
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.vScrollBarForAll = new System.Windows.Forms.VScrollBar();
             this.checkBoxDuplicates = new System.Windows.Forms.CheckBox();
             this.checkBoxSingles = new System.Windows.Forms.CheckBox();
-=======
+//=======
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
->>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
+//>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -370,14 +370,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
+//<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(949, 476);
             this.Controls.Add(this.vScrollBarForAll);
-=======
+//=======
             this.ClientSize = new System.Drawing.Size(949, 477);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonUp);
->>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
+//>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
             this.Controls.Add(this.buttonSyncSlava);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -432,14 +432,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonSyncSlava;
-<<<<<<< HEAD
+//<<<<<<< HEAD
         private System.Windows.Forms.VScrollBar vScrollBarForAll;
         private System.Windows.Forms.CheckBox checkBoxSingles;
         private System.Windows.Forms.CheckBox checkBoxDuplicates;
-=======
+//=======
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonDown;
->>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
+//>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
     }
 }
 

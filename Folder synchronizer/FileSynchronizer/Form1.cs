@@ -221,6 +221,7 @@ namespace FolderSynchronizer
             //26.17.16 slava - applying disply options if any
             listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
             ClearListViews();
+            FilllistsOfFiles(listsOfFiles);
             FilllistViews();
 
         }

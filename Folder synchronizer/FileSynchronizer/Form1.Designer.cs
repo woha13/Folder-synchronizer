@@ -337,7 +337,7 @@
             this.buttonUp.TabIndex = 29;
             this.buttonUp.Text = "Up";
             this.buttonUp.UseVisualStyleBackColor = true;
-            this.buttonUp.Click += new System.EventHandler(this.button2_Click);
+            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
             // 
             // buttonDown
             // 

@@ -136,6 +136,7 @@ namespace FolderSynchronizer
                     listViewIcons.Items.Add(WAC.Left.ToString() + ' ' + strIcon + ' ' + WAC.Right.ToString());
                 }
             }
+            CurrentPosition = 0;
         }
         private void FolderSynchronizerForm_Load(object sender, EventArgs e)
         {
@@ -308,22 +309,23 @@ namespace FolderSynchronizer
             listViewIcons.TopItem = listViewIcons.Items[5];
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (CurrentPosition>0)
-            {
-                CurrentPosition--;
-                listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[CurrentPosition];
-                listViewIcons.TopItem = listViewIcons.Items[CurrentPosition];
-                listViewRightListofFiles.TopItem = listViewRightListofFiles.Items[CurrentPosition];
-            }
-        }
 
         private void buttonDown_Click(object sender, EventArgs e)
         {
             if (CurrentPosition <= listViewIcons.Items.Count-listViewIcons.ClientSize.Height/(listViewIcons.Font.Height+3))
             {
                 CurrentPosition++;
+                listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[CurrentPosition];
+                listViewIcons.TopItem = listViewIcons.Items[CurrentPosition];
+                listViewRightListofFiles.TopItem = listViewRightListofFiles.Items[CurrentPosition];
+            }
+        }
+
+        private void buttonUp_Click(object sender, EventArgs e)
+        {
+            if (CurrentPosition > 0)
+            {
+                CurrentPosition--;
                 listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[CurrentPosition];
                 listViewIcons.TopItem = listViewIcons.Items[CurrentPosition];
                 listViewRightListofFiles.TopItem = listViewRightListofFiles.Items[CurrentPosition];

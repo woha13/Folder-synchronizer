@@ -188,14 +188,32 @@ namespace LogicofCMP
     }
     public partial class ListsofFiles
     {
-        public void deleteAllDelete()
+        public void deleteAllDelete(bool checkboxRightIsChecked, bool CheckboxLeftIsChecked, bool checkBoxEqualIsChecked, bool checkBoxNotEqualIsChecked)
         {
             for (int ii = 0; ii<listWohaAllConnected.Count; ii++)
             {
                 int jj = listWohaAllConnected.ElementAt(ii).Relations;
-                if (jj==LinksInfo.DeleteIcon)
+                if ((jj==LinksInfo.DeleteIcon || jj == LinksInfo.NotEqualIcon) && checkBoxNotEqualIsChecked)
                 {
-                    string kk = listWohaAllConnected.ElementAt(ii).NameLeft;
+                    string kk = listWohaAllConnected.ElementAt(ii).NameLeft; //What for?
+                    listWohaAllConnected.RemoveAt(ii);
+                    ii--;
+                }
+
+                if ((jj == LinksInfo.RightIcon || jj == LinksInfo.NotEqualToRight) && checkboxRightIsChecked)
+                {
+                    listWohaAllConnected.RemoveAt(ii);
+                    ii--;
+                }
+
+                if ((jj == LinksInfo.LeftIcon || jj == LinksInfo.NotEqualToLeft) && CheckboxLeftIsChecked)
+                {
+                    listWohaAllConnected.RemoveAt(ii);
+                    ii--;
+                }
+
+                if (jj == LinksInfo.EqualIcon && checkBoxEqualIsChecked)
+                {
                     listWohaAllConnected.RemoveAt(ii);
                     ii--;
                 }

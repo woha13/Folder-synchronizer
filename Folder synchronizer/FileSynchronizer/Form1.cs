@@ -216,6 +216,13 @@ namespace FolderSynchronizer
             fillLinksList();
 
             FolderSynchronizerForm_Load(this, e);
+
+
+            //26.17.16 slava - applying disply options if any
+            listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+            ClearListViews();
+            FilllistViews();
+
         }
 
 
@@ -271,10 +278,8 @@ namespace FolderSynchronizer
             //знайти, що перезаповнить листи по новій
             if (checkBoxNotEqual.Checked)
             {
-                listsOfFiles.deleteAllDelete();
-                listViewLeftListofFiles.Items.Clear();
-                listViewRightListofFiles.Items.Clear();
-                listViewIcons.Items.Clear();
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
                 FilllistViews();
             }
             else
@@ -283,9 +288,8 @@ namespace FolderSynchronizer
                 listsOfFiles.WohaFillListBoxesNice(listsOfFiles.LeftListofFiles,
                                                     listsOfFiles.RightListofFiles,
                                                     listsOfFiles.listLinksInfo);
-                listViewLeftListofFiles.Items.Clear();
-                listViewRightListofFiles.Items.Clear();
-                listViewIcons.Items.Clear();
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
                 FilllistViews();
             }
         }
@@ -297,6 +301,74 @@ namespace FolderSynchronizer
             //vScrollBarForAll.Padding
             //vScrollBarForAll.Value = 100;
             listViewLeftListofFiles.TopItem = listViewIcons.TopItem;
+        }
+
+        private void checkBoxRight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxRight.Checked)
+            {
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+            }
+            else
+            {
+                fillLinksList();
+                listsOfFiles.WohaFillListBoxesNice(listsOfFiles.LeftListofFiles,
+                                                    listsOfFiles.RightListofFiles,
+                                                    listsOfFiles.listLinksInfo);
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+            }
+        }
+
+        private void checkBoxEqual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxEqual.Checked)
+            {
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+            }
+            else
+            {
+                fillLinksList();
+                listsOfFiles.WohaFillListBoxesNice(listsOfFiles.LeftListofFiles,
+                                                    listsOfFiles.RightListofFiles,
+                                                    listsOfFiles.listLinksInfo);
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+            }
+        }
+
+        private void checkBoxLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxLeft.Checked)
+            {
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+            }
+            else
+            {
+                fillLinksList();
+                listsOfFiles.WohaFillListBoxesNice(listsOfFiles.LeftListofFiles,
+                                                    listsOfFiles.RightListofFiles,
+                                                    listsOfFiles.listLinksInfo);
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+            }
+        }
+        
+        //26.07.16 slava - added clearlistviewws method
+        private void ClearListViews()
+        {
+            listViewLeftListofFiles.Items.Clear();
+            listViewRightListofFiles.Items.Clear();
+            listViewIcons.Items.Clear();
         }
     }
 }

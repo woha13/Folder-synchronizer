@@ -236,6 +236,7 @@
             this.checkBoxRight.Text = ">";
             this.checkBoxRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxRight.UseVisualStyleBackColor = true;
+            this.checkBoxRight.CheckedChanged += new System.EventHandler(this.checkBoxRight_CheckedChanged);
             // 
             // checkBoxLeft
             // 
@@ -250,6 +251,7 @@
             this.checkBoxLeft.Text = "<";
             this.checkBoxLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxLeft.UseVisualStyleBackColor = true;
+            this.checkBoxLeft.CheckedChanged += new System.EventHandler(this.checkBoxLeft_CheckedChanged);
             // 
             // checkBoxNotEqual
             // 
@@ -279,6 +281,7 @@
             this.checkBoxEqual.Text = "==";
             this.checkBoxEqual.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxEqual.UseVisualStyleBackColor = true;
+            this.checkBoxEqual.CheckedChanged += new System.EventHandler(this.checkBoxEqual_CheckedChanged);
             // 
             // button1
             // 
@@ -339,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 477);
+            this.ClientSize = new System.Drawing.Size(949, 476);
             this.Controls.Add(this.vScrollBarForAll);
             this.Controls.Add(this.buttonSyncSlava);
             this.Controls.Add(this.groupBox2);

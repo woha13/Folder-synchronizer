@@ -34,6 +34,7 @@ namespace FolderSynchronizer
         public bool isByContentChecked = false; //variable to send ByContent checkbox state for Syncronize method
         public bool isIgnoreDateChecked = false;
         public bool isWithSubdirsChecked = false;
+        int CurrentPosition = 0;
 
         FolderBrowserDialog FolderPathLeftDialog = new FolderBrowserDialog(); //creating dialog window instance for left file path
         FolderBrowserDialog FolderPathRightDialog = new FolderBrowserDialog(); //creating dialog window instance for right file path
@@ -296,7 +297,37 @@ namespace FolderSynchronizer
             //listViewLeftListofFiles.BindingContext = vScrollBarForAll.BindingContext;
             //vScrollBarForAll.Padding
             //vScrollBarForAll.Value = 100;
-            listViewLeftListofFiles.TopItem = listViewIcons.TopItem;
+            listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[5];
+            listViewIcons.TopItem = listViewIcons.Items[5];
+            //listView.TopItem = listView.Items[idx]
+        }
+
+        private void Moved(object sender, EventArgs e)
+        {
+            listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[5];
+            listViewIcons.TopItem = listViewIcons.Items[5];
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (CurrentPosition>0)
+            {
+                CurrentPosition--;
+                listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[CurrentPosition];
+                listViewIcons.TopItem = listViewIcons.Items[CurrentPosition];
+                listViewRightListofFiles.TopItem = listViewRightListofFiles.Items[CurrentPosition];
+            }
+        }
+
+        private void buttonDown_Click(object sender, EventArgs e)
+        {
+            if (CurrentPosition <= listViewIcons.Items.Count-listViewIcons.ClientSize.Height/(listViewIcons.Font.Height+3))
+            {
+                CurrentPosition++;
+                listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[CurrentPosition];
+                listViewIcons.TopItem = listViewIcons.Items[CurrentPosition];
+                listViewRightListofFiles.TopItem = listViewRightListofFiles.Items[CurrentPosition];
+            }
         }
     }
 }

@@ -164,9 +164,7 @@ namespace FolderSynchronizer
             FilllistsOfFiles(listsOfFiles);
 
             //наповнюються listView 
-            listViewLeftListofFiles.Items.Clear();
-            listViewRightListofFiles.Items.Clear();
-            listViewIcons.Items.Clear();
+            ClearListViews();
             FilllistViews();
         }
 
@@ -369,6 +367,32 @@ namespace FolderSynchronizer
             listViewLeftListofFiles.Items.Clear();
             listViewRightListofFiles.Items.Clear();
             listViewIcons.Items.Clear();
+        }
+
+        private void checkBoxDuplicates_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDuplicates.Checked)
+            {
+                checkBoxEqual.Checked = true;
+                checkBoxNotEqual.Checked = true;
+            } else
+            {
+                checkBoxEqual.Checked = false;
+                checkBoxNotEqual.Checked = false;
+            }
+        }
+
+        private void checkBoxSingles_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSingles.Checked)
+            {
+                checkBoxRight.Checked = true;
+                checkBoxLeft.Checked = true;
+            } else
+            {
+                checkBoxRight.Checked = false;
+                checkBoxLeft.Checked = false;
+            }
         }
     }
 }

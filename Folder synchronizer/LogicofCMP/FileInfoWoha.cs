@@ -115,8 +115,8 @@ namespace LogicofCMP
             RightListofFiles.Clear();
             listLinksInfo.Clear();
             //FillSourcePathList(SourcePath, //FolderSynchronizerForm.isWithSubdirsChecked);
-            FillPathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs);
-            FillPathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs);
+            FillPathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs, FileMask);
+            FillPathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs, FileMask);
             RemoveStartFolder(SourcePath, LeftListofFiles);
             RemoveStartFolder(TargetPath, RightListofFiles);
             WohaAsymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
@@ -207,12 +207,13 @@ namespace LogicofCMP
             return result;
         }
 
-        private void FillPathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs)
+        private void FillPathList(string SourcePath, List<FileInfoWoha> ListofFiles, bool withSubDirs, string Mask)
         {
             // Process the list of files found in the directory.
             DirectoryInfo di = new DirectoryInfo(SourcePath);
-            foreach (var fi in di.GetFiles())
+            foreach (var fi in di.GetFiles(Mask))
             {
+                //if textBoxFileMask.Text
                 FileInfoWoha fileData = new FileInfoWoha();
                 fileData.Name = fi.Name;
                 fileData.PathInFolder = fi.Directory.ToString();
@@ -227,7 +228,7 @@ namespace LogicofCMP
             {
                 string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
                 foreach (string subdirectory in subdirectoryEntries)
-                    FillPathList(subdirectory, ListofFiles, withSubDirs);
+                    FillPathList(subdirectory, ListofFiles, withSubDirs, Mask);
             }
         }
 

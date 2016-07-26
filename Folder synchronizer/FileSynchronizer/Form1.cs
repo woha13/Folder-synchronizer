@@ -22,7 +22,7 @@ namespace FolderSynchronizer
             FolderPathRightDialog.SelectedPath = @"d:\Slava\2";
             textBoxFolderPathLeft.Text = @"d:\Slava\1";
             textBoxFolderPathRight.Text = @"d:\Slava\2";
-            textBoxFileMask.Text = @"*.*";
+            textBoxFileMask.Text = @"*.JPG";
 
             checkBoxAsymmetric.Checked = false; //Asymmetric checkbox default state
             checkBoxByContent.Checked = false; //ByContent checkbox default state

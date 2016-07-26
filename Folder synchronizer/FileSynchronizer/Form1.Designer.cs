@@ -52,9 +52,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonSyncSlava = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.vScrollBarForAll = new System.Windows.Forms.VScrollBar();
             this.checkBoxDuplicates = new System.Windows.Forms.CheckBox();
             this.checkBoxSingles = new System.Windows.Forms.CheckBox();
+=======
+            this.buttonUp = new System.Windows.Forms.Button();
+            this.buttonDown = new System.Windows.Forms.Button();
+>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -103,11 +108,11 @@
             this.listViewLeftListofFiles.TabIndex = 4;
             this.listViewLeftListofFiles.UseCompatibleStateImageBehavior = false;
             this.listViewLeftListofFiles.View = System.Windows.Forms.View.List;
-            this.listViewLeftListofFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Down);
             // 
             // listViewRightListofFiles
             // 
             this.listViewRightListofFiles.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listViewRightListofFiles.GridLines = true;
             this.listViewRightListofFiles.Location = new System.Drawing.Point(554, 203);
             this.listViewRightListofFiles.Name = "listViewRightListofFiles";
             this.listViewRightListofFiles.Size = new System.Drawing.Size(381, 266);
@@ -118,6 +123,7 @@
             // listViewIcons
             // 
             this.listViewIcons.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listViewIcons.GridLines = true;
             this.listViewIcons.Location = new System.Drawing.Point(436, 202);
             this.listViewIcons.Name = "listViewIcons";
             this.listViewIcons.Size = new System.Drawing.Size(73, 266);
@@ -312,13 +318,25 @@
             this.buttonSyncSlava.Text = "Sync Slava";
             this.buttonSyncSlava.UseVisualStyleBackColor = true;
             // 
-            // vScrollBarForAll
+            // buttonUp
             // 
-            this.vScrollBarForAll.Location = new System.Drawing.Point(399, 203);
-            this.vScrollBarForAll.Name = "vScrollBarForAll";
-            this.vScrollBarForAll.Size = new System.Drawing.Size(17, 265);
-            this.vScrollBarForAll.TabIndex = 29;
-            this.vScrollBarForAll.ValueChanged += new System.EventHandler(this.vScrollBar1_ValueChanged);
+            this.buttonUp.Location = new System.Drawing.Point(399, 203);
+            this.buttonUp.Name = "buttonUp";
+            this.buttonUp.Size = new System.Drawing.Size(31, 23);
+            this.buttonUp.TabIndex = 29;
+            this.buttonUp.Text = "Up";
+            this.buttonUp.UseVisualStyleBackColor = true;
+            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
+            // 
+            // buttonDown
+            // 
+            this.buttonDown.Location = new System.Drawing.Point(399, 442);
+            this.buttonDown.Name = "buttonDown";
+            this.buttonDown.Size = new System.Drawing.Size(31, 23);
+            this.buttonDown.TabIndex = 30;
+            this.buttonDown.Text = "Dn";
+            this.buttonDown.UseVisualStyleBackColor = true;
+            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
             // 
             // checkBoxDuplicates
             // 
@@ -352,8 +370,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(949, 476);
             this.Controls.Add(this.vScrollBarForAll);
+=======
+            this.ClientSize = new System.Drawing.Size(949, 477);
+            this.Controls.Add(this.buttonDown);
+            this.Controls.Add(this.buttonUp);
+>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
             this.Controls.Add(this.buttonSyncSlava);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -408,9 +432,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonSyncSlava;
+<<<<<<< HEAD
         private System.Windows.Forms.VScrollBar vScrollBarForAll;
         private System.Windows.Forms.CheckBox checkBoxSingles;
         private System.Windows.Forms.CheckBox checkBoxDuplicates;
+=======
+        private System.Windows.Forms.Button buttonUp;
+        private System.Windows.Forms.Button buttonDown;
+>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
     }
 }
 

@@ -252,6 +252,7 @@
             this.checkBoxLeft.Text = "<";
             this.checkBoxLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxLeft.UseVisualStyleBackColor = true;
+            this.checkBoxLeft.CheckedChanged += new System.EventHandler(this.checkBoxLeft_CheckedChanged);
             // 
             // checkBoxNotEqual
             // 

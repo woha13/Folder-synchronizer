@@ -331,5 +331,10 @@ namespace FolderSynchronizer
                 listViewRightListofFiles.TopItem = listViewRightListofFiles.Items[CurrentPosition];
             }
         }
+
+        private void checkBoxLeft_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

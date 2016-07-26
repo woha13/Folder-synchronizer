@@ -289,5 +289,14 @@ namespace FolderSynchronizer
                 FilllistViews();
             }
         }
+
+        private void vScrollBar1_ValueChanged(object sender, EventArgs e)
+        {
+            //listViewLeftListofFiles.AutoScrollOffset = vScrollBarForAll.AutoScrollOffset;
+            //listViewLeftListofFiles.BindingContext = vScrollBarForAll.BindingContext;
+            //vScrollBarForAll.Padding
+            //vScrollBarForAll.Value = 100;
+            listViewLeftListofFiles.TopItem = listViewIcons.TopItem;
+        }
     }
 }

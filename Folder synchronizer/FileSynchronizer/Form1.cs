@@ -336,5 +336,10 @@ namespace FolderSynchronizer
         {
 
         }
+
+        private void checkBoxRight_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

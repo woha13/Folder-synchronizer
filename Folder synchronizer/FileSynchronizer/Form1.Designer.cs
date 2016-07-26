@@ -238,6 +238,7 @@
             this.checkBoxRight.Text = ">";
             this.checkBoxRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkBoxRight.UseVisualStyleBackColor = true;
+            this.checkBoxRight.CheckedChanged += new System.EventHandler(this.checkBoxRight_CheckedChanged);
             // 
             // checkBoxLeft
             // 

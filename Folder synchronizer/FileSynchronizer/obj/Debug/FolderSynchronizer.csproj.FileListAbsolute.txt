@@ -1,1 +1,0 @@
-D:\PRJ\Folder synchronizer\FileSynchronizer\bin\Debug\FileSynchronizer.exe.config

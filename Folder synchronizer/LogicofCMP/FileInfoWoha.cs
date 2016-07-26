@@ -213,7 +213,6 @@ namespace LogicofCMP
             DirectoryInfo di = new DirectoryInfo(SourcePath);
             foreach (var fi in di.GetFiles(Mask))
             {
-                //if textBoxFileMask.Text
                 FileInfoWoha fileData = new FileInfoWoha();
                 fileData.Name = fi.Name;
                 fileData.PathInFolder = fi.Directory.ToString();

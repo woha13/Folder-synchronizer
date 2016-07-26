@@ -1,5 +1,0 @@
-D:\PRJ\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.dll
-D:\PRJ\Folder synchronizer\LogicofCMP\bin\Debug\LogicofCMP.pdb
-D:\PRJ\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.csprojResolveAssemblyReference.cache
-D:\PRJ\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.dll
-D:\PRJ\Folder synchronizer\LogicofCMP\obj\Debug\LogicofCMP.pdb

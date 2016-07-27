@@ -430,10 +430,5 @@ namespace FolderSynchronizer
                 checkBoxLeft.Checked = false;
             }
         }
-
-        private void textBoxFolderPathLeft_TextChanged(object sender, EventArgs e)
-        {
-            Console.Beep();
-        }
     }
 }

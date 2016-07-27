@@ -336,7 +336,7 @@ namespace LogicofCMP
                 listLinksInfo.Add(LI);
                 leftListIndex++;
             }
-            Console.Beep();
+            //Console.Beep();
         }
 
         public void WohaSymetricSynchronize(bool isAsymmetricChecked, bool isIgnoreDateChecked, bool isByContentChecked)
@@ -360,7 +360,7 @@ namespace LogicofCMP
             {
                 ReplaceDeleteforAsimetic(listLinksInfo);
             }
-            Console.Beep();
+            //Console.Beep();
         }
     }
     public partial class Synchronization

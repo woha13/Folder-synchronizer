@@ -50,16 +50,13 @@
             this.checkBoxEqual = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxSingles = new System.Windows.Forms.CheckBox();
+            this.checkBoxDuplicates = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonSyncSlava = new System.Windows.Forms.Button();
-//<<<<<<< HEAD
             this.vScrollBarForAll = new System.Windows.Forms.VScrollBar();
-            this.checkBoxDuplicates = new System.Windows.Forms.CheckBox();
-            this.checkBoxSingles = new System.Windows.Forms.CheckBox();
-//=======
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
-//>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -296,6 +293,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Files display options";
             // 
+            // checkBoxSingles
+            // 
+            this.checkBoxSingles.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxSingles.AutoSize = true;
+            this.checkBoxSingles.Location = new System.Drawing.Point(136, 90);
+            this.checkBoxSingles.MinimumSize = new System.Drawing.Size(73, 23);
+            this.checkBoxSingles.Name = "checkBoxSingles";
+            this.checkBoxSingles.Size = new System.Drawing.Size(73, 23);
+            this.checkBoxSingles.TabIndex = 31;
+            this.checkBoxSingles.Text = "Singles";
+            this.checkBoxSingles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxSingles.UseVisualStyleBackColor = true;
+            this.checkBoxSingles.CheckedChanged += new System.EventHandler(this.checkBoxSingles_CheckedChanged);
+            // 
+            // checkBoxDuplicates
+            // 
+            this.checkBoxDuplicates.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxDuplicates.AutoSize = true;
+            this.checkBoxDuplicates.Location = new System.Drawing.Point(136, 40);
+            this.checkBoxDuplicates.MinimumSize = new System.Drawing.Size(73, 23);
+            this.checkBoxDuplicates.Name = "checkBoxDuplicates";
+            this.checkBoxDuplicates.Size = new System.Drawing.Size(73, 23);
+            this.checkBoxDuplicates.TabIndex = 30;
+            this.checkBoxDuplicates.Text = "Duplicates";
+            this.checkBoxDuplicates.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkBoxDuplicates.UseVisualStyleBackColor = true;
+            this.checkBoxDuplicates.CheckedChanged += new System.EventHandler(this.checkBoxDuplicates_CheckedChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.checkBoxAsymmetric);
@@ -318,6 +343,13 @@
             this.buttonSyncSlava.Text = "Sync Slava";
             this.buttonSyncSlava.UseVisualStyleBackColor = true;
             // 
+            // vScrollBarForAll
+            // 
+            this.vScrollBarForAll.Location = new System.Drawing.Point(0, 0);
+            this.vScrollBarForAll.Name = "vScrollBarForAll";
+            this.vScrollBarForAll.Size = new System.Drawing.Size(17, 80);
+            this.vScrollBarForAll.TabIndex = 0;
+            // 
             // buttonUp
             // 
             this.buttonUp.Location = new System.Drawing.Point(399, 203);
@@ -338,46 +370,14 @@
             this.buttonDown.UseVisualStyleBackColor = true;
             this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
             // 
-            // checkBoxDuplicates
-            // 
-            this.checkBoxDuplicates.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxDuplicates.AutoSize = true;
-            this.checkBoxDuplicates.Location = new System.Drawing.Point(136, 40);
-            this.checkBoxDuplicates.MinimumSize = new System.Drawing.Size(73, 23);
-            this.checkBoxDuplicates.Name = "checkBoxDuplicates";
-            this.checkBoxDuplicates.Size = new System.Drawing.Size(73, 23);
-            this.checkBoxDuplicates.TabIndex = 30;
-            this.checkBoxDuplicates.Text = "Duplicates";
-            this.checkBoxDuplicates.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxDuplicates.UseVisualStyleBackColor = true;
-            this.checkBoxDuplicates.CheckedChanged += new System.EventHandler(this.checkBoxDuplicates_CheckedChanged);
-            // 
-            // checkBoxSingles
-            // 
-            this.checkBoxSingles.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxSingles.AutoSize = true;
-            this.checkBoxSingles.Location = new System.Drawing.Point(136, 90);
-            this.checkBoxSingles.MinimumSize = new System.Drawing.Size(73, 23);
-            this.checkBoxSingles.Name = "checkBoxSingles";
-            this.checkBoxSingles.Size = new System.Drawing.Size(73, 23);
-            this.checkBoxSingles.TabIndex = 31;
-            this.checkBoxSingles.Text = "Singles";
-            this.checkBoxSingles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxSingles.UseVisualStyleBackColor = true;
-            this.checkBoxSingles.CheckedChanged += new System.EventHandler(this.checkBoxSingles_CheckedChanged);
-            // 
             // FolderSynchronizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-//<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(949, 476);
-            this.Controls.Add(this.vScrollBarForAll);
-//=======
             this.ClientSize = new System.Drawing.Size(949, 477);
+            this.Controls.Add(this.vScrollBarForAll);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonUp);
-//>>>>>>> 62e0428df53277136cc2a8f36462a4977a12c87d
             this.Controls.Add(this.buttonSyncSlava);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

@@ -92,7 +92,7 @@ namespace FolderSynchronizer
                     //заповнюю ліве
                     if (WAC.Left != -1)
                     {
-                        listViewLeftListofFiles.Items.Add("#" + WAC.Left + "--" + WAC.PathInFolderLeft + "\\" + WAC.NameLeft);
+                        listViewLeftListofFiles.Items.Add(WAC.PathInFolderLeft + "\\" + WAC.NameLeft);
                     }
                     else
                     {
@@ -101,7 +101,7 @@ namespace FolderSynchronizer
                     //заповнюю праве
                     if (WAC.Right != -1)
                     {
-                        listViewRightListofFiles.Items.Add("#" + WAC.Right + "--" + WAC.PathInFolderRight + "\\" + WAC.NameRight);
+                        listViewRightListofFiles.Items.Add(WAC.PathInFolderRight + "\\" + WAC.NameRight);
                     }
                     else
                     {
@@ -133,7 +133,7 @@ namespace FolderSynchronizer
                             strIcon = @"!=>";
                             break;
                     }
-                    listViewIcons.Items.Add(WAC.Left.ToString() + ' ' + strIcon + ' ' + WAC.Right.ToString());
+                    listViewIcons.Items.Add(strIcon);
                 }
             }
             CurrentPosition = 0;
@@ -210,6 +210,8 @@ namespace FolderSynchronizer
             Synchronization syncFiles = new Synchronization();
             //syncFiles.Synchronize(listsOfFiles, isAsymmetricChecked, isByContentChecked);
             //викликається копіювання файлів - поки закоментив
+            
+            //перевірити всі шляхи і маски на валідність
 
             listViewIcons.Items.Clear();
 
@@ -427,6 +429,11 @@ namespace FolderSynchronizer
                 checkBoxRight.Checked = false;
                 checkBoxLeft.Checked = false;
             }
+        }
+
+        private void textBoxFolderPathLeft_TextChanged(object sender, EventArgs e)
+        {
+            Console.Beep();
         }
     }
 }

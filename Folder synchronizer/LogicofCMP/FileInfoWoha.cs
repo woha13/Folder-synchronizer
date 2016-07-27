@@ -114,7 +114,6 @@ namespace LogicofCMP
             LeftListofFiles.Clear();
             RightListofFiles.Clear();
             listLinksInfo.Clear();
-            //FillSourcePathList(SourcePath, //FolderSynchronizerForm.isWithSubdirsChecked);
             FillPathList(SourcePath, LeftListofFiles, isCheckBoxWithsubdirs, FileMask);
             FillPathList(TargetPath, RightListofFiles, isCheckBoxWithsubdirs, FileMask);
             RemoveStartFolder(SourcePath, LeftListofFiles);
@@ -122,7 +121,6 @@ namespace LogicofCMP
             WohaAsymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
             WohaSymetricSynchronize(isCheckBoxAsymmetric, isCheckBoxIgnoreDate, isCheckBoxByContent);
             WohaFillListBoxesNice(LeftListofFiles, RightListofFiles, listLinksInfo);
-            //якшо треба асіметрік - вичищаємо все, що копіює наліво
         }
         /// <summary>
         /// WohaFillListBoxesNice - заповнює гарненько лисбокси
@@ -375,38 +373,6 @@ namespace LogicofCMP
     }
     public partial class Synchronization
     {
-        public bool CompareBy(FileInfoWoha FIW1, FileInfoWoha FIW2, bool isByContentChecked, 
-                                bool isIgnoreDateChecked)
-        {
-            bool State=false;
-            if ((FIW1.Name == FIW2.Name) && (FIW1.Path == FIW2.Path)&&(FIW1.DateModification == FIW2.DateModification))
-            {
-                State = true;
-            }
 
-            if (isIgnoreDateChecked)
-            {
-                if((FIW1.Name == FIW2.Name) && (FIW1.Path == FIW2.Path))
-                {
-                    State = true;
-                }
-            }
-
-            if ((isByContentChecked) && (State))
-            {
-                if (FIW1.Size == FIW2.Size)
-                {
-                    State = true;
-                }
-                else
-                {
-                    State = false;
-                }
-            }
-
-            return State;
-        }
     }
 }
-//////////////////////
-////////////////////////

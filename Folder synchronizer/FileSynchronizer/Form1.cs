@@ -239,14 +239,15 @@ namespace FolderSynchronizer
             
             //перевірити всі шляхи і маски на валідність
 
-            listViewIcons.Items.Clear();
+            //listViewIcons.Items.Clear();
 
-            fillLinksList();
+            //fillLinksList();
 
-            FolderSynchronizerForm_Load(this, e);
+            //FolderSynchronizerForm_Load(this, e);
 
 
             //26.17.16 slava - applying disply options if any
+            FilllistsOfFiles(listsOfFiles);
             ClearListViews();
             //FilllistsOfFiles(listsOfFiles);
             listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
@@ -303,18 +304,6 @@ namespace FolderSynchronizer
         private void Down(object sender, KeyEventArgs e)
         {
             listViewRightListofFiles.TopItem = listViewLeftListofFiles.TopItem;
-        }
-
-        
-        private void vScrollBar1_ValueChanged(object sender, EventArgs e)
-        {
-            //listViewLeftListofFiles.AutoScrollOffset = vScrollBarForAll.AutoScrollOffset;
-            //listViewLeftListofFiles.BindingContext = vScrollBarForAll.BindingContext;
-            //vScrollBarForAll.Padding
-            //vScrollBarForAll.Value = 100;
-            listViewLeftListofFiles.TopItem = listViewLeftListofFiles.Items[5];
-            listViewIcons.TopItem = listViewIcons.Items[5];
-            //listView.TopItem = listView.Items[idx]
         }
 
         private void Moved(object sender, EventArgs e)

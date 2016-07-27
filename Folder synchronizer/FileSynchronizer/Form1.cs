@@ -445,9 +445,11 @@ namespace FolderSynchronizer
             if (Directory.Exists(textBoxFolderPathLeft.Text))
             {
                 textBoxFolderPathLeft.BackColor = Color.LightGreen;
+                buttonSyncWoha.Enabled = true;
             } else
             {
                 textBoxFolderPathLeft.BackColor = Color.Red;
+                buttonSyncWoha.Enabled = false;
             }
         }
 
@@ -456,10 +458,12 @@ namespace FolderSynchronizer
             if (Directory.Exists(textBoxFolderPathRight.Text))
             {
                 textBoxFolderPathRight.BackColor = Color.LightGreen;
+                buttonSyncWoha.Enabled = true;
             }
             else
             {
                 textBoxFolderPathRight.BackColor = Color.Red;
+                buttonSyncWoha.Enabled = false;
             }
         }
     }

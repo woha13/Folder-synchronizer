@@ -237,7 +237,7 @@ namespace LogicofCMP
             }
             catch (Exception e)
             {
-                ShowExceptionMessage(e.ToString(), "Woha Error opening file");
+                ShowExceptionMessage("Чи то шлях кривий, чи то маска крива - перевір і жмакай знову", "Woha Error opening file");
             }
         }
 

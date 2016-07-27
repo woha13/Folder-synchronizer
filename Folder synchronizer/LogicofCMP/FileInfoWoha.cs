@@ -211,8 +211,11 @@ namespace LogicofCMP
         {
             // Process the list of files found in the directory.
             DirectoryInfo di = new DirectoryInfo(SourcePath);
+            try
+            {
             foreach (var fi in di.GetFiles(Mask))
             {
+
                 FileInfoWoha fileData = new FileInfoWoha();
                 fileData.Name = fi.Name;
                 fileData.PathInFolder = fi.Directory.ToString();
@@ -222,12 +225,19 @@ namespace LogicofCMP
                 fileData.DateCreation = fi.CreationTime;
                 ListofFiles.Add(fileData);
             }
+
+
             // Recurse into subdirectories of this directory.
             if (withSubDirs)
             {
                 string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
                 foreach (string subdirectory in subdirectoryEntries)
                     FillPathList(subdirectory, ListofFiles, withSubDirs, Mask);
+            }
+        }
+             catch (System.ArgumentException e)
+            {
+                ShowExceptionMessage(e.ToString(), "Woha Error opening file");
             }
         }
 

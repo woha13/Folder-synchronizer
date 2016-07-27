@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 //using LogicofCMP;
 
 namespace FolderSynchronizer
@@ -53,7 +54,7 @@ namespace FolderSynchronizer
             {
                 FolderPathLeftDialog.SelectedPath = textBoxFolderPathLeft.Text;
             }
-
+            
             
             if (FolderPathLeftDialog.ShowDialog() == DialogResult.OK) //checking if dialog window closed by clicking OK button
             {
@@ -439,6 +440,27 @@ namespace FolderSynchronizer
             }
         }
 
+        private void textBoxFolderPathLeft_TextChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(textBoxFolderPathLeft.Text))
+            {
+                textBoxFolderPathLeft.BackColor = Color.LightGreen;
+            } else
+            {
+                textBoxFolderPathLeft.BackColor = Color.Red;
+            }
+        }
 
+        private void textBoxFolderPathRight_TextChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(textBoxFolderPathRight.Text))
+            {
+                textBoxFolderPathRight.BackColor = Color.LightGreen;
+            }
+            else
+            {
+                textBoxFolderPathRight.BackColor = Color.Red;
+            }
+        }
     }
 }

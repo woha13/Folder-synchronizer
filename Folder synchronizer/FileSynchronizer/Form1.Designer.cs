@@ -67,6 +67,7 @@
             this.textBoxFolderPathLeft.Name = "textBoxFolderPathLeft";
             this.textBoxFolderPathLeft.Size = new System.Drawing.Size(381, 20);
             this.textBoxFolderPathLeft.TabIndex = 0;
+            this.textBoxFolderPathLeft.TextChanged += new System.EventHandler(this.textBoxFolderPathLeft_TextChanged);
             // 
             // buttonFolderPathLeft
             // 
@@ -84,6 +85,7 @@
             this.textBoxFolderPathRight.Name = "textBoxFolderPathRight";
             this.textBoxFolderPathRight.Size = new System.Drawing.Size(381, 20);
             this.textBoxFolderPathRight.TabIndex = 2;
+            this.textBoxFolderPathRight.TextChanged += new System.EventHandler(this.textBoxFolderPathRight_TextChanged);
             // 
             // buttonFolderPathRight
             // 

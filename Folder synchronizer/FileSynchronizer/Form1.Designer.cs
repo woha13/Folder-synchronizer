@@ -40,7 +40,6 @@
             this.checkBoxWithsubdirs = new System.Windows.Forms.CheckBox();
             this.checkBoxByContent = new System.Windows.Forms.CheckBox();
             this.checkBoxIgnoreDate = new System.Windows.Forms.CheckBox();
-            this.buttonCompare = new System.Windows.Forms.Button();
             this.buttonSyncWoha = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.textBoxFileMask = new System.Windows.Forms.TextBox();
@@ -53,8 +52,6 @@
             this.checkBoxSingles = new System.Windows.Forms.CheckBox();
             this.checkBoxDuplicates = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonSyncSlava = new System.Windows.Forms.Button();
-            this.vScrollBarForAll = new System.Windows.Forms.VScrollBar();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -103,7 +100,7 @@
             this.listViewLeftListofFiles.GridLines = true;
             this.listViewLeftListofFiles.Location = new System.Drawing.Point(12, 202);
             this.listViewLeftListofFiles.Name = "listViewLeftListofFiles";
-            this.listViewLeftListofFiles.Size = new System.Drawing.Size(381, 266);
+            this.listViewLeftListofFiles.Size = new System.Drawing.Size(393, 266);
             this.listViewLeftListofFiles.TabIndex = 4;
             this.listViewLeftListofFiles.UseCompatibleStateImageBehavior = false;
             this.listViewLeftListofFiles.View = System.Windows.Forms.View.List;
@@ -112,9 +109,9 @@
             // 
             this.listViewRightListofFiles.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.listViewRightListofFiles.GridLines = true;
-            this.listViewRightListofFiles.Location = new System.Drawing.Point(554, 203);
+            this.listViewRightListofFiles.Location = new System.Drawing.Point(515, 203);
             this.listViewRightListofFiles.Name = "listViewRightListofFiles";
-            this.listViewRightListofFiles.Size = new System.Drawing.Size(381, 266);
+            this.listViewRightListofFiles.Size = new System.Drawing.Size(420, 266);
             this.listViewRightListofFiles.TabIndex = 5;
             this.listViewRightListofFiles.UseCompatibleStateImageBehavior = false;
             this.listViewRightListofFiles.View = System.Windows.Forms.View.List;
@@ -123,9 +120,9 @@
             // 
             this.listViewIcons.Alignment = System.Windows.Forms.ListViewAlignment.Left;
             this.listViewIcons.GridLines = true;
-            this.listViewIcons.Location = new System.Drawing.Point(436, 202);
+            this.listViewIcons.Location = new System.Drawing.Point(454, 202);
             this.listViewIcons.Name = "listViewIcons";
-            this.listViewIcons.Size = new System.Drawing.Size(73, 266);
+            this.listViewIcons.Size = new System.Drawing.Size(48, 266);
             this.listViewIcons.TabIndex = 6;
             this.listViewIcons.UseCompatibleStateImageBehavior = false;
             this.listViewIcons.View = System.Windows.Forms.View.List;
@@ -173,22 +170,13 @@
             this.checkBoxIgnoreDate.Text = "Ignore date";
             this.checkBoxIgnoreDate.UseVisualStyleBackColor = true;
             // 
-            // buttonCompare
-            // 
-            this.buttonCompare.Location = new System.Drawing.Point(436, 54);
-            this.buttonCompare.Name = "buttonCompare";
-            this.buttonCompare.Size = new System.Drawing.Size(73, 23);
-            this.buttonCompare.TabIndex = 11;
-            this.buttonCompare.Text = "Compare";
-            this.buttonCompare.UseVisualStyleBackColor = true;
-            // 
             // buttonSyncWoha
             // 
-            this.buttonSyncWoha.Location = new System.Drawing.Point(399, 83);
+            this.buttonSyncWoha.Location = new System.Drawing.Point(436, 48);
             this.buttonSyncWoha.Name = "buttonSyncWoha";
             this.buttonSyncWoha.Size = new System.Drawing.Size(73, 23);
             this.buttonSyncWoha.TabIndex = 12;
-            this.buttonSyncWoha.Text = "Sync Woha";
+            this.buttonSyncWoha.Text = "Compare";
             this.buttonSyncWoha.UseVisualStyleBackColor = true;
             this.buttonSyncWoha.Click += new System.EventHandler(this.buttonSyncronize_Click);
             // 
@@ -280,11 +268,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(212, 106);
+            this.button1.Location = new System.Drawing.Point(436, 80);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 36);
+            this.button1.Size = new System.Drawing.Size(73, 23);
             this.button1.TabIndex = 25;
-            this.button1.Text = "ConfimationAndFileHandler";
+            this.button1.Text = "Syncronize";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -348,25 +336,9 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Synchronize options";
             // 
-            // buttonSyncSlava
-            // 
-            this.buttonSyncSlava.Location = new System.Drawing.Point(475, 83);
-            this.buttonSyncSlava.Name = "buttonSyncSlava";
-            this.buttonSyncSlava.Size = new System.Drawing.Size(73, 23);
-            this.buttonSyncSlava.TabIndex = 28;
-            this.buttonSyncSlava.Text = "Sync Slava";
-            this.buttonSyncSlava.UseVisualStyleBackColor = true;
-            // 
-            // vScrollBarForAll
-            // 
-            this.vScrollBarForAll.Location = new System.Drawing.Point(0, 0);
-            this.vScrollBarForAll.Name = "vScrollBarForAll";
-            this.vScrollBarForAll.Size = new System.Drawing.Size(17, 80);
-            this.vScrollBarForAll.TabIndex = 0;
-            // 
             // buttonUp
             // 
-            this.buttonUp.Location = new System.Drawing.Point(399, 203);
+            this.buttonUp.Location = new System.Drawing.Point(413, 201);
             this.buttonUp.Name = "buttonUp";
             this.buttonUp.Size = new System.Drawing.Size(31, 23);
             this.buttonUp.TabIndex = 29;
@@ -376,7 +348,7 @@
             // 
             // buttonDown
             // 
-            this.buttonDown.Location = new System.Drawing.Point(399, 442);
+            this.buttonDown.Location = new System.Drawing.Point(413, 446);
             this.buttonDown.Name = "buttonDown";
             this.buttonDown.Size = new System.Drawing.Size(31, 23);
             this.buttonDown.TabIndex = 30;
@@ -389,17 +361,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 476);
-            this.Controls.Add(this.vScrollBarForAll);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonUp);
-            this.Controls.Add(this.buttonSyncSlava);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxFileMask);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSyncWoha);
-            this.Controls.Add(this.buttonCompare);
             this.Controls.Add(this.listViewIcons);
             this.Controls.Add(this.listViewRightListofFiles);
             this.Controls.Add(this.listViewLeftListofFiles);
@@ -434,7 +403,6 @@
         private System.Windows.Forms.CheckBox checkBoxWithsubdirs;
         private System.Windows.Forms.CheckBox checkBoxByContent;
         private System.Windows.Forms.CheckBox checkBoxIgnoreDate;
-        private System.Windows.Forms.Button buttonCompare;
         private System.Windows.Forms.Button buttonSyncWoha;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.TextBox textBoxFileMask;
@@ -445,9 +413,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button buttonSyncSlava;
-//<<<<<<< HEAD
-        private System.Windows.Forms.VScrollBar vScrollBarForAll;
         private System.Windows.Forms.CheckBox checkBoxSingles;
         private System.Windows.Forms.CheckBox checkBoxDuplicates;
 //=======

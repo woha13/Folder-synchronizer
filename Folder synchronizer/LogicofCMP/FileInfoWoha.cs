@@ -98,7 +98,7 @@ namespace LogicofCMP
         public List<FileInfoWoha> RightListofFiles;
         public List<LinksInfo> listLinksInfo;
         public List<WohaAllConnected> listWohaAllConnected;
-        public string FileMask;
+        public string FileMask; 
         public ListsofFiles()
         {
             LeftListofFiles = new List<FileInfoWoha>(); //лівий
@@ -237,7 +237,7 @@ namespace LogicofCMP
             }
             catch (Exception e)
             {
-                ShowExceptionMessage("Чи то шлях кривий, чи то маска крива - перевір і жмакай знову", "Woha Error opening file");
+                ShowExceptionMessage("Чи то шлях кривий, чи то маска крива - перевір і жмакай знову"+e.Message, "Woha Error opening file");
             }
         }
 

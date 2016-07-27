@@ -74,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
@@ -94,6 +95,18 @@
       <Project>{8105C5B2-99C9-474D-BF87-0BA882B53B6F}</Project>
       <Name>LogicofCMP</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eqo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

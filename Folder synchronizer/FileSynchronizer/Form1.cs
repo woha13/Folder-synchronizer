@@ -1,4 +1,5 @@
-﻿using LogicofCMP;
+﻿using FileSynchronizer.Properties;
+using LogicofCMP;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,8 +33,8 @@ namespace FolderSynchronizer
 
            
         }
-
-        //public bool isAsymmetricChecked = false; //variable to send Asymmetric checkbox state for Syncronize method
+	public ImageList ImageList1 = new ImageList();
+        public bool isAsymmetricChecked = false; //variable to send Asymmetric checkbox state for Syncronize method
         public bool isByContentChecked = false; //variable to send ByContent checkbox state for Syncronize method
         public bool isIgnoreDateChecked = false;
         public bool isWithSubdirsChecked = false;
@@ -42,7 +43,7 @@ namespace FolderSynchronizer
         FolderBrowserDialog FolderPathLeftDialog = new FolderBrowserDialog(); //creating dialog window instance for left file path
         FolderBrowserDialog FolderPathRightDialog = new FolderBrowserDialog(); //creating dialog window instance for right file path
         ListsofFiles listsOfFiles = new ListsofFiles();
-
+	ImageList imageList = new ImageList();
 
         private void buttonFolderPathLeft_Click(object sender, EventArgs e)
         {
@@ -110,23 +111,37 @@ namespace FolderSynchronizer
                         listViewRightListofFiles.Items.Add("");
                     }
                     //заповнюю середнє
+		    listViewIcons.SmallImageList = imageList;
+                    imageList.Images.Add(Resources.right);
+                    imageList.Images.Add(Resources.left);
+                    imageList.Images.Add(Resources.eqo);
+                    imageList.Images.Add(Resources.delete);
+                    //imageList.Images.Add(Image.FromFile("d:\\slava\\left.ico"));
+                    //imageList.Images.Add(Image.FromFile("d:\\slava\\eqo.ico"));
+                    //imageList.Images.Add(Image.FromFile("d:\\slava\\delete.ico"));
                     string strIcon = "error";
+                    int IconType = -1;
+                    //string strIcon = "error";
                     switch (WAC.Relations)
                     {
                         case (LinksInfo.RightIcon):
                             strIcon = @"=>";
+                            IconType = 0;
                             break;
                         case (LinksInfo.LeftIcon):
                             strIcon = @"<=";
+                            IconType = 1;
                             break;
                         case (LinksInfo.EqualIcon):
                             strIcon = @"==";
+                            IconType = 2;
                             break;
                         case (LinksInfo.NotEqualIcon):
                             strIcon = @"!=";
                             break;
                         case (LinksInfo.DeleteIcon):
                             strIcon = @"xx";
+                            IconType = 3;
                             break;
                         case (LinksInfo.NotEqualToLeft):
                             strIcon = @"!=<";
@@ -135,10 +150,15 @@ namespace FolderSynchronizer
                             strIcon = @"!=>";
                             break;
                     }
-                    listViewIcons.Items.Add(strIcon);
+                    listViewIcons.Items.Add(strIcon, IconType);
                 }
             }
             CurrentPosition = 0;
+	    for (int ii = 0; ii < listViewIcons.Items.Count; ii++)
+            {
+                //listViewIcons.Items[ii].ImageIndex=1;
+                listViewIcons.Items[ii].Text = "";
+            }
         }
         private void FolderSynchronizerForm_Load(object sender, EventArgs e)
         {
@@ -162,6 +182,10 @@ namespace FolderSynchronizer
             ColumnHeader h2 = new ColumnHeader();
             h2.Width = listViewIcons.ClientSize.Width - SystemInformation.VerticalScrollBarWidth;
             listViewIcons.Columns.Add(h2);
+            listViewIcons.Enabled = false;
+            listViewLeftListofFiles.Enabled = false;
+            listViewRightListofFiles.Enabled = false;
+
             //знайшов кінець
 
             //створююється листи файлів

@@ -212,6 +212,8 @@
             // 
             this.checkBoxRight.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxRight.AutoSize = true;
+            this.checkBoxRight.Checked = true;
+            this.checkBoxRight.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxRight.Location = new System.Drawing.Point(6, 56);
             this.checkBoxRight.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxRight.MinimumSize = new System.Drawing.Size(40, 40);
@@ -227,6 +229,8 @@
             // 
             this.checkBoxLeft.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxLeft.AutoSize = true;
+            this.checkBoxLeft.Checked = true;
+            this.checkBoxLeft.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxLeft.Location = new System.Drawing.Point(84, 56);
             this.checkBoxLeft.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxLeft.MinimumSize = new System.Drawing.Size(40, 40);
@@ -242,6 +246,8 @@
             // 
             this.checkBoxNotEqual.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxNotEqual.AutoSize = true;
+            this.checkBoxNotEqual.Checked = true;
+            this.checkBoxNotEqual.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxNotEqual.Location = new System.Drawing.Point(45, 94);
             this.checkBoxNotEqual.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxNotEqual.MinimumSize = new System.Drawing.Size(40, 40);
@@ -257,6 +263,8 @@
             // 
             this.checkBoxEqual.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxEqual.AutoSize = true;
+            this.checkBoxEqual.Checked = true;
+            this.checkBoxEqual.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEqual.Location = new System.Drawing.Point(45, 18);
             this.checkBoxEqual.MaximumSize = new System.Drawing.Size(40, 40);
             this.checkBoxEqual.MinimumSize = new System.Drawing.Size(40, 40);
@@ -297,6 +305,8 @@
             // 
             this.checkBoxSingles.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxSingles.AutoSize = true;
+            this.checkBoxSingles.Checked = true;
+            this.checkBoxSingles.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxSingles.Location = new System.Drawing.Point(136, 90);
             this.checkBoxSingles.MinimumSize = new System.Drawing.Size(73, 23);
             this.checkBoxSingles.Name = "checkBoxSingles";
@@ -311,6 +321,8 @@
             // 
             this.checkBoxDuplicates.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxDuplicates.AutoSize = true;
+            this.checkBoxDuplicates.Checked = true;
+            this.checkBoxDuplicates.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDuplicates.Location = new System.Drawing.Point(136, 40);
             this.checkBoxDuplicates.MinimumSize = new System.Drawing.Size(73, 23);
             this.checkBoxDuplicates.Name = "checkBoxDuplicates";
@@ -374,7 +386,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 477);
+            this.ClientSize = new System.Drawing.Size(949, 476);
             this.Controls.Add(this.vScrollBarForAll);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonUp);

@@ -28,9 +28,11 @@ namespace FolderSynchronizer
             checkBoxByContent.Checked = false; //ByContent checkbox default state
             checkBoxIgnoreDate.Checked = false;
             checkBoxWithsubdirs.Checked = false;
+
+           
         }
 
-        public bool isAsymmetricChecked = false; //variable to send Asymmetric checkbox state for Syncronize method
+        //public bool isAsymmetricChecked = false; //variable to send Asymmetric checkbox state for Syncronize method
         public bool isByContentChecked = false; //variable to send ByContent checkbox state for Syncronize method
         public bool isIgnoreDateChecked = false;
         public bool isWithSubdirsChecked = false;
@@ -40,7 +42,6 @@ namespace FolderSynchronizer
         FolderBrowserDialog FolderPathRightDialog = new FolderBrowserDialog(); //creating dialog window instance for right file path
         ListsofFiles listsOfFiles = new ListsofFiles();
 
-        
 
         private void buttonFolderPathLeft_Click(object sender, EventArgs e)
         {
@@ -177,13 +178,13 @@ namespace FolderSynchronizer
         
         private void checkBoxAsymmetric_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxAsymmetric.Checked)
-            {
-                isAsymmetricChecked = true;
-            } else
-            {
-                isAsymmetricChecked = false;
-            }
+            //if (checkBoxAsymmetric.Checked)
+            //{
+            //    isAsymmetricChecked = true;
+            //} else
+            //{
+            //    isAsymmetricChecked = false;
+            //}
         }
 
         private void checkBoxByContent_CheckedChanged(object sender, EventArgs e)
@@ -221,11 +222,10 @@ namespace FolderSynchronizer
 
 
             //26.17.16 slava - applying disply options if any
-            listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
             ClearListViews();
-            FilllistsOfFiles(listsOfFiles);
+            //FilllistsOfFiles(listsOfFiles);
+            listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
             FilllistViews();
-
         }
 
 
@@ -234,17 +234,22 @@ namespace FolderSynchronizer
         private void button1_Click(object sender, EventArgs e)
         {
 
-            ConfirmationForm confirmation = new ConfirmationForm(listsOfFiles, textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text);
+            ConfirmationForm confirmation = new ConfirmationForm(listsOfFiles, textBoxFolderPathLeft.Text, textBoxFolderPathRight.Text, 
+                                                                checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
 
             confirmation.ShowConfirmation();
 
+            FolderSynchronizerForm_Load(this, e);
+            ClearListViews();
+            listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+            FilllistViews();
 
             //Synchronization sync = new Synchronization();
 
             //sync.FileHandler(listsofFiles);
 
 
-            FolderSynchronizerForm_Load(this, e);
+            //FolderSynchronizerForm_Load(this, e);
 
 
             //Synchronization sync = new Synchronization();
@@ -275,28 +280,7 @@ namespace FolderSynchronizer
             listViewRightListofFiles.TopItem = listViewLeftListofFiles.TopItem;
         }
 
-        private void checkBoxNotEqual_CheckedChanged(object sender, EventArgs e)
-        {
-            //fillLinksList();
-            //знайти, що перезаповнить листи по новій
-            if (checkBoxNotEqual.Checked)
-            {
-                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
-                ClearListViews();
-                FilllistViews();
-            }
-            else
-            {
-                fillLinksList();
-                listsOfFiles.WohaFillListBoxesNice(listsOfFiles.LeftListofFiles,
-                                                    listsOfFiles.RightListofFiles,
-                                                    listsOfFiles.listLinksInfo);
-                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
-                ClearListViews();
-                FilllistViews();
-            }
-        }
-
+        
         private void vScrollBar1_ValueChanged(object sender, EventArgs e)
         {
             //listViewLeftListofFiles.AutoScrollOffset = vScrollBarForAll.AutoScrollOffset;
@@ -314,7 +298,7 @@ namespace FolderSynchronizer
             listViewIcons.TopItem = listViewIcons.Items[5];
         }
 
-
+        // 27.07.16 slava - implement show buttons invert logic
         private void buttonDown_Click(object sender, EventArgs e)
         {
             if (CurrentPosition <= listViewIcons.Items.Count-listViewIcons.ClientSize.Height/(listViewIcons.Font.Height+3))
@@ -339,7 +323,29 @@ namespace FolderSynchronizer
 
         private void checkBoxRight_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxRight.Checked)
+            if (checkBoxRight.Checked == false)
+            {
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+               
+            }
+            else
+            {
+                fillLinksList();
+                listsOfFiles.WohaFillListBoxesNice(listsOfFiles.LeftListofFiles,
+                                                    listsOfFiles.RightListofFiles,
+                                                    listsOfFiles.listLinksInfo);
+                listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
+                ClearListViews();
+                FilllistViews();
+                
+            }
+        }
+
+        private void checkBoxLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxLeft.Checked == false)
             {
                 listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
                 ClearListViews();
@@ -359,7 +365,7 @@ namespace FolderSynchronizer
 
         private void checkBoxEqual_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxEqual.Checked)
+            if (checkBoxEqual.Checked == false)
             {
                 listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
                 ClearListViews();
@@ -377,9 +383,11 @@ namespace FolderSynchronizer
             }
         }
 
-        private void checkBoxLeft_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxNotEqual_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxLeft.Checked)
+            //fillLinksList();
+            //знайти, що перезаповнить листи по новій
+            if (checkBoxNotEqual.Checked == false)
             {
                 listsOfFiles.deleteAllDelete(checkBoxRight.Checked, checkBoxLeft.Checked, checkBoxEqual.Checked, checkBoxNotEqual.Checked);
                 ClearListViews();
@@ -396,7 +404,7 @@ namespace FolderSynchronizer
                 FilllistViews();
             }
         }
-        
+
         //26.07.16 slava - added clearlistviewws method
         private void ClearListViews()
         {
@@ -430,5 +438,7 @@ namespace FolderSynchronizer
                 checkBoxLeft.Checked = false;
             }
         }
+
+
     }
 }

@@ -10,3 +10,15 @@ D:\prj\Folder synchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.Propertie
 D:\prj\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.csproj.GenerateResource.Cache
 D:\prj\Folder synchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.exe
 D:\prj\Folder synchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.pdb
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\bin\Debug\FileSynchronizer.exe.config
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.exe
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.pdb
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\bin\Debug\FileSynchronizer.exe
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\bin\Debug\FileSynchronizer.pdb
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\bin\Debug\LogicofCMP.dll
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\bin\Debug\LogicofCMP.pdb
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.csprojResolveAssemblyReference.cache
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.ConfirmationForm.resources
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.FolderSynchronizerForm.resources
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FileSynchronizer.Properties.Resources.resources
+\\vyacheslavch\d$\!   Slava\OneDrive\C# cource\Folder synchronizer\Folder synchronizer\Folder synchronizer\FileSynchronizer\obj\Debug\FolderSynchronizer.csproj.GenerateResource.Cache

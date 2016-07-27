@@ -213,29 +213,29 @@ namespace LogicofCMP
             DirectoryInfo di = new DirectoryInfo(SourcePath);
             try
             {
-            foreach (var fi in di.GetFiles(Mask))
-            {
+                foreach (var fi in di.GetFiles(Mask))
+                {
 
-                FileInfoWoha fileData = new FileInfoWoha();
-                fileData.Name = fi.Name;
-                fileData.PathInFolder = fi.Directory.ToString();
-                fileData.Path = SourcePath;
-                fileData.Size = fi.Length;
-                fileData.DateModification = fi.LastWriteTime;
-                fileData.DateCreation = fi.CreationTime;
-                ListofFiles.Add(fileData);
+                    FileInfoWoha fileData = new FileInfoWoha();
+                    fileData.Name = fi.Name;
+                    fileData.PathInFolder = fi.Directory.ToString();
+                    fileData.Path = SourcePath;
+                    fileData.Size = fi.Length;
+                    fileData.DateModification = fi.LastWriteTime;
+                    fileData.DateCreation = fi.CreationTime;
+                    ListofFiles.Add(fileData);
+                }
+
+
+                // Recurse into subdirectories of this directory.
+                if (withSubDirs)
+                {
+                    string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
+                    foreach (string subdirectory in subdirectoryEntries)
+                        FillPathList(subdirectory, ListofFiles, withSubDirs, Mask);
+                }
             }
-
-
-            // Recurse into subdirectories of this directory.
-            if (withSubDirs)
-            {
-                string[] subdirectoryEntries = Directory.GetDirectories(SourcePath);
-                foreach (string subdirectory in subdirectoryEntries)
-                    FillPathList(subdirectory, ListofFiles, withSubDirs, Mask);
-            }
-        }
-             catch (System.ArgumentException e)
+            catch (Exception e)
             {
                 ShowExceptionMessage(e.ToString(), "Woha Error opening file");
             }

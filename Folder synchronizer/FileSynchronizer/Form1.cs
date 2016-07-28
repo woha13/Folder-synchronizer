@@ -20,18 +20,23 @@ namespace FolderSynchronizer
         {
             InitializeComponent();
 
-            FolderPathLeftDialog.SelectedPath = @"d:\Slava\1";
-            FolderPathRightDialog.SelectedPath = @"d:\Slava\2";
-            textBoxFolderPathLeft.Text = @"d:\Slava\1";
-            textBoxFolderPathRight.Text = @"d:\Slava\2";
+            FolderPathLeftDialog.SelectedPath = @"C:\";
+            FolderPathRightDialog.SelectedPath = @"C:\";
+            textBoxFolderPathLeft.Text = @"C:\";
+            textBoxFolderPathRight.Text = @"C:\";
+
+            //FolderPathLeftDialog.SelectedPath = @"d:\Slava\1";
+            //FolderPathRightDialog.SelectedPath = @"d:\Slava\2";
+            //textBoxFolderPathLeft.Text = @"d:\Slava\1";
+            //textBoxFolderPathRight.Text = @"d:\Slava\2";
             textBoxFileMask.Text = @"*.*";
 
             checkBoxAsymmetric.Checked = false; //Asymmetric checkbox default state
             checkBoxByContent.Checked = false; //ByContent checkbox default state
-            checkBoxIgnoreDate.Checked = false;
-            checkBoxWithsubdirs.Checked = false;
+            checkBoxIgnoreDate.Checked = false; //IgnoreDate checkbox default state
+            checkBoxWithsubdirs.Checked = false; //WithSubdirs checkbox default state
 
-           
+
         }
 	public ImageList ImageList1 = new ImageList();
        

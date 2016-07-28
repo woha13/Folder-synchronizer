@@ -157,6 +157,12 @@ namespace FolderSynchronizer
                         // copying left file to right folder
                         try
                         {
+                            //checking if subfolder exists if no -> cretaing subfolder
+                            if (Directory.Exists(folderPathRight+pathInFolderLeft) == false)
+                            {
+                                Directory.CreateDirectory(folderPathRight + pathInFolderLeft);
+                            }
+
                             File.Copy(sourceFile, destFile, true);
                         }
                         catch (IOException e)
@@ -176,6 +182,11 @@ namespace FolderSynchronizer
                         // copying right file to left folder
                         try
                         {
+                            //checking if subfolder exists if no -> cretaing subfolder
+                            if (Directory.Exists(folderPathLeft + folderPathRight) == false)
+                            {
+                                Directory.CreateDirectory(folderPathLeft + patInFolderRight);
+                            }
                             File.Copy(sourceFile, destFile, true);
                         }
                         catch (IOException e)

@@ -27,8 +27,6 @@ namespace FolderSynchronizer
             this.isLeftChecked = isLeftChecked;
             this.isEqualChecked = isEqualChecked;
             this.isNotEqualChecked = isNotEqualChecked;
-
-
         }
 
         ListsofFiles listsOfFiles;
@@ -38,17 +36,16 @@ namespace FolderSynchronizer
         bool isLeftChecked;
         bool isEqualChecked;
         bool isNotEqualChecked;
-
-
+        
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             ActiveForm.Close();
         }
 
-        //24.07 22.30 slava - implement confirmation form with all relevant information and functions
+        //method for showing confirmation form with all relevant information and functions
         public void ShowConfirmation ()
         {
-            //25.07 1.33 slava - changed getting folder paths 
+           
             textBoxLeftToRight.Text = folderPathLeft;
             textBoxRightToLeft.Text = folderPathRight;
 
@@ -64,35 +61,32 @@ namespace FolderSynchronizer
             //gathering info about files
             foreach (LinksInfo LI in listsOfFiles.listLinksInfo)
             {
-                if (isRightChecked)
+                if (isRightChecked) //check for ShowOptions
                 {
-                    if (LI.Relations == 1 || LI.Relations == 6)
+                    if (LI.Relations == 1 || LI.Relations == 6) //check for file relations
                     {
                         LeftToRightAmountOfFiles++;
                         LeftToRightSizeOfFiles = LeftToRightSizeOfFiles + listsOfFiles.LeftListofFiles.ElementAt(LI.Left).Size;
                     }
                 }
                
-                if (isLeftChecked)
+                if (isLeftChecked) //check for ShowOptions
                 {
-                    if (LI.Relations == 2 || LI.Relations == 7)
+                    if (LI.Relations == 2 || LI.Relations == 7) //check for file relations
                     {
                         RightToLeftAmountOfFiles++;
                         RightToLeftSizeOfFiles = RightToLeftSizeOfFiles + listsOfFiles.RightListofFiles.ElementAt(LI.Right).Size;
-
                     }
                 }
                 
-                if(isNotEqualChecked)
+                if(isNotEqualChecked) //check for ShowOptions
                 {
-                    if (LI.Relations == 5)
+                    if (LI.Relations == 5) //check for file relations
                     {
                         DeleteFilesAmountOfFiles++;
                         DeleteFilesSizeOfFiles = DeleteFilesSizeOfFiles + listsOfFiles.RightListofFiles.ElementAt(LI.Right).Size;
                     }
                 }
-
-                
             } 
 
             // activating controls and showing info if needed
@@ -118,52 +112,28 @@ namespace FolderSynchronizer
             }
             
             ShowDialog();
-
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            
-            // 25.07.16 16.33 slava - confirmation checkbox logic implementation
-            //sync.FileHandler(listsOfFiles, folderPathLeft, folderPathRight, checkBoxLeftToRight.Checked, checkBoxRightToLeft.Checked, checkBoxRightDeleteFiles.Checked);
+            // calling method for handling files
             FileHandler(listsOfFiles, folderPathLeft, folderPathRight); 
-            Close();
-            
+            Close();    
         }
-
-        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
-        private void checkBoxLeftToRight_CheckedChanged(object sender, EventArgs e)
+        
+        public void FileHandler(ListsofFiles Lists, string folderPathLeft, string folderPathRight) 
         {
-            
-        }
-
-        // 25.07.16 16.33 slava - confirmation checkbox logic implementation
-        private void checkBoxRightToLeft_CheckedChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        //25.07.16 16.33 slava - confirmation checkbox logic implementation
-        private void checkBoxRightDeleteFiles_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        public void FileHandler(ListsofFiles Lists, string folderPathLeft, string folderPathRight) //, bool checkboxLeftToRightIsChecked, bool checkboxRightToLeftIsChecked, bool checkboxDeleteFromRightIsChecked
-        {
-
-            Synchronization sync = new Synchronization();
             FileInfoWoha FIWLeft = null;
             FileInfoWoha FIWRight = null;
 
-            //25.07.16 13.38 slava - if one of folder is empty by default subfolderas are empty but not null
+            //if one of folder is empty by default subfolderas are empty but not null
             string pathInFolderLeft = "";
             string patInFolderRight = "";
 
             foreach (LinksInfo LI in Lists.listLinksInfo)
             {
 
-                //25.07.16 13.38 slava - if some list is not empty or Left or Right list does't containf -1 than we create a list instance and getting puth in folder
+                //if some list is not empty or Left or Right list does't contain -1 than we asighn a list instance and getting puth in folder
                 if (Lists.LeftListofFiles.Count != 0 && LI.Left != -1 )
                 {
                     FIWLeft = Lists.LeftListofFiles.ElementAt(LI.Left); // getting left file info
@@ -175,16 +145,12 @@ namespace FolderSynchronizer
                     FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
                     patInFolderRight = Lists.RightListofFiles.ElementAt(LI.Right).PathInFolder;
                 }
-
-
+                
                 //if file from left folder doesn't exist in right folder
-
-                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
-                if (checkBoxLeftToRight.Checked) //checkboxLeftToRightIsChecked
+                if (checkBoxLeftToRight.Checked) 
                 {
                     if (LI.Relations == 1 || LI.Relations == 6)
                     {
-
                         string sourceFile = Path.Combine(folderPathLeft + pathInFolderLeft, FIWLeft.Name);
                         string destFile = Path.Combine(folderPathRight + pathInFolderLeft, FIWLeft.Name);
 
@@ -195,22 +161,15 @@ namespace FolderSynchronizer
                         }
                         catch (IOException e)
                         {
-
-                            sync.ShowExceptionMessage(e.ToString(), "Error copying file");
+                            ShowExceptionMessage(e.ToString(), "Error copying file");
                         }
                     }
-
                 }
 
-                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
-                if (checkBoxRightToLeft.Checked) //checkboxRightToLeftIsChecked
+                if (checkBoxRightToLeft.Checked) 
                 {
-                    // if file from right folder doesn't exist in left folder
                     if (LI.Relations == 2 || LI.Relations == 7)
                     {
-                        //FIWLeft = Lists.LeftListofFiles.ElementAt(0); // getting left file info
-                        //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
                         string sourceFile = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
                         string destFile = Path.Combine(folderPathLeft + patInFolderRight, FIWRight.Name);
 
@@ -221,22 +180,16 @@ namespace FolderSynchronizer
                         }
                         catch (IOException e)
                         {
-
-                            sync.ShowExceptionMessage(e.ToString(), "Error copying file");
+                            ShowExceptionMessage(e.ToString(), "Error copying file");
                         }
                     }
 
                 }
-
-                // 25.07.16 16.33 slava - confirmation checkbox logic implementation
-                if (checkBoxRightDeleteFiles.Checked) //checkboxDeleteFromRightIsChecked
+                    if (checkBoxRightDeleteFiles.Checked) 
                 {
-                    // 23.07.16 slava - added file deletion section
                     //If file from right need to be deleted
                     if (LI.Relations == 5)
                     {
-                        //FIWRight = Lists.RightListofFiles.ElementAt(LI.Right); //getting right file info
-
                         string fileForDeletion = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
                         try
                         {
@@ -244,13 +197,17 @@ namespace FolderSynchronizer
                         }
                         catch (IOException e)
                         {
-
-                            sync.ShowExceptionMessage(e.ToString(), "Error deleting file");
+                            ShowExceptionMessage(e.ToString(), "Error deleting file");
                         }
                     }
                 }
-
             }
+        }
+        public void ShowExceptionMessage(string message, string caption)
+        {
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result;
+            result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
         }
     }
 }

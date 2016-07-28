@@ -47,7 +47,7 @@
             this.checkBoxLeft = new System.Windows.Forms.CheckBox();
             this.checkBoxNotEqual = new System.Windows.Forms.CheckBox();
             this.checkBoxEqual = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSynchronize = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxSingles = new System.Windows.Forms.CheckBox();
             this.checkBoxDuplicates = new System.Windows.Forms.CheckBox();
@@ -136,7 +136,6 @@
             this.checkBoxAsymmetric.TabIndex = 7;
             this.checkBoxAsymmetric.Text = "Asymmetric";
             this.checkBoxAsymmetric.UseVisualStyleBackColor = true;
-            this.checkBoxAsymmetric.CheckedChanged += new System.EventHandler(this.checkBoxAsymmetric_CheckedChanged);
             // 
             // checkBoxWithsubdirs
             // 
@@ -147,7 +146,6 @@
             this.checkBoxWithsubdirs.TabIndex = 8;
             this.checkBoxWithsubdirs.Text = "With subdirs";
             this.checkBoxWithsubdirs.UseVisualStyleBackColor = true;
-            this.checkBoxWithsubdirs.CheckedChanged += new System.EventHandler(this.checkBoxWithsubdirs_CheckedChanged);
             // 
             // checkBoxByContent
             // 
@@ -158,7 +156,6 @@
             this.checkBoxByContent.TabIndex = 9;
             this.checkBoxByContent.Text = "By Content";
             this.checkBoxByContent.UseVisualStyleBackColor = true;
-            this.checkBoxByContent.CheckedChanged += new System.EventHandler(this.checkBoxByContent_CheckedChanged);
             // 
             // checkBoxIgnoreDate
             // 
@@ -266,15 +263,15 @@
             this.checkBoxEqual.UseVisualStyleBackColor = true;
             this.checkBoxEqual.CheckedChanged += new System.EventHandler(this.checkBoxEqual_CheckedChanged);
             // 
-            // button1
+            // buttonSynchronize
             // 
-            this.button1.Location = new System.Drawing.Point(436, 80);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(73, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Syncronize";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonSynchronize.Location = new System.Drawing.Point(436, 80);
+            this.buttonSynchronize.Name = "buttonSynchronize";
+            this.buttonSynchronize.Size = new System.Drawing.Size(73, 23);
+            this.buttonSynchronize.TabIndex = 25;
+            this.buttonSynchronize.Text = "Syncronize";
+            this.buttonSynchronize.UseVisualStyleBackColor = true;
+            this.buttonSynchronize.Click += new System.EventHandler(this.buttonSynchronize_Click);
             // 
             // groupBox1
             // 
@@ -365,7 +362,7 @@
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonSynchronize);
             this.Controls.Add(this.textBoxFileMask);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSyncWoha);
@@ -410,7 +407,7 @@
         private System.Windows.Forms.CheckBox checkBoxLeft;
         private System.Windows.Forms.CheckBox checkBoxNotEqual;
         private System.Windows.Forms.CheckBox checkBoxEqual;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSynchronize;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkBoxSingles;

@@ -36,6 +36,8 @@ namespace FolderSynchronizer
         bool isLeftChecked;
         bool isEqualChecked;
         bool isNotEqualChecked;
+
+        List<string>  pathInFolderForDeletion = new List<string>();
         
         private void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -176,6 +178,8 @@ namespace FolderSynchronizer
                 {
                     if (LI.Relations == 2 || LI.Relations == 7)
                     {
+                        
+
                         string sourceFile = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
                         string destFile = Path.Combine(folderPathLeft + patInFolderRight, FIWRight.Name);
 
@@ -201,10 +205,17 @@ namespace FolderSynchronizer
                     //If file from right need to be deleted
                     if (LI.Relations == 5)
                     {
+                        //adding pathin folder for deletion
+                        if (patInFolderRight != "" && patInFolderRight != null)
+                        {
+                            pathInFolderForDeletion.Add(patInFolderRight);
+                        }
+
                         string fileForDeletion = Path.Combine(folderPathRight + patInFolderRight, FIWRight.Name);
                         try
                         {
                             File.Delete(fileForDeletion);
+                            
                         }
                         catch (IOException e)
                         {
@@ -213,6 +224,25 @@ namespace FolderSynchronizer
                     }
                 }
             }
+
+            //Deleting subfolder if need
+            foreach (string i in pathInFolderForDeletion)
+            {
+                try
+                {
+                    if (Directory.Exists(folderPathRight + i))
+                    {
+
+                        Directory.Delete(folderPathRight + i, true);
+                    }
+
+                }
+                catch (IOException e)
+                {
+                    ShowExceptionMessage(e.ToString(), "Error deleting folder");
+                }
+            }
+
         }
         public void ShowExceptionMessage(string message, string caption)
         {
@@ -220,5 +250,6 @@ namespace FolderSynchronizer
             DialogResult result;
             result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Error);
         }
+        
     }
 }

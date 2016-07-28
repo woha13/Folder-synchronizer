@@ -83,11 +83,11 @@
             // 
             this.checkBoxRightDeleteFiles.AutoSize = true;
             this.checkBoxRightDeleteFiles.Enabled = false;
-            this.checkBoxRightDeleteFiles.Location = new System.Drawing.Point(13, 166);
+            this.checkBoxRightDeleteFiles.Location = new System.Drawing.Point(12, 167);
             this.checkBoxRightDeleteFiles.Name = "checkBoxRightDeleteFiles";
-            this.checkBoxRightDeleteFiles.Size = new System.Drawing.Size(107, 17);
+            this.checkBoxRightDeleteFiles.Size = new System.Drawing.Size(104, 17);
             this.checkBoxRightDeleteFiles.TabIndex = 4;
-            this.checkBoxRightDeleteFiles.Text = "Right delete files:";
+            this.checkBoxRightDeleteFiles.Text = "Right delete files";
             this.checkBoxRightDeleteFiles.UseVisualStyleBackColor = true;
             // 
             // buttonOk
